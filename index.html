@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="id" style=""><head><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Jurnal Sukabumi | Jelas Seimbang</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#e9bcb5",
+                        "secondary": "#575e70",
+                        "on-secondary-container": "#5c6274",
+                        "on-tertiary-container": "#f8f7ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary-fixed-variant": "#404758",
+                        "on-primary-fixed": "#410000",
+                        "tertiary-container": "#0068f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface": "#f9f9f9",
+                        "text-muted": "#6b7280",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#93000a",
+                        "outline": "#946e68",
+                        "on-surface": "#1a1c1c",
+                        "primary-container": "#e60000",
+                        "secondary-fixed": "#dce2f7",
+                        "on-primary-fixed-variant": "#930100",
+                        "on-tertiary-fixed": "#001847",
+                        "inverse-primary": "#ffb4a8",
+                        "surface-tint": "#c00000",
+                        "on-tertiary-fixed-variant": "#0040a0",
+                        "surface-container-low": "#f3f3f4",
+                        "primary": "#b70100",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "tertiary-fixed-dim": "#b2c5ff",
+                        "js-dark-red": "#8b0000",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#dae2ff",
+                        "background": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fff7f5",
+                        "surface-container": "#eeeeee",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "primary-fixed": "#ffdad4",
+                        "on-background": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#0051c6",
+                        "on-secondary-fixed": "#141b2b",
+                        "border-subtle": "#e5e7eb",
+                        "on-surface-variant": "#5f3f3a",
+                        "inverse-surface": "#2f3131",
+                        "surface-gray": "#f9f9f9",
+                        "secondary-container": "#d9dff5",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "1rem",
+                        "inline-gap": "0.75rem",
+                        "section-gap": "1.5rem",
+                        "edge-margin": "1rem",
+                        "container-max": "1152px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Roboto"],
+                        "headline-md": ["Roboto"],
+                        "metadata": ["Roboto"],
+                        "body-md": ["Roboto"],
+                        "nav-link": ["Roboto"],
+                        "headline-display": ["Roboto"],
+                        "headline-lg": ["Roboto"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["12px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "metadata": ["12px", {"fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "nav-link": ["11px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "headline-display": ["30px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-gradient-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        }
+        .section-title-accent {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title-accent::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #b70100;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 w-full bg-surface/95 dark:bg-on-background/95 backdrop-blur-sm px-4 md:px-8 border-b border-outline-variant transition-all duration-300 shadow-sm py-3">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between py-3 gap-4">
+<!-- Brand Logo -->
+<div class="flex items-center gap-4">
+<a href="#" class="block w-auto h-16 flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuFPJMz4sFr6yioqtitcvo_LNoktGbqKVKWOzqEFvAjS63m9HYsWJveyP3K_sjycMO8BGH9EG8YBNPQxWpHqy5lBhm6CWPfOPLiPYBUhD77j6Jr-MgpC96OzsdDWsrT3M5rKTnjqa3vwt4QR1wP8PFW7cGvoFUZVpflePpyvnTKqrIMGTXuwNp1etVhX6wtfxGL1PMbxYdBgwgoMvJVUgBghJRh2897Nhbo05IMITFS8ieVHFUZBkInhQ" alt="Jurnal Sukabumi Logo" class="h-full w-auto object-contain"></a>
+</div>
+<!-- Search & Actions -->
+<div class="flex items-center gap-4 w-full md:w-auto"><div class="hidden lg:block text-on-surface-variant font-metadata text-metadata whitespace-nowrap mr-2">Sabtu, 1 Agustus 2026</div>
+<div class="relative flex-grow md:flex-grow-0 md:w-64">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Cari Berita..." type="text">
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<div class="hidden md:flex items-center gap-3 mr-2"><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-facebook text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-x-twitter text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-instagram text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-youtube text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-tiktok text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-linkedin text-lg"></i></a><a class="text-primary hover:opacity-80 transition-opacity" href="#"><i class="fab fa-pinterest text-lg"></i></a></div>
+</div>
+</div>
+<!-- Navigation Links - PITA NAVIGASI BERGRADASI MERAH -->
+<nav class="w-full bg-gradient-to-r from-[#b70100] to-[#e60000] rounded-md -mx-4 md:-mx-8 px-4 md:px-8" style="width: calc(100% + 2rem); margin-left: -1rem; margin-right: -1rem;">
+<div class="max-w-container-max mx-auto overflow-x-auto no-scrollbar">
+<div class="flex items-center py-3 space-x-6"><a href="#" class="text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold border-b-2 border-white pb-1 hover:opacity-80">HOME</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">PERISTIWA</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">POLITIK</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">HUKUM</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">NASIONAL</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">PARLEMEN</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">EKONOMI</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">WISATA</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">RAGAM</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">SOSOK</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">OPINI</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">GERBANG DESA</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">PENDIDIKAN</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">RELIGI</a><a href="#" class="text-white/90 hover:text-white font-nav-link text-nav-link uppercase whitespace-nowrap transition-colors font-bold">VIDEO</a></div>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-4 md:px-8 py-section-gap">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Content Area -->
+<div class="lg:col-span-8 space-y-section-gap">
+<!-- Hero Section (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px]">
+<!-- Primary Hero -->
+<div class="relative rounded-lg overflow-hidden group h-[300px] md:h-full md:col-span-1">
+<div class="absolute top-4 left-4 z-10 bg-primary text-on-primary px-3 py-1 text-xs font-bold uppercase rounded">Headline</div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A portrait of a local Indonesian leader speaking passionately, captured in a dramatic cinematic lighting style with warm tones and deep shadows. The setting is a traditional wooden house interior, suggesting an intimate community gathering. High contrast and sharp focus on the subject's expressive face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzwXbFlxhoyep0b_sSKW48PYRZZg9DEFI8kOOBcy0Mv_s2rX6RihwQBdhvADo3R7U-V_Ev3s7k2LI1L7YI4nLapjkAW2zcB0TzcYzpAFemMPk5-HxG91eX5kFN9oTYaeNeP2g0Z6fDQOpMx5Yd8ZjaiJnMjh7HrFVr2L9XbyTNNqlXHsUXx3kOGFgmHHeaupmvRgI5Qg3gaHlvqOObglTXVFGsu-vrI5l-Jylr7t3nBcnRsDqQEDFg">
+<div class="absolute inset-0 text-gradient-overlay flex flex-col justify-end p-6">
+<span class="text-white/80 font-metadata text-metadata mb-2">Headline • 1 Jam Lalu</span>
+<h2 class="text-white font-headline-lg text-headline-lg leading-tight group-hover:text-primary-fixed-dim transition-colors">
+                                Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan
+                            </h2>
+</div>
+</div>
+<!-- Secondary Hero Grid -->
+<div class="grid grid-rows-2 gap-4 md:col-span-1">
+<div class="relative rounded-lg overflow-hidden group">
+<div class="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">Hukum</div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A gritty, black and white close-up shot of hands being restrained, symbolizing a legal or criminal investigation. The lighting is harsh and dramatic, creating a sense of urgency and gravity. High texture and emotional intensity captured in a professional journalistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0LKv_19fmSmqib1M3iBH6dDexzSzP5DSv0vJKo-nNXDlDcrjSs902pS7lyAF7uj566X-zQV9pNFfk0HaQCClkATK-oAzcqiQ-B-C3HgyFMC7hUlq899Dhe3bQUqn5fFv9chBVi3VYb7lL_XsZeV14KhQBbmtmROeVYcgjL_IF-MstaS8j2E2br3yfW7_KGw_SZEdUS6WANHFQUhR5_zuzsN28u6UqZl1_efoSqjjj4lZfXw5sMIbt">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all p-4 flex flex-col justify-end">
+<h3 class="text-white font-headline-md text-headline-md leading-tight">Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga Simpenan</h3>
+</div>
+</div>
+<div class="relative rounded-lg overflow-hidden group">
+<div class="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">Nasional</div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A wide aerial shot of a disaster-stricken village area in Indonesia with remnants of burnt structures and smoking debris. Several emergency workers in bright vests are seen coordinating relief efforts. The atmosphere is somber under a cloudy, grey sky, emphasizing the scale of the tragedy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkqqUSv5VZ29pTkviz2OC6peQC1griLqMRi-0QCTYnwtpDj4ycMZ_-OaKo5Clj-7dAOdjoPt2YPT29JiRF7nW85VC1xN-Raj1ImVO6KyP6AVjDs4slH11lhYUiTSdRJb0z0Kvpf5u8F31UfcDiV-Dwl6FPN83Na4ZoHMGAE-dI9p7hwqdjmkAf110-gWibHPrylebzClSF2YhhmMhP6gQfdO5gx3Tn4XpZxFJWJo3hXMJo3yLnvEh">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all p-4 flex flex-col justify-end">
+<h3 class="text-white font-headline-md text-headline-md leading-tight">Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest News Feed -->
+<section>
+<div class="mb-6 flex justify-between items-end border-b border-outline-variant pb-2">
+<h2 class="font-headline-lg text-headline-lg uppercase tracking-tight section-title-accent">Berita Terkini</h2>
+<a class="text-primary font-label-bold text-label-bold hover:underline" href="#">LIHAT SEMUA</a>
+</div>
+<div class="space-y-6">
+<!-- Horizontal Feed Card -->
+<article class="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
+<div class="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A group of community leaders and villagers standing together in front of a temporary aid tent in Sukabumi. They are holding boxes of relief supplies, smiling warmly at the camera. Bright daylight, natural outdoor setting, vibrant colors representing hope and community solidarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4_nZWQZ608UouSmYCATNnMX_a1yhCvMtaHJKNEm-Lp4kkVS_lG8xtsBpa5LeR_vcuRnPKQZ0PIufhMc7i3h5MIWcDkt-_C-PmU7oeaZivhRYaEQ7w04Pm2rHNElrqGgJwKxNHrpTdrxNkLp0A1vhKYSCjZTabZoy1zysQgMxtm76Vo0TY7h_0qMffSfllIUZeqTZflUVYbqffYCP8cT_ooE4EF0_yStWsq_yhsfGNGfCT9K-Y1RB">
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-primary font-label-bold text-label-bold mb-1 uppercase">Gerbang Desa</span>
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Warga Desa Cipanengah Galang Bantuan untuk Korban Kebakaran Kampung Adat Ciptamulya</h3>
+<p class="text-on-surface-variant font-body-md text-sm line-clamp-2 mb-3">Kegiatan gotong royong warga desa menunjukkan solidaritas tinggi dalam membantu sesama yang tertimpa musibah...</p>
+<span class="text-text-muted font-metadata text-metadata">Sabtu, 1 Agustus 2026 - 13:41 WIB</span>
+</div>
+</article>
+<article class="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
+<div class="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A yellow truck overturned on a steep mountain road in West Java. Logs of wood are scattered across the asphalt. Onlookers and police officers are present at the scene. High-contrast midday lighting, realistic documentary-style photography showing the aftermath of a traffic accident." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfctd_nTTiPyzBBVtf38_4euNGnWz7h2QtfX-2Czulb1UfPbvLMXBQPylEPTUwVApdCAQn8TjI2TQ5uFqnLF8JjXDjcqqEkseT7nuEwNMKZYIpKm6VxREF3B4dZeR77Ig1LzuWc-9ZNjAN_oaTXm9-Heensu0z9hdju5PbtmlYvlQOem3cda7m0PLlDDMO_HtNLd_zMzSlZvgHVeS9TkJX-IQ1QKgdTuD4AGvcEousbj8wRmqSM_AC">
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-primary font-label-bold text-label-bold mb-1 uppercase">Peristiwa</span>
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban Sukabumi</h3>
+<p class="text-on-surface-variant font-body-md text-sm line-clamp-2 mb-3">Kecelakaan tunggal terjadi di tanjakan ekstrem Cibangban, mengakibatkan arus lalu lintas tersendat selama berjam-jam...</p>
+<span class="text-text-muted font-metadata text-metadata">Sabtu, 1 Agustus 2026 - 13:37 WIB</span>
+</div>
+</article>
+</div>
+</section>
+<!-- Section: Wisata (Horizontal Scroller/Card Style) -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30">
+<div class="mb-6 flex justify-between items-center">
+<h2 class="font-headline-lg text-headline-lg uppercase tracking-tight section-title-accent">Wisata</h2>
+<div class="flex gap-2">
+<button class="p-1 rounded-full border border-outline hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded-full border border-outline hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 duration-500" data-alt="A beautiful panoramic view of a lush green tea plantation in the Sukabumi highlands under a misty morning sky. A traditional wooden gate with intricate carvings stands at the entrance. The scene is tranquil and serene, using a natural color palette of greens and soft morning blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSx43BXmZmKj6fENTwI-BSPSDEKO6In6KFXT7m-0HSLEfID_ySM6i02t2vlD3K1hg8C4atDAMMAtYfo0T4P8bw-Jw6WrSm42wlbFttyXO8IpBqppib4IvqG90C_u-BgqsbjIrA7TNS9xwKtCjtYrwAS3k0XiMtlDnKEDu4YuVNczu9VHYu-S9ouKGbcwJeS6Lq3h40diDIBAvDIXA_B0SDonYqRVlM3TkL2sBzMV06tCXPBEemH7cb">
+</div>
+<div class="p-4">
+<span class="text-primary font-label-bold text-label-bold mb-2 block">WISATA</span>
+<h4 class="font-headline-md text-sm group-hover:text-primary transition-colors">Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata</h4>
+</div>
+</div>
+<div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 duration-500" data-alt="A coastal scene in Pelabuhan Ratu, Sukabumi, featuring dramatic ocean waves crashing against dark volcanic rocks. A group of tourists is seen walking along the sandy beach in the distance. The lighting is golden-hour warm, creating high-contrast silhouettes and sparkling water textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM30Wqmsh4_3Ues79OBpvk-MHng8QZFfDHzSZwLsz6g5ChCrX9R5nG1eGrv-fQY6jiT6JdIxRp4fi1yb1JUHCOofC4o9vvkgcRstk7QximbRNG8MDbMW9fGlIzJP2hXBlSAG-LMkUQu9TDG8rrYzT-XP7DaQYM-rPL3vpXMIhpB-1-UqS-fQgZahAWrmo-M77w9OTfwSs8akAIgzn36DnMs0LPAuCQwch_nuqArt5TEH5h8Yd3Ki67">
+</div>
+<div class="p-4">
+<span class="text-primary font-label-bold text-label-bold mb-2 block">WISATA</span>
+<h4 class="font-headline-md text-sm group-hover:text-primary transition-colors">PENYU Cari Lokasi Ideal, Gadobangkong hingga Citepus Dibidik</h4>
+</div>
+</div>
+<div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 duration-500" data-alt="An interior shot of a traditional Javanese wooden house being used as a cultural museum. Antique artifacts and textiles are displayed elegantly under soft, warm indoor lighting. The atmosphere is historical and respectful, highlighting the rich cultural heritage of the Sukabumi region." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArjMxzY2RFVxOIoJWlFN3RL7dX-tnyZ2c8oGnkYukTtpdH4kxHxU-bOd6vr1yeUKqqAZlbMlhuBQqNXzM4KqshppK_f6hPz21HqP6iUVc7ZWQ2ySduVMqAJOhqHZtO6S0KGcpr6L0D5cuVl-niLiS8vfKXfUT_yrt_pXwr_4DrqpVNBlbIgyLZtd9t94rQJ9Bu_lmpF3x4nIQTzJXfJzVhIxzcN7NqRX8P-vkXitIO4OtdppMcXoOI">
+</div>
+<div class="p-4">
+<span class="text-primary font-label-bold text-label-bold mb-2 block">WISATA</span>
+<h4 class="font-headline-md text-sm group-hover:text-primary transition-colors">8 Tahun Padjadjaran Anyar, Menjaga Warisan Karuhun</h4>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-8">
+<!-- Ad/Announcement Widget -->
+<div class="bg-surface-container rounded-lg p-1">
+<img class="w-full rounded shadow-sm" data-alt="A professional official digital poster with a white background and red accents. It features a portrait of a distinguished man in a suit, a certificate emblem, and bold Indonesian typography. The design is formal, clean, and authoritative, suitable for an official government or corporate announcement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyd2DLvJgN3AcqqVcig0yWzehg0RyhjBvMv0VFtTL02aG9MSfrXGO69lzGqXR_goYBcKgAsDdSXZuktCab8Aiw4t4g39lkMxvBrRJ9PXxlJI1rgvJ96pf0qCBkMs9W1jUTI_KCwqHRoR_-APNOJvXhFXIqYvOXo6dkNk6u_AT_hFOfvvdt7UTMysNUhR_2kudpBhQjwvHNkK7lle3IV3h2IsMEXHxBdDxQf3_u9g6snySyD5OQGAnq">
+</div>
+<!-- Popular News Widget - ANGKA POPULER RAKSASA -->
+<div class="bg-white rounded-lg shadow-sm border border-outline-variant p-6">
+<h2 class="font-headline-md text-headline-md mb-6 uppercase border-b-2 border-primary pb-2 inline-block">Populer</h2>
+<div class="space-y-6">
+<div class="flex items-start gap-4 group cursor-pointer">
+<div class="text-6xl font-black text-[#8b0000] leading-none group-hover:text-primary transition-colors select-none flex-shrink-0">1</div>
+<div class="pt-1">
+<h4 class="font-body-md text-sm font-bold leading-tight group-hover:text-primary">Suami Bongkar Dugaan Perselingkuhan di Kalibunder, Oknum Guru Dilaporkan</h4>
+<span class="text-text-muted text-[10px] uppercase mt-1 block">Hukum</span>
+</div>
+</div>
+<div class="flex items-start gap-4 group cursor-pointer">
+<div class="text-6xl font-black text-[#8b0000] leading-none group-hover:text-primary transition-colors select-none flex-shrink-0">2</div>
+<div class="pt-1">
+<h4 class="font-body-md text-sm font-bold leading-tight group-hover:text-primary">Nyalip Bersamaan di Cibadak, Pengendara Motor Meninggal Dunia</h4>
+<span class="text-text-muted text-[10px] uppercase mt-1 block">Peristiwa</span>
+</div>
+</div>
+<div class="flex items-start gap-4 group cursor-pointer">
+<div class="text-6xl font-black text-[#8b0000] leading-none group-hover:text-primary transition-colors select-none flex-shrink-0">3</div>
+<div class="pt-1">
+<h4 class="font-body-md text-sm font-bold leading-tight group-hover:text-primary">12 Lulusan Cumlaude PGSD UMMI Langsung Kantongi Beasiswa S2</h4>
+<span class="text-text-muted text-[10px] uppercase mt-1 block">Pendidikan</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section Tags / Topics -->
+<div class="bg-surface-container-high rounded-lg p-6">
+<h2 class="font-headline-md text-headline-md mb-4 uppercase">Topik Terkini</h2>
+<div class="flex flex-wrap gap-2">
+<a class="bg-white border border-outline-variant px-3 py-1 rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-wider" href="#"># Ekonomi</a>
+<a class="bg-white border border-outline-variant px-3 py-1 rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-wider" href="#"># Politik</a>
+<a class="bg-white border border-outline-variant px-3 py-1 rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-wider" href="#"># Wisata</a>
+<a class="bg-white border border-outline-variant px-3 py-1 rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-wider" href="#"># Peristiwa</a>
+<a class="bg-white border border-outline-variant px-3 py-1 rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-wider" href="#"># Ragam</a>
+</div>
+</div>
+<!-- National Section -->
+<div>
+<h2 class="font-headline-md text-headline-md mb-4 uppercase border-l-4 border-primary pl-3">Nasional</h2>
+<div class="space-y-4">
+<div class="group cursor-pointer">
+<img class="w-full h-32 object-cover rounded-lg mb-2" data-alt="A group of Indonesian men in professional attire standing in an office hallway, holding a document. One man is gesturing as if explaining something. The lighting is bright fluorescent office light. Professional and news-oriented composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbUuhv6EIYGO-Hpz6pLGIzwq4DFmZv6nlIrUebX6BgDlMwvRy8glb_gIPkmjqN6Jj3YtWJ9rO02MPVqwdCh4eU-BnRvuCKa81CSMd2xT-kj_JOcClGGWdf7E2LtDEfkDJjjYlbdRBq8xZbDFtfFygBboAWAfjLqzgYko0Ftg33oUz_T5Zp_V84Lw11vOP2jzeq1TFtL6pTHSCHhCnhIn6NoAXut3vMf-dXrp-yM7IRtJMpmEj4yWu3">
+<h4 class="font-body-md text-sm font-bold leading-snug group-hover:text-primary">Usung Perubahan di PWI Jabar, Kang Andhy Tawarkan Program Kesejahteraan</h4>
+<span class="text-text-muted text-[10px]">31 Juli 2026</span>
+</div>
+<div class="border-t border-outline-variant pt-3 group cursor-pointer">
+<h4 class="font-body-md text-sm font-bold leading-snug group-hover:text-primary">Hergun Usul Kemendagri Luncurkan Program Wirausaha Pemula</h4>
+<span class="text-text-muted text-[10px]">30 Juli 2026</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t-4 border-primary mt-section-gap bg-primary">
+<div class="max-w-container-max mx-auto py-12 px-4 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+<!-- Brand & Info -->
+<div class="space-y-6 max-w-sm">
+<div class="text-headline-lg font-headline-lg text-on-primary uppercase tracking-tighter">Jurnal Sukabumi</div>
+<p class="text-white/90 font-body-md text-sm">Media informasi digital terdepan di Sukabumi, menyajikan berita terkini, akurat, dan terpercaya dengan menjunjung tinggi integritas jurnalistik.</p>
+<div class="flex gap-4"><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-facebook-f"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-x-twitter"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-instagram"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-youtube"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-tiktok"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-linkedin-in"></i></a><a class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors" href="#"><i class="fab fa-pinterest-p"></i></a></div>
+</div>
+<!-- Quick Links -->
+<div class="grid grid-cols-2 gap-x-12 gap-y-4"><div><h5 class="text-white font-label-bold text-label-bold uppercase mb-4">Perusahaan</h5><ul class="space-y-2"><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Tentang Kami</a></li><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Redaksi</a></li><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Karir</a></li></ul></div><div><h5 class="text-white font-label-bold text-label-bold uppercase mb-4">Kebijakan</h5><ul class="space-y-2"><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Pedoman Siber</a></li><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Privacy Policy</a></li><li class=""><a class="text-white/80 hover:text-white hover:underline decoration-white transition-all text-sm" href="#">Kontak</a></li></ul></div></div>
+</div>
+<!-- Bottom Bar -->
+<div class="max-w-container-max mx-auto px-4 md:px-8 py-6 border-t border-surface-variant/20 flex flex-col md:flex-row justify-between items-center gap-4"><span class="text-metadata text-white/60 font-metadata">© 2024 Jurnal Sukabumi. Member of Media Group.</span><div class="flex gap-6 text-xs text-white/60 font-label-bold"><a class="hover:text-white" href="#">FACEBOOK</a><a class="hover:text-white" href="#">INSTAGRAM</a><a class="hover:text-white" href="#">TWITTER</a><a class="hover:text-white" href="#">YOUTUBE</a></div></div>
+</footer>
+<script>
+        // Simple micro-interaction for navbar transparency shift
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('py-2');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.add('py-3');
+                header.classList.remove('py-2');
+            }
+        });
+    </script>
+</body></html>
