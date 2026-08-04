@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { articles } from "@/lib/articles";
 
 /* ─── Navigation Categories ─── */
 const navLinks = [
@@ -71,14 +72,17 @@ const topicTags = ["Ekonomi", "Politik", "Wisata", "Peristiwa", "Ragam"];
 /* ─── Wisata Cards Data ─── */
 const wisataCards = [
   {
+    slug: "desa-wisata-tegalega-disiapkan-jadi-magnet-baru-pariwisata",
     src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCSx43BXmZmKj6fENTwI-BSPSDEKO6In6KFXT7m-0HSLEfID_ySM6i02t2vlD3K1hg8C4atDAMMAtYfo0T4P8bw-Jw6WrSm42wlbFttyXO8IpBqppib4IvqG90C_u-BgqsbjIrA7TNS9xwKtCjtYrwAS3k0XiMtlDnKEDu4YuVNczu9VHYu-S9ouKGbcwJeS6Lq3h40diDIBAvDIXA_B0SDonYqRVlM3TkL2sBzMV06tCXPBEemH7cb",
     title: "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
   },
   {
+    slug: "penyu-cari-lokasi-ideal-gadobangkong-hingga-citepus-dibidik",
     src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDM30Wqmsh4_3Ues79OBpvk-MHng8QZFfDHzSZwLsz6g5ChCrX9R5nG1eGrv-fQY6jiT6JdIxRp4fi1yb1JUHCOofC4o9vvkgcRstk7QximbRNG8MDbMW9fGlIzJP2hXBlSAG-LMkUQu9TDG8rrYzT-XP7DaQYM-rPL3vpXMIhpB-1-UqS-fQgZahAWrmo-M77w9OTfwSs8akAIgzn36DnMs0LPAuCQwch_nuqArt5TEH5h8Yd3Ki67",
     title: "PENYU Cari Lokasi Ideal, Gadobangkong hingga Citepus Dibidik",
   },
   {
+    slug: "8-tahun-padjadjaran-anyar-menjaga-warisan-karuhun",
     src: "https://lh3.googleusercontent.com/aida-public/AB6AXuArjMxzY2RFVxOIoJWlFN3RL7dX-tnyZ2c8oGnkYukTtpdH4kxHxU-bOd6vr1yeUKqqAZlbMlhuBQqNXzM4KqshppK_f6hPz21HqP6iUVc7ZWQ2ySduVMqAJOhqHZtO6S0KGcpr6L0D5cuVl-niLiS8vfKXfUT_yrt_pXwr_4DrqpVNBlbIgyLZtd9t94rQJ9Bu_lmpF3x4nIQTzJXfJzVhIxzcN7NqRX8P-vkXitIO4OtdppMcXoOI",
     title: "8 Tahun Padjadjaran Anyar, Menjaga Warisan Karuhun",
   },
@@ -188,7 +192,7 @@ export default function Home() {
             {/* Hero Section (Bento Style) */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px]">
               {/* Primary Hero */}
-              <div className="relative rounded-lg overflow-hidden group h-[300px] md:h-full md:col-span-1">
+              <Link href="/berita/52-korban-kebakaran-ciptamulya-diundang-kdm-ke-lembur-pakuan" className="relative rounded-lg overflow-hidden group h-[300px] md:h-full md:col-span-1 block">
                 <div className="absolute top-4 left-4 z-10 bg-primary text-on-primary px-3 py-1 text-xs font-bold uppercase rounded">
                   Headline
                 </div>
@@ -206,11 +210,11 @@ export default function Home() {
                     ke Lembur Pakuan
                   </h2>
                 </div>
-              </div>
+              </Link>
 
               {/* Secondary Hero Grid */}
               <div className="grid grid-rows-2 gap-4 md:col-span-1">
-                <div className="relative rounded-lg overflow-hidden group">
+                <Link href="/berita/rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji" className="relative rounded-lg overflow-hidden group block">
                   <div className="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">
                     Hukum
                   </div>
@@ -225,8 +229,8 @@ export default function Home() {
                       Gegerkan Warga Simpenan
                     </h3>
                   </div>
-                </div>
-                <div className="relative rounded-lg overflow-hidden group">
+                </Link>
+                <Link href="/berita/kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman" className="relative rounded-lg overflow-hidden group block">
                   <div className="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">
                     Nasional
                   </div>
@@ -240,7 +244,7 @@ export default function Home() {
                       Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman
                     </h3>
                   </div>
-                </div>
+                </Link>
               </div>
             </section>
 
@@ -259,59 +263,63 @@ export default function Home() {
               </div>
               <div className="space-y-6">
                 {/* Feed Card 1 */}
-                <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
-                  <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      alt="Warga Desa Cipanengah galang bantuan"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4_nZWQZ608UouSmYCATNnMX_a1yhCvMtaHJKNEm-Lp4kkVS_lG8xtsBpa5LeR_vcuRnPKQZ0PIufhMc7i3h5MIWcDkt-_C-PmU7oeaZivhRYaEQ7w04Pm2rHNElrqGgJwKxNHrpTdrxNkLp0A1vhKYSCjZTabZoy1zysQgMxtm76Vo0TY7h_0qMffSfllIUZeqTZflUVYbqffYCP8cT_ooE4EF0_yStWsq_yhsfGNGfCT9K-Y1RB"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
-                      Gerbang Desa
-                    </span>
-                    <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
-                      Warga Desa Cipanengah Galang Bantuan untuk Korban
-                      Kebakaran Kampung Adat Ciptamulya
-                    </h3>
-                    <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
-                      Kegiatan gotong royong warga desa menunjukkan solidaritas
-                      tinggi dalam membantu sesama yang tertimpa musibah...
-                    </p>
-                    <span className="text-text-muted font-[Roboto] text-[12px]">
-                      Sabtu, 1 Agustus 2026 - 13:41 WIB
-                    </span>
-                  </div>
-                </article>
+                <Link href="/berita/warga-desa-cipanengah-galang-bantuan-korban-kebakaran-ciptamulya" className="block">
+                  <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
+                    <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+                      <img
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        alt="Warga Desa Cipanengah galang bantuan"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4_nZWQZ608UouSmYCATNnMX_a1yhCvMtaHJKNEm-Lp4kkVS_lG8xtsBpa5LeR_vcuRnPKQZ0PIufhMc7i3h5MIWcDkt-_C-PmU7oeaZivhRYaEQ7w04Pm2rHNElrqGgJwKxNHrpTdrxNkLp0A1vhKYSCjZTabZoy1zysQgMxtm76Vo0TY7h_0qMffSfllIUZeqTZflUVYbqffYCP8cT_ooE4EF0_yStWsq_yhsfGNGfCT9K-Y1RB"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
+                        Gerbang Desa
+                      </span>
+                      <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
+                        Warga Desa Cipanengah Galang Bantuan untuk Korban
+                        Kebakaran Kampung Adat Ciptamulya
+                      </h3>
+                      <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
+                        Kegiatan gotong royong warga desa menunjukkan solidaritas
+                        tinggi dalam membantu sesama yang tertimpa musibah...
+                      </p>
+                      <span className="text-text-muted font-[Roboto] text-[12px]">
+                        Sabtu, 1 Agustus 2026 - 13:41 WIB
+                      </span>
+                    </div>
+                  </article>
+                </Link>
 
                 {/* Feed Card 2 */}
-                <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
-                  <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
-                    <img
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      alt="Truk Kayu Terguling di Cibangban"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfctd_nTTiPyzBBVtf38_4euNGnWz7h2QtfX-2Czulb1UfPbvLMXBQPylEPTUwVApdCAQn8TjI2TQ5uFqnLF8JjXDjcqqEkseT7nuEwNMKZYIpKm6VxREF3B4dZeR77Ig1LzuWc-9ZNjAN_oaTXm9-Heensu0z9hdju5PbtmlYvlQOem3cda7m0PLlDDMO_HtNLd_zMzSlZvgHVeS9TkJX-IQ1QKgdTuD4AGvcEousbj8wRmqSM_AC"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
-                      Peristiwa
-                    </span>
-                    <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
-                      Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban
-                      Sukabumi
-                    </h3>
-                    <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
-                      Kecelakaan tunggal terjadi di tanjakan ekstrem Cibangban,
-                      mengakibatkan arus lalu lintas tersendat selama
-                      berjam-jam...
-                    </p>
-                    <span className="text-text-muted font-[Roboto] text-[12px]">
-                      Sabtu, 1 Agustus 2026 - 13:37 WIB
-                    </span>
-                  </div>
-                </article>
+                <Link href="/berita/truk-kayu-terguling-di-cibangban-sukabumi" className="block">
+                  <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
+                    <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+                      <img
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        alt="Truk Kayu Terguling di Cibangban"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfctd_nTTiPyzBBVtf38_4euNGnWz7h2QtfX-2Czulb1UfPbvLMXBQPylEPTUwVApdCAQn8TjI2TQ5uFqnLF8JjXDjcqqEkseT7nuEwNMKZYIpKm6VxREF3B4dZeR77Ig1LzuWc-9ZNjAN_oaTXm9-Heensu0z9hdju5PbtmlYvlQOem3cda7m0PLlDDMO_HtNLd_zMzSlZvgHVeS9TkJX-IQ1QKgdTuD4AGvcEousbj8wRmqSM_AC"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
+                        Peristiwa
+                      </span>
+                      <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
+                        Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban
+                        Sukabumi
+                      </h3>
+                      <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
+                        Kecelakaan tunggal terjadi di tanjakan ekstrem Cibangban,
+                        mengakibatkan arus lalu lintas tersendat selama
+                        berjam-jam...
+                      </p>
+                      <span className="text-text-muted font-[Roboto] text-[12px]">
+                        Sabtu, 1 Agustus 2026 - 13:37 WIB
+                      </span>
+                    </div>
+                  </article>
+                </Link>
               </div>
             </section>
 
@@ -336,9 +344,10 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {wisataCards.map((card) => (
-                  <div
+                  <Link
                     key={card.title}
-                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group"
+                    href={`/berita/${card.slug}`}
+                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group block"
                   >
                     <div className="h-40 overflow-hidden">
                       <img
@@ -355,7 +364,7 @@ export default function Home() {
                         {card.title}
                       </h4>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </section>
