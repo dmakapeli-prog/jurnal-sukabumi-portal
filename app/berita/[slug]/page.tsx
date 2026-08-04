@@ -81,7 +81,8 @@ const navLinks = [
    ═══════════════════════════════════════════ */
 export default function BeritaDetailPage() {
   const params = useParams();
-  const slug = params.slug as string;
+  const rawSlug = params?.slug;
+  const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
 
   const [article, setArticle] = useState<Berita | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<Berita[]>([]);
@@ -90,6 +91,7 @@ export default function BeritaDetailPage() {
 
   useEffect(() => {
     async function fetchArticle() {
+      if (!slug) return;
       try {
         // Extract id from slug format: "1-jalan-tol-bocimi..."
         const idMatch = slug.match(/^(\d+)-/);
