@@ -1,9 +1,55 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { articles } from "@/lib/articles";
+import { supabase } from "@/lib/supabase";
+
+/* ─── Types ─── */
+interface Berita {
+  id: number;
+  judul: string;
+  isi_berita: string;
+  gambar_url: string;
+  waktu_dibuat: string;
+}
+
+/* ─── Helpers ─── */
+function toSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim();
+}
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const months = [
+    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+    "Juli", "Agustus", "September", "Oktober", "November", "Desember",
+  ];
+  const hh = d.getHours().toString().padStart(2, "0");
+  const mm = d.getMinutes().toString().padStart(2, "0");
+  return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} - ${hh}:${mm} WIB`;
+}
+
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 60) return `${minutes} Menit Lalu`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} Jam Lalu`;
+  const daysAgo = Math.floor(hours / 24);
+  return `${daysAgo} Hari Lalu`;
+}
+
+function truncate(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen).trimEnd() + "...";
+}
 
 /* ─── Navigation Categories ─── */
 const navLinks = [
@@ -45,53 +91,38 @@ const footerSocialIcons = [
   { icon: "fab fa-pinterest-p", label: "Pinterest" },
 ];
 
-/* ─── Popular News Data ─── */
-const popularNews = [
-  {
-    rank: 1,
-    title:
-      "Suami Bongkar Dugaan Perselingkuhan di Kalibunder, Oknum Guru Dilaporkan",
-    category: "Hukum",
-  },
-  {
-    rank: 2,
-    title: "Nyalip Bersamaan di Cibadak, Pengendara Motor Meninggal Dunia",
-    category: "Peristiwa",
-  },
-  {
-    rank: 3,
-    title:
-      "12 Lulusan Cumlaude PGSD UMMI Langsung Kantongi Beasiswa S2",
-    category: "Pendidikan",
-  },
-];
-
 /* ─── Topic Tags ─── */
 const topicTags = ["Ekonomi", "Politik", "Wisata", "Peristiwa", "Ragam"];
-
-/* ─── Wisata Cards Data ─── */
-const wisataCards = [
-  {
-    slug: "desa-wisata-tegalega-disiapkan-jadi-magnet-baru-pariwisata",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCSx43BXmZmKj6fENTwI-BSPSDEKO6In6KFXT7m-0HSLEfID_ySM6i02t2vlD3K1hg8C4atDAMMAtYfo0T4P8bw-Jw6WrSm42wlbFttyXO8IpBqppib4IvqG90C_u-BgqsbjIrA7TNS9xwKtCjtYrwAS3k0XiMtlDnKEDu4YuVNczu9VHYu-S9ouKGbcwJeS6Lq3h40diDIBAvDIXA_B0SDonYqRVlM3TkL2sBzMV06tCXPBEemH7cb",
-    title: "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
-  },
-  {
-    slug: "penyu-cari-lokasi-ideal-gadobangkong-hingga-citepus-dibidik",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDM30Wqmsh4_3Ues79OBpvk-MHng8QZFfDHzSZwLsz6g5ChCrX9R5nG1eGrv-fQY6jiT6JdIxRp4fi1yb1JUHCOofC4o9vvkgcRstk7QximbRNG8MDbMW9fGlIzJP2hXBlSAG-LMkUQu9TDG8rrYzT-XP7DaQYM-rPL3vpXMIhpB-1-UqS-fQgZahAWrmo-M77w9OTfwSs8akAIgzn36DnMs0LPAuCQwch_nuqArt5TEH5h8Yd3Ki67",
-    title: "PENYU Cari Lokasi Ideal, Gadobangkong hingga Citepus Dibidik",
-  },
-  {
-    slug: "8-tahun-padjadjaran-anyar-menjaga-warisan-karuhun",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuArjMxzY2RFVxOIoJWlFN3RL7dX-tnyZ2c8oGnkYukTtpdH4kxHxU-bOd6vr1yeUKqqAZlbMlhuBQqNXzM4KqshppK_f6hPz21HqP6iUVc7ZWQ2ySduVMqAJOhqHZtO6S0KGcpr6L0D5cuVl-niLiS8vfKXfUT_yrt_pXwr_4DrqpVNBlbIgyLZtd9t94rQJ9Bu_lmpF3x4nIQTzJXfJzVhIxzcN7NqRX8P-vkXitIO4OtdppMcXoOI",
-    title: "8 Tahun Padjadjaran Anyar, Menjaga Warisan Karuhun",
-  },
-];
 
 /* ═══════════════════════════════════════════
    MAIN PAGE COMPONENT
    ═══════════════════════════════════════════ */
 export default function Home() {
+  const [beritaList, setBeritaList] = useState<Berita[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  /* Fetch berita from Supabase */
+  useEffect(() => {
+    async function fetchBerita() {
+      try {
+        const { data, error: sbError } = await supabase
+          .from("berita")
+          .select("*")
+          .order("waktu_dibuat", { ascending: false });
+
+        if (sbError) throw sbError;
+        setBeritaList(data || []);
+      } catch (err: unknown) {
+        console.error("Gagal memuat berita:", err);
+        setError("Gagal memuat berita. Silakan coba lagi nanti.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBerita();
+  }, []);
+
   /* Scroll micro-interaction for header */
   useEffect(() => {
     const handler = () => {
@@ -108,6 +139,12 @@ export default function Home() {
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  /* Split berita: first 3 for hero, rest for feed */
+  const heroItems = beritaList.slice(0, 3);
+  const feedItems = beritaList.slice(3);
+  /* Popular sidebar uses first 3 by views/order */
+  const popularItems = beritaList.slice(0, 3);
 
   return (
     <>
@@ -128,7 +165,12 @@ export default function Home() {
           {/* Search & Actions */}
           <div className="flex items-center gap-4 w-full md:w-auto">
             <div className="hidden lg:block text-on-surface-variant font-[Roboto] text-[12px] whitespace-nowrap mr-2">
-              Sabtu, 1 Agustus 2026
+              {new Date().toLocaleDateString("id-ID", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </div>
             <div className="relative flex-grow md:flex-grow-0 md:w-64">
               <input
@@ -189,185 +231,158 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* ─── Main Content Area (8 cols) ─── */}
           <div className="lg:col-span-8 space-y-6">
-            {/* Hero Section (Bento Style) */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px]">
-              {/* Primary Hero */}
-              <Link href="/berita/52-korban-kebakaran-ciptamulya-diundang-kdm-ke-lembur-pakuan" className="relative rounded-lg overflow-hidden group h-[300px] md:h-full md:col-span-1 block">
-                <div className="absolute top-4 left-4 z-10 bg-primary text-on-primary px-3 py-1 text-xs font-bold uppercase rounded">
-                  Headline
-                </div>
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  alt="Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzwXbFlxhoyep0b_sSKW48PYRZZg9DEFI8kOOBcy0Mv_s2rX6RihwQBdhvADo3R7U-V_Ev3s7k2LI1L7YI4nLapjkAW2zcB0TzcYzpAFemMPk5-HxG91eX5kFN9oTYaeNeP2g0Z6fDQOpMx5Yd8ZjaiJnMjh7HrFVr2L9XbyTNNqlXHsUXx3kOGFgmHHeaupmvRgI5Qg3gaHlvqOObglTXVFGsu-vrI5l-Jylr7t3nBcnRsDqQEDFg"
-                />
-                <div className="absolute inset-0 text-gradient-overlay flex flex-col justify-end p-6">
-                  <span className="text-white/80 font-[Roboto] text-[12px] mb-2">
-                    Headline • 1 Jam Lalu
-                  </span>
-                  <h2 className="text-white font-[Roboto] text-[24px] font-extrabold leading-tight group-hover:text-primary-fixed-dim transition-colors">
-                    Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM
-                    ke Lembur Pakuan
-                  </h2>
-                </div>
-              </Link>
 
-              {/* Secondary Hero Grid */}
-              <div className="grid grid-rows-2 gap-4 md:col-span-1">
-                <Link href="/berita/rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji" className="relative rounded-lg overflow-hidden group block">
-                  <div className="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">
-                    Hukum
+            {/* ─── LOADING STATE ─── */}
+            {loading && (
+              <>
+                {/* Hero Skeleton */}
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px]">
+                  <div className="rounded-lg bg-surface-container animate-pulse h-[300px] md:h-full" />
+                  <div className="grid grid-rows-2 gap-4">
+                    <div className="rounded-lg bg-surface-container animate-pulse" />
+                    <div className="rounded-lg bg-surface-container animate-pulse" />
                   </div>
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    alt="Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0LKv_19fmSmqib1M3iBH6dDexzSzP5DSv0vJKo-nNXDlDcrjSs902pS7lyAF7uj566X-zQV9pNFfk0HaQCClkATK-oAzcqiQ-B-C3HgyFMC7hUlq899Dhe3bQUqn5fFv9chBVi3VYb7lL_XsZeV14KhQBbmtmROeVYcgjL_IF-MstaS8j2E2br3yfW7_KGw_SZEdUS6WANHFQUhR5_zuzsN28u6UqZl1_efoSqjjj4lZfXw5sMIbt"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all p-4 flex flex-col justify-end">
-                    <h3 className="text-white font-[Roboto] text-[20px] font-bold leading-tight">
-                      Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji
-                      Gegerkan Warga Simpenan
-                    </h3>
+                </section>
+                {/* Feed Skeleton */}
+                <section>
+                  <div className="h-8 w-48 bg-surface-container animate-pulse rounded mb-6" />
+                  <div className="space-y-4">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="flex gap-6 p-4 bg-surface-container-lowest rounded-lg">
+                        <div className="w-56 h-40 bg-surface-container animate-pulse rounded-lg flex-shrink-0" />
+                        <div className="flex-1 space-y-3 py-4">
+                          <div className="h-4 w-24 bg-surface-container animate-pulse rounded" />
+                          <div className="h-6 w-full bg-surface-container animate-pulse rounded" />
+                          <div className="h-4 w-3/4 bg-surface-container animate-pulse rounded" />
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </Link>
-                <Link href="/berita/kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman" className="relative rounded-lg overflow-hidden group block">
-                  <div className="absolute top-3 left-3 z-10 bg-primary text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase rounded">
-                    Nasional
-                  </div>
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    alt="Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkqqUSv5VZ29pTkviz2OC6peQC1griLqMRi-0QCTYnwtpDj4ycMZ_-OaKo5Clj-7dAOdjoPt2YPT29JiRF7nW85VC1xN-Raj1ImVO6KyP6AVjDs4slH11lhYUiTSdRJb0z0Kvpf5u8F31UfcDiV-Dwl6FPN83Na4ZoHMGAE-dI9p7hwqdjmkAf110-gWibHPrylebzClSF2YhhmMhP6gQfdO5gx3Tn4XpZxFJWJo3hXMJo3yLnvEh"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all p-4 flex flex-col justify-end">
-                    <h3 className="text-white font-[Roboto] text-[20px] font-bold leading-tight">
-                      Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman
-                    </h3>
-                  </div>
-                </Link>
-              </div>
-            </section>
+                </section>
+              </>
+            )}
 
-            {/* ─── Latest News Feed ─── */}
-            <section>
-              <div className="mb-6 flex justify-between items-end border-b border-outline-variant pb-2">
-                <h2 className="font-[Roboto] text-[24px] font-extrabold uppercase tracking-tight section-title-accent leading-[1.2]">
-                  Berita Terkini
-                </h2>
-                <Link
-                  className="text-primary font-[Roboto] text-[12px] font-bold hover:underline"
-                  href="#"
-                >
-                  LIHAT SEMUA
-                </Link>
+            {/* ─── ERROR STATE ─── */}
+            {error && !loading && (
+              <div className="bg-error-container text-on-error-container p-6 rounded-lg text-center">
+                <span className="material-symbols-outlined text-4xl mb-2 block">error</span>
+                <p className="font-[Roboto] font-bold">{error}</p>
               </div>
-              <div className="space-y-6">
-                {/* Feed Card 1 */}
-                <Link href="/berita/warga-desa-cipanengah-galang-bantuan-korban-kebakaran-ciptamulya" className="block">
-                  <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
-                    <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+            )}
+
+            {/* ─── CONTENT FROM SUPABASE ─── */}
+            {!loading && !error && (
+              <>
+                {/* Hero Section (Bento Style) */}
+                {heroItems.length > 0 && (
+                  <section className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px]">
+                    {/* Primary Hero */}
+                    <Link
+                      href={`/berita/${heroItems[0].id}-${toSlug(heroItems[0].judul)}`}
+                      className="relative rounded-lg overflow-hidden group h-[300px] md:h-full md:col-span-1 block"
+                    >
+                      <div className="absolute top-4 left-4 z-10 bg-primary text-on-primary px-3 py-1 text-xs font-bold uppercase rounded">
+                        Headline
+                      </div>
                       <img
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        alt="Warga Desa Cipanengah galang bantuan"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4_nZWQZ608UouSmYCATNnMX_a1yhCvMtaHJKNEm-Lp4kkVS_lG8xtsBpa5LeR_vcuRnPKQZ0PIufhMc7i3h5MIWcDkt-_C-PmU7oeaZivhRYaEQ7w04Pm2rHNElrqGgJwKxNHrpTdrxNkLp0A1vhKYSCjZTabZoy1zysQgMxtm76Vo0TY7h_0qMffSfllIUZeqTZflUVYbqffYCP8cT_ooE4EF0_yStWsq_yhsfGNGfCT9K-Y1RB"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt={heroItems[0].judul}
+                        src={heroItems[0].gambar_url}
                       />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
-                        Gerbang Desa
-                      </span>
-                      <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
-                        Warga Desa Cipanengah Galang Bantuan untuk Korban
-                        Kebakaran Kampung Adat Ciptamulya
-                      </h3>
-                      <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
-                        Kegiatan gotong royong warga desa menunjukkan solidaritas
-                        tinggi dalam membantu sesama yang tertimpa musibah...
-                      </p>
-                      <span className="text-text-muted font-[Roboto] text-[12px]">
-                        Sabtu, 1 Agustus 2026 - 13:41 WIB
-                      </span>
-                    </div>
-                  </article>
-                </Link>
+                      <div className="absolute inset-0 text-gradient-overlay flex flex-col justify-end p-6">
+                        <span className="text-white/80 font-[Roboto] text-[12px] mb-2">
+                          Headline • {timeAgo(heroItems[0].waktu_dibuat)}
+                        </span>
+                        <h2 className="text-white font-[Roboto] text-[24px] font-extrabold leading-tight group-hover:text-primary-fixed-dim transition-colors">
+                          {heroItems[0].judul}
+                        </h2>
+                      </div>
+                    </Link>
 
-                {/* Feed Card 2 */}
-                <Link href="/berita/truk-kayu-terguling-di-cibangban-sukabumi" className="block">
-                  <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
-                    <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
-                      <img
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        alt="Truk Kayu Terguling di Cibangban"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfctd_nTTiPyzBBVtf38_4euNGnWz7h2QtfX-2Czulb1UfPbvLMXBQPylEPTUwVApdCAQn8TjI2TQ5uFqnLF8JjXDjcqqEkseT7nuEwNMKZYIpKm6VxREF3B4dZeR77Ig1LzuWc-9ZNjAN_oaTXm9-Heensu0z9hdju5PbtmlYvlQOem3cda7m0PLlDDMO_HtNLd_zMzSlZvgHVeS9TkJX-IQ1QKgdTuD4AGvcEousbj8wRmqSM_AC"
-                      />
+                    {/* Secondary Hero Grid */}
+                    <div className="grid grid-rows-2 gap-4 md:col-span-1">
+                      {heroItems.slice(1, 3).map((item) => (
+                        <Link
+                          key={item.id}
+                          href={`/berita/${item.id}-${toSlug(item.judul)}`}
+                          className="relative rounded-lg overflow-hidden group block"
+                        >
+                          <img
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            alt={item.judul}
+                            src={item.gambar_url}
+                          />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all p-4 flex flex-col justify-end">
+                            <h3 className="text-white font-[Roboto] text-[20px] font-bold leading-tight">
+                              {item.judul}
+                            </h3>
+                          </div>
+                        </Link>
+                      ))}
                     </div>
-                    <div className="flex flex-col justify-center">
-                      <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
-                        Peristiwa
-                      </span>
-                      <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
-                        Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban
-                        Sukabumi
-                      </h3>
-                      <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
-                        Kecelakaan tunggal terjadi di tanjakan ekstrem Cibangban,
-                        mengakibatkan arus lalu lintas tersendat selama
-                        berjam-jam...
-                      </p>
-                      <span className="text-text-muted font-[Roboto] text-[12px]">
-                        Sabtu, 1 Agustus 2026 - 13:37 WIB
-                      </span>
-                    </div>
-                  </article>
-                </Link>
-              </div>
-            </section>
+                  </section>
+                )}
 
-            {/* ─── Wisata Section ─── */}
-            <section className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30">
-              <div className="mb-6 flex justify-between items-center">
-                <h2 className="font-[Roboto] text-[24px] font-extrabold uppercase tracking-tight section-title-accent leading-[1.2]">
-                  Wisata
-                </h2>
-                <div className="flex gap-2">
-                  <button className="p-1 rounded-full border border-outline hover:bg-primary hover:text-white transition-all">
-                    <span className="material-symbols-outlined">
-                      chevron_left
-                    </span>
-                  </button>
-                  <button className="p-1 rounded-full border border-outline hover:bg-primary hover:text-white transition-all">
-                    <span className="material-symbols-outlined">
-                      chevron_right
-                    </span>
-                  </button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {wisataCards.map((card) => (
-                  <Link
-                    key={card.title}
-                    href={`/berita/${card.slug}`}
-                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all group block"
-                  >
-                    <div className="h-40 overflow-hidden">
-                      <img
-                        className="w-full h-full object-cover group-hover:scale-110 duration-500"
-                        alt={card.title}
-                        src={card.src}
-                      />
+                {/* ─── Latest News Feed ─── */}
+                {feedItems.length > 0 && (
+                  <section>
+                    <div className="mb-6 flex justify-between items-end border-b border-outline-variant pb-2">
+                      <h2 className="font-[Roboto] text-[24px] font-extrabold uppercase tracking-tight section-title-accent leading-[1.2]">
+                        Berita Terkini
+                      </h2>
+                      <Link
+                        className="text-primary font-[Roboto] text-[12px] font-bold hover:underline"
+                        href="#"
+                      >
+                        LIHAT SEMUA
+                      </Link>
                     </div>
-                    <div className="p-4">
-                      <span className="text-primary font-[Roboto] text-[12px] font-bold mb-2 block">
-                        WISATA
-                      </span>
-                      <h4 className="font-[Roboto] text-sm font-bold group-hover:text-primary transition-colors">
-                        {card.title}
-                      </h4>
+                    <div className="space-y-6">
+                      {feedItems.map((item) => (
+                        <Link
+                          key={item.id}
+                          href={`/berita/${item.id}-${toSlug(item.judul)}`}
+                          className="block"
+                        >
+                          <article className="flex flex-col md:flex-row gap-6 p-4 bg-surface-container-lowest rounded-lg hover:shadow-md transition-shadow group">
+                            <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+                              <img
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                alt={item.judul}
+                                src={item.gambar_url}
+                              />
+                            </div>
+                            <div className="flex flex-col justify-center">
+                              <span className="text-primary font-[Roboto] text-[12px] font-bold mb-1 uppercase">
+                                Berita
+                              </span>
+                              <h3 className="font-[Roboto] text-[20px] font-bold leading-[1.3] mb-2 group-hover:text-primary transition-colors">
+                                {item.judul}
+                              </h3>
+                              <p className="text-on-surface-variant text-sm line-clamp-2 mb-3">
+                                {truncate(item.isi_berita, 150)}
+                              </p>
+                              <span className="text-text-muted font-[Roboto] text-[12px]">
+                                {formatDate(item.waktu_dibuat)}
+                              </span>
+                            </div>
+                          </article>
+                        </Link>
+                      ))}
                     </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
+                  </section>
+                )}
+
+                {/* ─── Empty State ─── */}
+                {beritaList.length === 0 && (
+                  <div className="text-center py-16 text-on-surface-variant">
+                    <span className="material-symbols-outlined text-6xl mb-4 block opacity-40">newspaper</span>
+                    <p className="font-[Roboto] text-lg font-bold">Belum ada berita</p>
+                    <p className="text-sm mt-1">Berita akan muncul di sini setelah ditambahkan ke database.</p>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* ─── Sidebar (4 cols) ─── */}
@@ -381,30 +396,41 @@ export default function Home() {
               />
             </div>
 
-            {/* ─── Popular News Widget — ANGKA POPULER RAKSASA ─── */}
+            {/* ─── Popular News Widget ─── */}
             <div className="bg-white rounded-lg shadow-sm border border-outline-variant p-6">
               <h2 className="font-[Roboto] text-[20px] font-bold mb-6 uppercase border-b-2 border-primary pb-2 inline-block">
                 Populer
               </h2>
               <div className="space-y-6">
-                {popularNews.map((item) => (
-                  <div
-                    key={item.rank}
-                    className="flex items-start gap-4 group cursor-pointer"
-                  >
-                    <div className="text-6xl font-black text-[#8b0000] leading-none group-hover:text-primary transition-colors select-none flex-shrink-0">
-                      {item.rank}
-                    </div>
-                    <div className="pt-1">
-                      <h4 className="text-sm font-bold leading-tight group-hover:text-primary">
-                        {item.title}
-                      </h4>
-                      <span className="text-text-muted text-[10px] uppercase mt-1 block">
-                        {item.category}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                {loading
+                  ? [1, 2, 3].map((i) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <div className="w-12 h-14 bg-surface-container animate-pulse rounded" />
+                        <div className="flex-1 space-y-2 pt-1">
+                          <div className="h-4 bg-surface-container animate-pulse rounded w-full" />
+                          <div className="h-3 bg-surface-container animate-pulse rounded w-1/3" />
+                        </div>
+                      </div>
+                    ))
+                  : popularItems.map((item, index) => (
+                      <Link
+                        key={item.id}
+                        href={`/berita/${item.id}-${toSlug(item.judul)}`}
+                        className="flex items-start gap-4 group cursor-pointer"
+                      >
+                        <div className="text-6xl font-black text-[#8b0000] leading-none group-hover:text-primary transition-colors select-none flex-shrink-0">
+                          {index + 1}
+                        </div>
+                        <div className="pt-1">
+                          <h4 className="text-sm font-bold leading-tight group-hover:text-primary">
+                            {item.judul}
+                          </h4>
+                          <span className="text-text-muted text-[10px] uppercase mt-1 block">
+                            {timeAgo(item.waktu_dibuat)}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
               </div>
             </div>
 
@@ -432,28 +458,44 @@ export default function Home() {
                 Nasional
               </h2>
               <div className="space-y-4">
-                <div className="group cursor-pointer">
-                  <img
-                    className="w-full h-32 object-cover rounded-lg mb-2"
-                    alt="Usung Perubahan di PWI Jabar"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbUuhv6EIYGO-Hpz6pLGIzwq4DFmZv6nlIrUebX6BgDlMwvRy8glb_gIPkmjqN6Jj3YtWJ9rO02MPVqwdCh4eU-BnRvuCKa81CSMd2xT-kj_JOcClGGWdf7E2LtDEfkDJjjYlbdRBq8xZbDFtfFygBboAWAfjLqzgYko0Ftg33oUz_T5Zp_V84Lw11vOP2jzeq1TFtL6pTHSCHhCnhIn6NoAXut3vMf-dXrp-yM7IRtJMpmEj4yWu3"
-                  />
-                  <h4 className="text-sm font-bold leading-snug group-hover:text-primary">
-                    Usung Perubahan di PWI Jabar, Kang Andhy Tawarkan Program
-                    Kesejahteraan
-                  </h4>
-                  <span className="text-text-muted text-[10px]">
-                    31 Juli 2026
-                  </span>
-                </div>
-                <div className="border-t border-outline-variant pt-3 group cursor-pointer">
-                  <h4 className="text-sm font-bold leading-snug group-hover:text-primary">
-                    Hergun Usul Kemendagri Luncurkan Program Wirausaha Pemula
-                  </h4>
-                  <span className="text-text-muted text-[10px]">
-                    30 Juli 2026
-                  </span>
-                </div>
+                {loading ? (
+                  <div className="space-y-4">
+                    <div className="h-32 bg-surface-container animate-pulse rounded-lg" />
+                    <div className="h-4 bg-surface-container animate-pulse rounded w-3/4" />
+                  </div>
+                ) : beritaList.length > 0 ? (
+                  <>
+                    <Link
+                      href={`/berita/${beritaList[0].id}-${toSlug(beritaList[0].judul)}`}
+                      className="group cursor-pointer block"
+                    >
+                      <img
+                        className="w-full h-32 object-cover rounded-lg mb-2"
+                        alt={beritaList[0].judul}
+                        src={beritaList[0].gambar_url}
+                      />
+                      <h4 className="text-sm font-bold leading-snug group-hover:text-primary">
+                        {beritaList[0].judul}
+                      </h4>
+                      <span className="text-text-muted text-[10px]">
+                        {formatDate(beritaList[0].waktu_dibuat)}
+                      </span>
+                    </Link>
+                    {beritaList.length > 1 && (
+                      <Link
+                        href={`/berita/${beritaList[1].id}-${toSlug(beritaList[1].judul)}`}
+                        className="border-t border-outline-variant pt-3 group cursor-pointer block"
+                      >
+                        <h4 className="text-sm font-bold leading-snug group-hover:text-primary">
+                          {beritaList[1].judul}
+                        </h4>
+                        <span className="text-text-muted text-[10px]">
+                          {formatDate(beritaList[1].waktu_dibuat)}
+                        </span>
+                      </Link>
+                    )}
+                  </>
+                ) : null}
               </div>
             </div>
           </aside>
