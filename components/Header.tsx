@@ -22,13 +22,55 @@ const navLinks = [
 ];
 
 const socialIcons = [
-  { icon: "fab fa-facebook-f", label: "Facebook", href: "https://facebook.com" },
-  { icon: "fab fa-x-twitter", label: "Twitter", href: "https://twitter.com" },
-  { icon: "fab fa-instagram", label: "Instagram", href: "https://instagram.com" },
-  { icon: "fab fa-youtube", label: "YouTube", href: "https://youtube.com" },
-  { icon: "fab fa-tiktok", label: "TikTok", href: "https://tiktok.com" },
-  { icon: "fab fa-linkedin-in", label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: "fab fa-pinterest-p", label: "Pinterest", href: "https://pinterest.com" },
+  {
+    icon: "fab fa-facebook-f",
+    label: "Facebook",
+    href: "https://facebook.com",
+    colorClass: "text-[#1877F2]",
+    hoverBg: "hover:bg-[#1877F2]/10",
+  },
+  {
+    icon: "fab fa-x-twitter",
+    label: "Twitter",
+    href: "https://twitter.com",
+    colorClass: "text-black",
+    hoverBg: "hover:bg-black/10",
+  },
+  {
+    icon: "fab fa-instagram",
+    label: "Instagram",
+    href: "https://instagram.com",
+    colorClass: "text-[#E4405F]",
+    hoverBg: "hover:bg-[#E4405F]/10",
+  },
+  {
+    icon: "fab fa-youtube",
+    label: "YouTube",
+    href: "https://youtube.com",
+    colorClass: "text-[#FF0000]",
+    hoverBg: "hover:bg-[#FF0000]/10",
+  },
+  {
+    icon: "fab fa-tiktok",
+    label: "TikTok",
+    href: "https://tiktok.com",
+    colorClass: "text-black",
+    hoverBg: "hover:bg-black/10",
+  },
+  {
+    icon: "fab fa-linkedin-in",
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    colorClass: "text-[#0A66C2]",
+    hoverBg: "hover:bg-[#0A66C2]/10",
+  },
+  {
+    icon: "fab fa-pinterest-p",
+    label: "Pinterest",
+    href: "https://pinterest.com",
+    colorClass: "text-[#BD081C]",
+    hoverBg: "hover:bg-[#BD081C]/10",
+  },
 ];
 
 export default function Header() {
@@ -88,18 +130,18 @@ export default function Header() {
           </form>
         </div>
 
-        {/* KANAN: Ikon Sosial Media */}
-        <div className="hidden md:flex items-center gap-1.5">
+        {/* KANAN: Ikon Sosial Media Warna Resmi App */}
+        <div className="hidden md:flex items-center gap-2">
           {socialIcons.map((s) => (
             <a
               key={s.label}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-gray-100 hover:bg-red-600 text-gray-600 hover:text-white flex items-center justify-center transition-colors text-xs"
+              className={`w-8 h-8 rounded-full bg-gray-100 ${s.hoverBg} flex items-center justify-center transition-all hover:scale-110 shadow-xs border border-gray-200/80`}
               aria-label={s.label}
             >
-              <i className={s.icon} />
+              <i className={`${s.icon} ${s.colorClass} text-sm`} />
             </a>
           ))}
         </div>
@@ -144,17 +186,17 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="flex items-center justify-center gap-3 pt-3 border-t border-red-500 mt-2">
+              <div className="flex items-center justify-center gap-2 pt-3 border-t border-red-500 mt-2">
                 {socialIcons.map((s) => (
                   <a
                     key={s.label}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-red-700 hover:bg-red-800 text-white flex items-center justify-center transition-colors text-xs"
+                    className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
                     aria-label={s.label}
                   >
-                    <i className={s.icon} />
+                    <i className={`${s.icon} ${s.colorClass} text-sm`} />
                   </a>
                 ))}
               </div>

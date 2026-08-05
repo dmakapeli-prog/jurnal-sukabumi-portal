@@ -1,13 +1,48 @@
 import Link from "next/link";
 
 const footerSocials = [
-  { icon: "fab fa-facebook-f", label: "Facebook", href: "https://facebook.com" },
-  { icon: "fab fa-x-twitter", label: "Twitter", href: "https://twitter.com" },
-  { icon: "fab fa-instagram", label: "Instagram", href: "https://instagram.com" },
-  { icon: "fab fa-youtube", label: "YouTube", href: "https://youtube.com" },
-  { icon: "fab fa-tiktok", label: "TikTok", href: "https://tiktok.com" },
-  { icon: "fab fa-linkedin-in", label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: "fab fa-pinterest-p", label: "Pinterest", href: "https://pinterest.com" },
+  {
+    icon: "fab fa-facebook-f",
+    label: "Facebook",
+    href: "https://facebook.com",
+    colorClass: "text-[#1877F2]",
+  },
+  {
+    icon: "fab fa-x-twitter",
+    label: "Twitter",
+    href: "https://twitter.com",
+    colorClass: "text-black",
+  },
+  {
+    icon: "fab fa-instagram",
+    label: "Instagram",
+    href: "https://instagram.com",
+    colorClass: "text-[#E4405F]",
+  },
+  {
+    icon: "fab fa-youtube",
+    label: "YouTube",
+    href: "https://youtube.com",
+    colorClass: "text-[#FF0000]",
+  },
+  {
+    icon: "fab fa-tiktok",
+    label: "TikTok",
+    href: "https://tiktok.com",
+    colorClass: "text-black",
+  },
+  {
+    icon: "fab fa-linkedin-in",
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    colorClass: "text-[#0A66C2]",
+  },
+  {
+    icon: "fab fa-pinterest-p",
+    label: "Pinterest",
+    href: "https://pinterest.com",
+    colorClass: "text-[#BD081C]",
+  },
 ];
 
 const mediaNetworkLinks = [
@@ -39,7 +74,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* 2. Ikon Sosial Media (Background Bulat) */}
+        {/* 2. Ikon Sosial Media Warna Resmi Brand (Background Bulat Putih Kontras) */}
         <div className="flex items-center justify-center flex-wrap gap-3">
           {footerSocials.map((s) => (
             <a
@@ -47,10 +82,10 @@ export default function Footer() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-full bg-white/10 hover:bg-red-600 text-white flex items-center justify-center transition-colors text-xs shadow-sm"
+              className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-transform hover:scale-110 shadow-md border border-white/20"
               aria-label={s.label}
             >
-              <i className={s.icon} />
+              <i className={`${s.icon} ${s.colorClass} text-base`} />
             </a>
           ))}
         </div>
