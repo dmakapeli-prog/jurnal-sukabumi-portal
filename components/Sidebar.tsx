@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -10,65 +7,66 @@ interface SidebarProps {
 
 const bannerAds = [
   { id: 1, alt: "Banner Iklan DPRD Sukabumi", src: "https://picsum.photos/seed/dprd/300/200" },
-  { id: 2, alt: "Banner Iklan Layanan Masyarakat Pemkab", src: "https://picsum.photos/seed/pemkab/300/250" },
-  { id: 3, alt: "Banner Sponsorship Regional", src: "https://picsum.photos/seed/sponsor/300/180" },
+  { id: 2, alt: "Banner Sertifikat Media Siber", src: "https://picsum.photos/seed/sertifikat/300/240" },
+  { id: 3, alt: "Banner Iklan Layanan Masyarakat Pemkab", src: "https://picsum.photos/seed/pemkab/300/180" },
+];
+
+const topicTags = [
+  "# EKBIS",
+  "# HEADLINE",
+  "# PERISTIWA",
+  "# POLITIK",
+  "# HUKUM",
+  "# WISATA",
+  "# PARLEMEN",
+  "# GERBANG DESA",
+  "# PENDIDIKAN",
 ];
 
 const fallbackPopular = [
   {
     id: 1,
     slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
-    rank: 1,
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
     date: "4 Agt 2026",
+    image: "https://picsum.photos/seed/pop1/100/70",
   },
   {
     id: 2,
     slug: "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
-    rank: 2,
     title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
     category: "HUKUM",
     date: "4 Agt 2026",
+    image: "https://picsum.photos/seed/pop2/100/70",
   },
   {
     id: 3,
     slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
-    rank: 3,
     title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
     category: "HEADLINE",
     date: "4 Agt 2026",
+    image: "https://picsum.photos/seed/pop3/100/70",
   },
   {
     id: 4,
     slug: "guru-ngaji-terduga-pelaku-pencabulan-ditangkap-di-banten",
-    rank: 4,
     title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten",
     category: "PERISTIWA",
     date: "4 Agt 2026",
+    image: "https://picsum.photos/seed/pop4/100/70",
   },
   {
     id: 5,
     slug: "perumda-amtjm-tanggapi-aksi-mahasiswa",
-    rank: 5,
     title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter Sesuai Prosedur",
     category: "PERISTIWA",
     date: "4 Agt 2026",
+    image: "https://picsum.photos/seed/pop5/100/70",
   },
 ];
 
-const sidebarSocials = [
-  { icon: "fab fa-facebook-f", label: "Facebook", href: "https://facebook.com", color: "bg-blue-600" },
-  { icon: "fab fa-x-twitter", label: "Twitter", href: "https://twitter.com", color: "bg-black" },
-  { icon: "fab fa-instagram", label: "Instagram", href: "https://instagram.com", color: "bg-pink-600" },
-  { icon: "fab fa-youtube", label: "YouTube", href: "https://youtube.com", color: "bg-red-600" },
-  { icon: "fab fa-tiktok", label: "TikTok", href: "https://tiktok.com", color: "bg-slate-900" },
-];
-
 export default function Sidebar({ popularArticles }: SidebarProps) {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [voted, setVoted] = useState(false);
-
   const displayArticles =
     popularArticles && popularArticles.length > 0
       ? popularArticles.slice(0, 5).map((item, idx) => ({
@@ -78,36 +76,72 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
           title: item.title,
           category: item.category,
           date: item.date,
+          image: item.image,
         }))
-      : fallbackPopular;
+      : fallbackPopular.map((item, idx) => ({ ...item, rank: idx + 1 }));
+
+  // National Featured Single Card (e.g. 8th article or fallback)
+  const nasionalArticle =
+    popularArticles && popularArticles.length > 5
+      ? popularArticles[5]
+      : {
+          id: 99,
+          slug: "kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman",
+          title: "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman dan Terkendali",
+          category: "NASIONAL",
+          date: "5 Agt 2026",
+          image: "https://picsum.photos/seed/nasional/300/180",
+          excerpt:
+            "Pemerintah memastikan distribusi logistik dan fasilitas dasar bagi penyintas bencana berlangsung lancar.",
+        };
 
   return (
     <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-6">
-      {/* BANNER IKLAN BERJAJAR VERTIKAL (DI ATAS SIDEBAR) */}
-      <div className="flex flex-col gap-4">
+      {/* 🔴 A. BANNER IKLAN VERTIKAL BERTUMPUK (PALING ATAS) */}
+      <div className="flex flex-col gap-3">
         {bannerAds.map((banner) => (
           <div
             key={banner.id}
-            className="w-full bg-gray-50 border border-gray-200 rounded-xl p-2 text-center shadow-sm"
+            className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-center shadow-sm"
           >
-            <span className="text-[9px] uppercase font-extrabold text-gray-400 block mb-1 font-['Montserrat'] tracking-wider">
+            <span className="text-[9px] uppercase font-black text-gray-400 block mb-1 font-['Montserrat'] tracking-wider">
               SPONSORSHIP / IKLAN
             </span>
-            <div className="w-full rounded-lg overflow-hidden flex items-center justify-center bg-gray-200">
+            <div className="w-full rounded-md overflow-hidden flex items-center justify-center bg-gray-200">
               <img
                 src={banner.src}
                 alt={banner.alt}
-                className="w-full h-auto object-cover rounded-lg"
+                className="w-full h-auto object-cover rounded-md"
               />
             </div>
           </div>
         ))}
       </div>
 
-      {/* BERITA TERPOPULER WIDGET */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
-        <div className="border-b-2 border-red-600 pb-2">
-          <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
+      {/* 🔴 B. TOPIK TERKINI */}
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex flex-col gap-3">
+        <div className="border-b-2 border-red-600 pb-1.5">
+          <h3 className="text-slate-900 text-base font-black font-['Montserrat'] uppercase tracking-wide">
+            TOPIK TERKINI
+          </h3>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {topicTags.map((tag) => (
+            <Link
+              key={tag}
+              href="#"
+              className="bg-gray-100 border border-gray-200 text-slate-800 text-[11px] font-bold font-['Montserrat'] px-2.5 py-1 rounded hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors"
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* 🔴 C. BERITA TERPOPULER (ANGKA BESAR MERAH DI SEBELAH KIRI) */}
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex flex-col gap-3">
+        <div className="border-b-2 border-red-600 pb-1.5">
+          <h3 className="text-slate-900 text-base font-black font-['Montserrat'] uppercase tracking-wide">
             BERITA TERPOPULER
           </h3>
         </div>
@@ -117,20 +151,31 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
             <Link
               key={item.id}
               href={`/berita/${item.slug}`}
-              className="flex gap-3 items-start group border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
+              className="flex items-center gap-3 group border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
             >
-              <span className="w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-extrabold text-xs font-['Montserrat'] flex-shrink-0 group-hover:bg-slate-900 transition-colors shadow-sm">
+              {/* Angka Urutan BESAR MERAH TEBAL di sebelah kiri */}
+              <span className="text-3xl font-black text-red-600 font-['Montserrat'] w-7 text-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 {item.rank}
               </span>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-red-600 text-[10px] font-extrabold uppercase font-['Montserrat']">
+
+              {/* Thumbnail Small */}
+              <div className="w-16 h-12 bg-gray-200 rounded overflow-hidden flex-shrink-0 border border-gray-200">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                />
+              </div>
+
+              {/* Detail Text */}
+              <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+                <span className="text-red-600 text-[9px] font-black uppercase font-['Montserrat']">
                   {item.category}
                 </span>
-                <h4 className="text-gray-800 group-hover:text-red-600 text-xs font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
+                <h4 className="text-slate-900 group-hover:text-red-600 text-xs font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
                   {item.title}
                 </h4>
-                <span className="text-gray-400 text-[10px] mt-0.5 font-['Montserrat'] flex items-center gap-1">
-                  <i className="far fa-clock text-[9px]"></i>
+                <span className="text-gray-400 text-[9px] font-['Montserrat'] mt-0.5">
                   {item.date}
                 </span>
               </div>
@@ -139,96 +184,45 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
         </div>
       </div>
 
-      {/* IKUTI KAMI SOCIAL MEDIA WIDGET */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
-        <div className="border-b-2 border-red-600 pb-2">
-          <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
-            IKUTI KAMI
+      {/* 🔴 D. NASIONAL (SATU CARD BERITA UTUH) */}
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex flex-col gap-3">
+        <div className="border-b-2 border-red-600 pb-1.5 flex items-center justify-between">
+          <h3 className="text-slate-900 text-base font-black font-['Montserrat'] uppercase tracking-wide">
+            NASIONAL
           </h3>
-        </div>
-
-        <div className="grid grid-cols-5 gap-2">
-          {sidebarSocials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${s.color} text-white h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm`}
-              aria-label={s.label}
-            >
-              <i className={`${s.icon} text-base`} />
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* JAJAK PENDAPAT / POLLING WIDGET */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-3">
-        <div className="border-b-2 border-red-600 pb-2">
-          <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
-            JAJAK PENDAPAT
-          </h3>
-        </div>
-
-        <p className="text-xs font-bold text-slate-800 font-['Montserrat'] leading-snug">
-          Apakah Anda setuju dengan langkah penertiban tambang liar di kawasan Sukabumi?
-        </p>
-
-        {!voted ? (
-          <div className="flex flex-col gap-2 mt-1">
-            {[
-              { id: 1, label: "Setuju, demi kelestarian alam" },
-              { id: 2, label: "Tidak setuju, butuh solusi ekonomi" },
-              { id: 3, label: "Netral / Ragu-ragu" },
-            ].map((opt) => (
-              <button
-                key={opt.id}
-                onClick={() => setSelectedOption(opt.id)}
-                className={`w-full p-2.5 rounded-lg text-left text-xs font-['Montserrat'] transition-all border ${
-                  selectedOption === opt.id
-                    ? "border-red-600 bg-red-50 text-red-700 font-bold"
-                    : "border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
-            <button
-              disabled={selectedOption === null}
-              onClick={() => setVoted(true)}
-              className="w-full mt-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold text-xs py-2 rounded-lg transition-colors font-['Montserrat'] shadow"
-            >
-              Kirim Pilihan
-            </button>
-          </div>
-        ) : (
-          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-lg text-xs font-bold text-center font-['Montserrat'] mt-1">
-            ✓ Terima kasih! Suara Anda telah berhasil direkam.
-          </div>
-        )}
-      </div>
-
-      {/* E-PAPER / INFOGRAFIS WIDGET */}
-      <div className="bg-slate-900 text-white rounded-xl p-5 shadow-lg flex flex-col gap-3 border border-slate-800">
-        <div>
-          <span className="bg-red-600 text-white text-[10px] font-extrabold font-['Montserrat'] px-2 py-0.5 uppercase rounded">
-            E-PAPER / INFOGRAFIS
+          <span className="text-[10px] font-bold text-red-600 font-['Montserrat'] uppercase">
+            FOKUS
           </span>
-          <h4 className="text-sm font-bold font-['Montserrat'] mt-2 leading-snug">
-            Edisi Cetak & Infografis Jurnal Sukabumi Pekan Ini
-          </h4>
         </div>
-        <div className="relative w-full aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden">
-          <img
-            src="https://picsum.photos/seed/epaper/300/180"
-            alt="E-Paper Sukabumi"
-            className="w-full h-full object-cover"
-          />
+
+        <div className="flex flex-col gap-2 group">
+          <div className="relative w-full h-40 bg-gray-100 rounded-md overflow-hidden border border-gray-200">
+            <img
+              src={nasionalArticle.image}
+              alt={nasionalArticle.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-black font-['Montserrat'] px-2 py-0.5 uppercase rounded shadow">
+              {nasionalArticle.category || "NASIONAL"}
+            </span>
+          </div>
+
+          <Link href={`/berita/${nasionalArticle.slug || nasionalArticle.id}`}>
+            <h4 className="text-slate-900 group-hover:text-red-600 text-sm font-bold font-['Montserrat'] leading-snug transition-colors">
+              {nasionalArticle.title}
+            </h4>
+          </Link>
+
+          {"excerpt" in nasionalArticle && nasionalArticle.excerpt && (
+            <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed">
+              {nasionalArticle.excerpt}
+            </p>
+          )}
+
+          <span className="text-gray-400 text-[10px] font-['Montserrat'] mt-1">
+            {nasionalArticle.date}
+          </span>
         </div>
-        <button className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-xs font-bold font-['Montserrat'] transition-colors shadow">
-          BACA E-PAPER
-        </button>
       </div>
     </aside>
   );
