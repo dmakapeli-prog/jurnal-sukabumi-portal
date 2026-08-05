@@ -75,7 +75,7 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
       : fallbackPopular.map((item, idx) => ({ ...item, rank: idx + 1 }));
 
   return (
-    <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-5">
+    <aside className="w-full flex-shrink-0 flex flex-col gap-5">
       {/* 1. 3 TAG <img> BERTUMPUK VERTIKAL (FLEX-COL) DENGAN MARGIN BAWAH MB-4 */}
       <div className="flex flex-col gap-3 mb-4">
         {/* Gambar 1: Poster DPRD (Portrait) */}

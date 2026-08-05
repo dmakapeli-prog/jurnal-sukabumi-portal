@@ -10,30 +10,27 @@ export const revalidate = 60;
 export default async function Home() {
   const liveArticles = await fetchLiveArticles();
 
-  // Divide live articles: 0-5 for HeroSection (1 Main + 4 Sub-thumbnails), rest for NewsFeed
-  const heroArticles = liveArticles.slice(0, 5);
-  const feedArticles = liveArticles.slice(5);
+  // Divide live articles: 0-4 for HeroSection slider, rest for NewsFeed
+  const heroArticles = liveArticles.slice(0, 4);
+  const feedArticles = liveArticles.slice(4);
 
   return (
     <div className="min-h-screen bg-slate-100/50 flex flex-col font-['Montserrat',sans-serif]">
       {/* Header Navigation (Two-Tier Layout) */}
       <Header />
 
-      {/* Main Content Area Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-5 md:px-6 pt-4 pb-10 flex flex-col gap-5">
-        {/* Hero Section Grid (1 Giant Image + 4 Sub-thumbnails) */}
-        <HeroSection articles={heroArticles} />
+      {/* Container Utama: Strict 2-Column Layout (70% Kiri / 30% Kanan) */}
+      <main className="max-w-7xl mx-auto px-4 w-full flex flex-col lg:flex-row gap-6 mt-4 pb-10 flex-1">
+        {/* Kolom Kiri (Main Content - 70%): HeroSection + NewsFeed */}
+        <div className="w-full lg:w-[70%] min-w-0 flex flex-col gap-6">
+          <HeroSection articles={heroArticles} />
+          <NewsFeed
+            articles={feedArticles.length > 0 ? feedArticles : liveArticles}
+          />
+        </div>
 
-        {/* Two-Column Main Content & Sidebar Layout */}
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
-          {/* Left Vertical News Feed (with inserted Dark Theme Blocks) */}
-          <div className="flex-1 w-full min-w-0">
-            <NewsFeed
-              articles={feedArticles.length > 0 ? feedArticles : liveArticles}
-            />
-          </div>
-
-          {/* Right Sidebar Widgets */}
+        {/* Kolom Kanan (Sidebar - 30%): 3 Banner Teratas + Topik Terkini + Populer */}
+        <div className="w-full lg:w-[30%] flex-shrink-0">
           <Sidebar popularArticles={liveArticles} />
         </div>
       </main>
