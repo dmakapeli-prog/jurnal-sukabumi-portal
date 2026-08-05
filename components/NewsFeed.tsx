@@ -2,72 +2,136 @@ import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
 interface NewsFeedProps {
-  articles: LiveArticle[];
+  articles?: LiveArticle[];
 }
 
+const fallbackArticles: LiveArticle[] = [
+  {
+    id: 1,
+    slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
+    link: "#",
+    title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
+    category: "PERISTIWA",
+    date: "Senin, 3 Agt 2026 - 15:30 WIB",
+    image: "https://picsum.photos/seed/feed1/400/250",
+    excerpt: "Dampak penambangan emas tanpa izin merusak kualitas air sungai dan mengancam kesehatan ratusan KK.",
+  },
+  {
+    id: 2,
+    slug: "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
+    link: "#",
+    title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
+    category: "HUKUM",
+    date: "Senin, 3 Agt 2026 - 14:15 WIB",
+    image: "https://picsum.photos/seed/feed2/400/250",
+    excerpt: "Aparat kepolisian bertindak cepat mengamankan situasi guna menghindari aksi main hakim sendiri.",
+  },
+  {
+    id: 3,
+    slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
+    link: "#",
+    title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
+    category: "HEADLINE",
+    date: "Senin, 3 Agt 2026 - 12:45 WIB",
+    image: "https://picsum.photos/seed/feed3/400/250",
+    excerpt: "Pihak pengembang diminta menghentikan proyek sampai seluruh dokumen legalitas diterbitkan Pemkab Sukabumi.",
+  },
+  {
+    id: 4,
+    slug: "guru-ngaji-terduga-pelaku-pencabulan-ditangkap-di-banten",
+    link: "#",
+    title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten",
+    category: "PERISTIWA",
+    date: "Senin, 3 Agt 2026 - 11:00 WIB",
+    image: "https://picsum.photos/seed/feed4/400/250",
+    excerpt: "Pelaku sempat melarikan diri ke luar kota sebelum akhirnya terdeteksi tim buser Polres Sukabumi.",
+  },
+  {
+    id: 5,
+    slug: "perumda-amtjm-tanggapi-aksi-mahasiswa",
+    link: "#",
+    title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Sesuai Prosedur",
+    category: "PERISTIWA",
+    date: "Senin, 3 Agt 2026 - 10:20 WIB",
+    image: "https://picsum.photos/seed/feed5/400/250",
+    excerpt: "Direksi Perumda memberikan penjelasan transparan terkait proses lelang pengadaan water meter.",
+  },
+  {
+    id: 6,
+    slug: "pemkab-sukabumi-dorong-pengembangan-wisata-geopark",
+    link: "#",
+    title: "Pemkab Sukabumi Dorong Pengembangan Wisata Geopark Ciletuh Berbasis Masyarakat",
+    category: "WISATA",
+    date: "Minggu, 2 Agt 2026 - 16:50 WIB",
+    image: "https://picsum.photos/seed/feed6/400/250",
+    excerpt: "Pemberdayaan UMKM lokal menjadi fokus utama peningkatan ekonomi kawasan wisata Geopark UNESCO.",
+  },
+  {
+    id: 7,
+    slug: "sidang-paripurna-dprd-sukabumi-bahas-rancangan-apbd",
+    link: "#",
+    title: "Sidang Paripurna DPRD Sukabumi Bahas Rancangan APBD Perubahan 2026",
+    category: "PARLEMEN",
+    date: "Minggu, 2 Agt 2026 - 14:10 WIB",
+    image: "https://picsum.photos/seed/feed7/400/250",
+    excerpt: "Fokus alokasi anggaran akan diarahkan pada perbaikan infrastruktur jalan dan penanganan stunting.",
+  },
+];
+
 export default function NewsFeed({ articles }: NewsFeedProps) {
-  if (!articles || articles.length === 0) {
-    return (
-      <div className="w-full p-8 text-center bg-gray-50 border border-gray-200 rounded-lg text-gray-500 font-['Montserrat'] text-xs">
-        Belum ada berita terbaru yang dapat ditampilkan.
-      </div>
-    );
-  }
+  const feedData =
+    articles && articles.length > 0 ? articles : fallbackArticles;
 
-  // Split news array into parts so we can insert dark theme blocks in-between
-  const firstBatch = articles.slice(0, 3);
-  const secondBatch = articles.slice(3, 6);
-  const thirdBatch = articles.slice(6);
-
-  // Dark Theme Block Data (using articles subset or custom highlights)
-  const darkBlock1Items = articles.slice(1, 4);
-  const darkBlock2Items = articles.slice(4, 7);
+  const firstBatch = feedData.slice(0, 3);
+  const darkBlockArticles =
+    feedData.length >= 6 ? feedData.slice(3, 6) : fallbackArticles.slice(3, 6);
+  const remainingBatch =
+    feedData.length >= 6 ? feedData.slice(6) : feedData.slice(3);
 
   return (
-    <div className="w-full flex flex-col gap-5">
-      {/* SECTION HEADER */}
-      <div className="flex items-center justify-between border-b-2 border-red-600 pb-1.5">
-        <h2 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide flex items-center gap-2">
-          <span>BERITA TERKINI</span>
-          <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+    <div className="w-full flex flex-col">
+      {/* 1. HEADER SECTION: TEKS "BERITA TERKINI" TEBAL DENGAN GARIS BAWAH MERAH SEBAGIAN */}
+      <div className="border-b-2 border-red-600 pb-1.5 mb-5 flex items-center justify-between">
+        <h2 className="text-slate-900 text-lg sm:text-xl font-black font-['Montserrat'] uppercase tracking-wide">
+          BERITA TERKINI
         </h2>
         <span className="text-[11px] font-black text-red-600 uppercase font-['Montserrat']">
-          LATEST FEED
+          LATEST NEWS
         </span>
       </div>
 
-      {/* BATCH 1: Vertical List (Articles 1-3) */}
-      <div className="flex flex-col gap-4">
+      {/* 2. LIST BERITA STANDAR (BATCH 1: 3 BERITA PERTAMA) */}
+      <div className="flex flex-col">
         {firstBatch.map((item) => (
           <article
             key={item.id}
-            className="flex flex-col sm:flex-row gap-3.5 items-start group border-b border-gray-200 pb-4 last:border-b-0"
+            className="flex flex-row gap-3 sm:gap-4 items-start group border-b border-gray-200 pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
           >
-            <div className="relative w-full sm:w-52 h-36 bg-gray-100 rounded-md overflow-hidden flex-shrink-0 shadow-sm border border-gray-200">
+            {/* Gambar thumbnail di kiri (w-1/3) */}
+            <div className="w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
               />
             </div>
-            <div className="flex flex-col justify-between py-0.5 flex-1 h-full gap-1.5">
-              <div className="flex flex-col gap-1">
-                <span className="text-red-600 text-[10px] font-black font-['Montserrat'] uppercase tracking-wider">
-                  {item.category}
-                </span>
-                <Link href={`/berita/${item.slug || item.id}`}>
-                  <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors">
-                    {item.title}
-                  </h3>
-                </Link>
-                {item.excerpt && (
-                  <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed">
-                    {item.excerpt}
-                  </p>
-                )}
-              </div>
-              <span className="text-gray-400 text-[10px] font-['Montserrat'] mt-1 flex items-center gap-1">
-                <i className="far fa-clock"></i>
+
+            {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
+            <div className="w-2/3 flex flex-col justify-between flex-1 py-0.5 gap-1">
+              <span className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide">
+                {item.category}
+              </span>
+              <Link href={`/berita/${item.slug || item.id}`}>
+                <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
+                  {item.title}
+                </h3>
+              </Link>
+              {item.excerpt && (
+                <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed hidden sm:block">
+                  {item.excerpt}
+                </p>
+              )}
+              <span className="text-gray-400 text-[10px] sm:text-[11px] font-['Montserrat'] mt-1">
                 {item.date}
               </span>
             </div>
@@ -75,160 +139,73 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
         ))}
       </div>
 
-      {/* 🔴 DARK THEME BLOCK 1: "FOKUS PERISTIWA" (In-between after item 3) */}
-      {darkBlock1Items.length > 0 && (
-        <div className="my-2 bg-slate-900 rounded-lg p-4 flex flex-col gap-3 shadow-md border border-slate-800">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-            <h3 className="text-red-500 text-xs sm:text-sm font-black font-['Montserrat'] uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 bg-red-600 rounded-full"></span>
-              FOKUS PERISTIWA SUKABUMI
-            </h3>
-            <span className="text-[10px] text-gray-400 font-['Montserrat'] uppercase font-bold">
-              SOROTAN
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {darkBlock1Items.map((item) => (
-              <div
-                key={item.id}
-                className="bg-slate-800/90 hover:bg-slate-800 rounded-md p-2.5 flex flex-col gap-2 transition-colors border border-slate-700/60 group"
-              >
-                <div className="relative w-full h-28 bg-slate-700 rounded overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <span className="text-red-400 text-[10px] font-black font-['Montserrat'] uppercase">
-                  {item.category}
-                </span>
-                <Link href={`/berita/${item.slug || item.id}`}>
-                  <h4 className="text-white text-xs font-bold font-['Montserrat'] line-clamp-2 leading-snug group-hover:text-red-400 transition-colors">
-                    {item.title}
-                  </h4>
-                </Link>
-              </div>
-            ))}
-          </div>
+      {/* 3. SISIPKAN BLOK GELAP DENGAN LABEL MERAH OVERLAPPING (-TOP-4 LEFT-4) */}
+      <div className="relative mt-8 mb-6 p-4 sm:p-5 bg-slate-900 rounded-none border border-slate-800">
+        {/* Label div berwarna merah menonjol ke luar atas */}
+        <div className="absolute -top-4 left-4 bg-red-600 text-white font-black text-xs px-3 py-1.5 uppercase tracking-wider rounded-none z-10 shadow-sm">
+          Peristiwa
         </div>
-      )}
 
-      {/* BATCH 2: Vertical List (Articles 4-6) */}
-      {secondBatch.length > 0 && (
-        <div className="flex flex-col gap-4">
-          {secondBatch.map((item) => (
-            <article
-              key={item.id}
-              className="flex flex-col sm:flex-row gap-3.5 items-start group border-b border-gray-200 pb-4 last:border-b-0"
-            >
-              <div className="relative w-full sm:w-52 h-36 bg-gray-100 rounded-md overflow-hidden flex-shrink-0 shadow-sm border border-gray-200">
+        {/* 3 Kartu Berita Berjejer Horizontal (Gambar di atas, judul putih di bawah) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          {darkBlockArticles.map((item) => (
+            <div key={item.id} className="flex flex-col gap-2 group">
+              <div className="relative w-full aspect-[16/10] bg-slate-800 rounded-none overflow-hidden border border-slate-700">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
               </div>
-              <div className="flex flex-col justify-between py-0.5 flex-1 h-full gap-1.5">
-                <div className="flex flex-col gap-1">
-                  <span className="text-red-600 text-[10px] font-black font-['Montserrat'] uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                  <Link href={`/berita/${item.slug || item.id}`}>
-                    <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors">
-                      {item.title}
-                    </h3>
-                  </Link>
-                  {item.excerpt && (
-                    <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed">
-                      {item.excerpt}
-                    </p>
-                  )}
-                </div>
-                <span className="text-gray-400 text-[10px] font-['Montserrat'] mt-1 flex items-center gap-1">
-                  <i className="far fa-clock"></i>
-                  {item.date}
-                </span>
-              </div>
-            </article>
+              <span className="text-red-400 text-[10px] font-black font-['Montserrat'] uppercase">
+                {item.category}
+              </span>
+              <Link href={`/berita/${item.slug || item.id}`}>
+                <h4 className="text-white group-hover:text-red-400 text-xs sm:text-sm font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
+                  {item.title}
+                </h4>
+              </Link>
+              <span className="text-gray-400 text-[9px] font-['Montserrat'] mt-auto">
+                {item.date}
+              </span>
+            </div>
           ))}
         </div>
-      )}
+      </div>
 
-      {/* 🔴 DARK THEME BLOCK 2: "KABAR PARLEMEN & RAGAM" (In-between after item 6) */}
-      {darkBlock2Items.length > 0 && (
-        <div className="my-2 bg-slate-950 rounded-lg p-4 flex flex-col gap-3 shadow-md border border-slate-900">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-            <h3 className="text-red-500 text-xs sm:text-sm font-black font-['Montserrat'] uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 bg-red-600 rounded-full"></span>
-              PARLEMEN & RAGAM SUKABUMI
-            </h3>
-            <span className="text-[10px] text-gray-400 font-['Montserrat'] uppercase font-bold">
-              RAGAM
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {darkBlock2Items.map((item) => (
-              <div
-                key={item.id}
-                className="bg-slate-900 hover:bg-slate-850 rounded-md p-2.5 flex flex-col gap-2 transition-colors border border-slate-800 group"
-              >
-                <div className="relative w-full h-28 bg-slate-800 rounded overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <span className="text-red-400 text-[10px] font-black font-['Montserrat'] uppercase">
-                  {item.category}
-                </span>
-                <Link href={`/berita/${item.slug || item.id}`}>
-                  <h4 className="text-white text-xs font-bold font-['Montserrat'] line-clamp-2 leading-snug group-hover:text-red-400 transition-colors">
-                    {item.title}
-                  </h4>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* BATCH 3: Vertical List (Articles 7+) */}
-      {thirdBatch.length > 0 && (
-        <div className="flex flex-col gap-4">
-          {thirdBatch.map((item) => (
+      {/* 4. LIST BERITA STANDAR SISANYA (BATCH SISA) */}
+      {remainingBatch.length > 0 && (
+        <div className="flex flex-col">
+          {remainingBatch.map((item) => (
             <article
               key={item.id}
-              className="flex flex-col sm:flex-row gap-3.5 items-start group border-b border-gray-200 pb-4 last:border-b-0"
+              className="flex flex-row gap-3 sm:gap-4 items-start group border-b border-gray-200 pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
             >
-              <div className="relative w-full sm:w-52 h-36 bg-gray-100 rounded-md overflow-hidden flex-shrink-0 shadow-sm border border-gray-200">
+              {/* Gambar thumbnail di kiri (w-1/3) */}
+              <div className="w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
               </div>
-              <div className="flex flex-col justify-between py-0.5 flex-1 h-full gap-1.5">
-                <div className="flex flex-col gap-1">
-                  <span className="text-red-600 text-[10px] font-black font-['Montserrat'] uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                  <Link href={`/berita/${item.slug || item.id}`}>
-                    <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors">
-                      {item.title}
-                    </h3>
-                  </Link>
-                  {item.excerpt && (
-                    <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed">
-                      {item.excerpt}
-                    </p>
-                  )}
-                </div>
-                <span className="text-gray-400 text-[10px] font-['Montserrat'] mt-1 flex items-center gap-1">
-                  <i className="far fa-clock"></i>
+
+              {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
+              <div className="w-2/3 flex flex-col justify-between flex-1 py-0.5 gap-1">
+                <span className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide">
+                  {item.category}
+                </span>
+                <Link href={`/berita/${item.slug || item.id}`}>
+                  <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
+                    {item.title}
+                  </h3>
+                </Link>
+                {item.excerpt && (
+                  <p className="text-gray-600 text-xs font-['Montserrat'] line-clamp-2 leading-relaxed hidden sm:block">
+                    {item.excerpt}
+                  </p>
+                )}
+                <span className="text-gray-400 text-[10px] sm:text-[11px] font-['Montserrat'] mt-1">
                   {item.date}
                 </span>
               </div>
