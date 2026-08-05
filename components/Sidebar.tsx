@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -9,46 +8,52 @@ interface SidebarProps {
   popularArticles?: LiveArticle[];
 }
 
+const bannerAds = [
+  { id: 1, alt: "Banner Iklan DPRD Sukabumi", src: "https://picsum.photos/seed/dprd/300/200" },
+  { id: 2, alt: "Banner Iklan Layanan Masyarakat Pemkab", src: "https://picsum.photos/seed/pemkab/300/250" },
+  { id: 3, alt: "Banner Sponsorship Regional", src: "https://picsum.photos/seed/sponsor/300/180" },
+];
+
 const fallbackPopular = [
   {
     id: 1,
+    slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
     rank: 1,
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
-    views: "1.4k dibaca",
-    link: "#",
+    date: "4 Agt 2026",
   },
   {
     id: 2,
+    slug: "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
     rank: 2,
     title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
     category: "HUKUM",
-    views: "1.1k dibaca",
-    link: "#",
+    date: "4 Agt 2026",
   },
   {
     id: 3,
+    slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
     rank: 3,
     title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
     category: "HEADLINE",
-    views: "950 dibaca",
-    link: "#",
+    date: "4 Agt 2026",
   },
   {
     id: 4,
+    slug: "guru-ngaji-terduga-pelaku-pencabulan-ditangkap-di-banten",
     rank: 4,
     title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten",
     category: "PERISTIWA",
-    views: "820 dibaca",
-    link: "#",
+    date: "4 Agt 2026",
   },
   {
     id: 5,
+    slug: "perumda-amtjm-tanggapi-aksi-mahasiswa",
     rank: 5,
     title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter Sesuai Prosedur",
     category: "PERISTIWA",
-    views: "740 dibaca",
-    link: "#",
+    date: "4 Agt 2026",
   },
 ];
 
@@ -68,30 +73,35 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
     popularArticles && popularArticles.length > 0
       ? popularArticles.slice(0, 5).map((item, idx) => ({
           id: item.id,
+          slug: item.slug || `berita-${item.id}`,
           rank: idx + 1,
           title: item.title,
           category: item.category,
-          views: item.date,
-          link: item.link,
+          date: item.date,
         }))
       : fallbackPopular;
 
   return (
     <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-6">
-      {/* Sponsorship Ad Slot 1 */}
-      <div className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-center shadow-sm">
-        <span className="text-[10px] uppercase font-extrabold text-gray-400 block mb-2 font-['Montserrat'] tracking-wider">
-          SPONSORSHIP / IKLAN
-        </span>
-        <div className="relative w-full aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-          <Image
-            src="https://placehold.co/300x250/e2e8f0/475569?text=Iklan+Banner+300x250"
-            alt="Iklan Banner 300x250"
-            fill
-            sizes="300px"
-            className="object-cover"
-          />
-        </div>
+      {/* BANNER IKLAN BERJAJAR VERTIKAL (DI ATAS SIDEBAR) */}
+      <div className="flex flex-col gap-4">
+        {bannerAds.map((banner) => (
+          <div
+            key={banner.id}
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl p-2 text-center shadow-sm"
+          >
+            <span className="text-[9px] uppercase font-extrabold text-gray-400 block mb-1 font-['Montserrat'] tracking-wider">
+              SPONSORSHIP / IKLAN
+            </span>
+            <div className="w-full rounded-lg overflow-hidden flex items-center justify-center bg-gray-200">
+              <img
+                src={banner.src}
+                alt={banner.alt}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* BERITA TERPOPULER WIDGET */}
@@ -106,8 +116,7 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
           {displayArticles.map((item) => (
             <Link
               key={item.id}
-              href={item.link}
-              target="_blank"
+              href={`/berita/${item.slug}`}
               className="flex gap-3 items-start group border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
             >
               <span className="w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-extrabold text-xs font-['Montserrat'] flex-shrink-0 group-hover:bg-slate-900 transition-colors shadow-sm">
@@ -122,7 +131,7 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
                 </h4>
                 <span className="text-gray-400 text-[10px] mt-0.5 font-['Montserrat'] flex items-center gap-1">
                   <i className="far fa-clock text-[9px]"></i>
-                  {item.views}
+                  {item.date}
                 </span>
               </div>
             </Link>
@@ -211,12 +220,10 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
           </h4>
         </div>
         <div className="relative w-full aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden">
-          <Image
-            src="https://placehold.co/300x180/0f172a/ffffff?text=E-Paper+Sukabumi"
+          <img
+            src="https://picsum.photos/seed/epaper/300/180"
             alt="E-Paper Sukabumi"
-            fill
-            sizes="300px"
-            className="object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <button className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-xs font-bold font-['Montserrat'] transition-colors shadow">

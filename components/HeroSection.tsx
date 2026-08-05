@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -23,13 +22,10 @@ export default function HeroSection({ articles }: HeroSectionProps) {
         {mainHeadline && (
           <div className="lg:col-span-2 bg-slate-900 rounded-xl overflow-hidden shadow-lg flex flex-col group border border-slate-800">
             <div className="relative w-full aspect-[16/9] min-h-[280px] sm:min-h-[360px] bg-slate-800">
-              <Image
+              <img
                 src={mainHeadline.image}
                 alt={mainHeadline.title}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 750px"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 
@@ -43,7 +39,7 @@ export default function HeroSection({ articles }: HeroSectionProps) {
                 </span>
               </div>
 
-              <Link href={mainHeadline.link} target="_blank">
+              <Link href={`/berita/${mainHeadline.slug || mainHeadline.id}`}>
                 <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold font-['Montserrat'] leading-snug group-hover:text-red-400 transition-colors">
                   {mainHeadline.title}
                 </h1>
@@ -66,12 +62,10 @@ export default function HeroSection({ articles }: HeroSectionProps) {
               className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col group flex-1"
             >
               <div className="relative w-full h-44 bg-gray-100">
-                <Image
+                <img
                   src={item.image}
                   alt={item.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
@@ -80,7 +74,7 @@ export default function HeroSection({ articles }: HeroSectionProps) {
                   <span className="text-red-600 text-xs font-bold font-['Montserrat'] uppercase">
                     {item.category}
                   </span>
-                  <Link href={item.link} target="_blank">
+                  <Link href={`/berita/${item.slug || item.id}`}>
                     <h2 className="text-slate-900 group-hover:text-red-600 font-bold font-['Montserrat'] text-sm sm:text-base leading-snug transition-colors line-clamp-2">
                       {item.title}
                     </h2>
@@ -104,19 +98,17 @@ export default function HeroSection({ articles }: HeroSectionProps) {
               className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col group"
             >
               <div className="relative w-full h-28 sm:h-32 bg-gray-100">
-                <Image
+                <img
                   src={item.image}
                   alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 250px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-3 flex flex-col gap-1 flex-1 justify-between">
                 <span className="text-red-600 text-[10px] font-extrabold font-['Montserrat'] uppercase">
                   {item.category}
                 </span>
-                <Link href={item.link} target="_blank">
+                <Link href={`/berita/${item.slug || item.id}`}>
                   <h3 className="text-slate-900 group-hover:text-red-600 font-bold font-['Montserrat'] text-xs leading-snug transition-colors line-clamp-2">
                     {item.title}
                   </h3>

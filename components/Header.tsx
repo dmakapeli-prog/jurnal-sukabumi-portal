@@ -4,21 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "HOME", active: true },
-  { label: "PERISTIWA" },
-  { label: "POLITIK" },
-  { label: "HUKUM" },
-  { label: "NASIONAL" },
-  { label: "PARLEMEN" },
-  { label: "EKONOMI" },
-  { label: "WISATA" },
-  { label: "RAGAM" },
-  { label: "SOSOK" },
-  { label: "OPINI" },
-  { label: "GERBANG DESA" },
-  { label: "PENDIDIKAN" },
-  { label: "RELIGI" },
-  { label: "VIDEO" },
+  { label: "HOME", href: "/", active: true },
+  { label: "PERISTIWA", href: "#" },
+  { label: "POLITIK", href: "#" },
+  { label: "HUKUM", href: "#" },
+  { label: "NASIONAL", href: "#" },
+  { label: "PARLEMEN", href: "#" },
+  { label: "EKBIS", href: "#" },
+  { label: "WISATA", href: "#" },
+  { label: "RAGAM", href: "#" },
+  { label: "SOSOK", href: "#" },
+  { label: "OPINI", href: "#" },
+  { label: "GERBANG DESA", href: "#" },
+  { label: "PENDIDIKAN", href: "#" },
+  { label: "RELIGI", href: "#" },
+  { label: "VIDEO", href: "#" },
 ];
 
 const socialIcons = [
@@ -27,6 +27,8 @@ const socialIcons = [
   { icon: "fab fa-instagram", label: "Instagram", href: "https://instagram.com" },
   { icon: "fab fa-youtube", label: "YouTube", href: "https://youtube.com" },
   { icon: "fab fa-tiktok", label: "TikTok", href: "https://tiktok.com" },
+  { icon: "fab fa-linkedin-in", label: "LinkedIn", href: "https://linkedin.com" },
+  { icon: "fab fa-pinterest-p", label: "Pinterest", href: "https://pinterest.com" },
 ];
 
 export default function Header() {
@@ -37,22 +39,16 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
-      {/* Top Bar Container */}
+      {/* BARIS 1: Logo (Kiri), Tanggal & Search (Tengah), Social Media (Kanan) */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Brand Text Logo & Mobile Drawer Toggle */}
+        {/* KIRI: Logo Resmi Jurnal Sukabumi */}
         <div className="flex items-center justify-between w-full md:w-auto">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="bg-red-600 text-white font-black text-2xl px-3 py-1 rounded-md shadow-md tracking-tighter">
-              JS
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-black font-['Montserrat'] tracking-tight text-slate-900 group-hover:text-red-600 transition-colors">
-                JURNAL <span className="text-red-600">SUKABUMI</span>
-              </span>
-              <span className="text-[10px] font-extrabold text-gray-500 tracking-widest uppercase -mt-1 font-['Montserrat']">
-                Media Informasi Digital Terpercaya • Jelas & Seimbang
-              </span>
-            </div>
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="https://jurnalsukabumi.com/wp-content/uploads/2025/11/cropped-Logo-jurnalsukabumi-2025-01.png"
+              alt="Jurnal Sukabumi Logo Resmi"
+              className="h-12 md:h-14 w-auto object-contain"
+            />
           </Link>
 
           <button
@@ -64,17 +60,16 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Date, Search Box & Social Icons */}
-        <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-          <div className="hidden lg:flex items-center gap-1.5 text-gray-600 text-xs font-semibold font-['Montserrat']">
+        {/* TENGAH: Tanggal & Form Pencarian */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-1 max-w-md justify-center">
+          <div className="text-gray-600 text-xs font-semibold font-['Montserrat'] whitespace-nowrap hidden sm:flex items-center gap-1.5">
             <i className="far fa-calendar-alt text-red-600"></i>
             <span>{todayDate}</span>
           </div>
 
-          {/* Search Form */}
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex-1 md:w-64 flex items-center relative"
+            className="w-full sm:w-64 flex items-center relative"
           >
             <input
               type="text"
@@ -91,36 +86,36 @@ export default function Header() {
               <i className="fas fa-search text-xs"></i>
             </button>
           </form>
+        </div>
 
-          {/* Social Links */}
-          <div className="hidden md:flex items-center gap-2">
-            {socialIcons.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-red-600 text-gray-600 hover:text-white flex items-center justify-center transition-colors text-xs"
-                aria-label={s.label}
-              >
-                <i className={s.icon} />
-              </a>
-            ))}
-          </div>
+        {/* KANAN: Ikon Sosial Media */}
+        <div className="hidden md:flex items-center gap-1.5">
+          {socialIcons.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-7 h-7 rounded-full bg-gray-100 hover:bg-red-600 text-gray-600 hover:text-white flex items-center justify-center transition-colors text-xs"
+              aria-label={s.label}
+            >
+              <i className={s.icon} />
+            </a>
+          ))}
         </div>
       </div>
 
-      {/* Main Red Navigation Bar */}
-      <nav className="bg-red-600 text-white shadow-md">
+      {/* BARIS 2: Background Merah Full Width - Menu Navigasi Horizontal */}
+      <nav className="w-full bg-red-600 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4">
           {/* Desktop Nav Items */}
-          <div className="hidden md:flex items-center overflow-x-auto no-scrollbar py-1 gap-1">
+          <div className="hidden md:flex items-center overflow-x-auto no-scrollbar py-1 gap-0.5">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
-                href="#"
-                className={`px-3 py-2 text-xs font-bold font-['Montserrat'] whitespace-nowrap transition-colors rounded hover:bg-red-700 ${
-                  item.active ? "bg-red-800 text-white shadow-inner" : ""
+                href={item.href}
+                className={`px-3 py-2 text-xs font-black font-['Montserrat'] uppercase whitespace-nowrap transition-colors rounded hover:bg-red-700 ${
+                  item.active ? "bg-red-800 text-white shadow-inner" : "text-white/95"
                 }`}
               >
                 {item.label}
@@ -133,13 +128,13 @@ export default function Header() {
             <div className="md:hidden py-3 px-2 flex flex-col gap-2 border-t border-red-500">
               <div className="text-white text-xs font-medium pb-2 border-b border-red-500 px-2 flex items-center justify-between">
                 <span>{todayDate}</span>
-                <span className="text-[10px] bg-red-800 px-2 py-0.5 rounded font-bold">KATEGORI</span>
+                <span className="text-[10px] bg-red-800 px-2 py-0.5 rounded font-bold uppercase">Kategori</span>
               </div>
               <div className="grid grid-cols-2 gap-1.5 pt-1">
                 {navLinks.map((item) => (
                   <Link
                     key={item.label}
-                    href="#"
+                    href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-3 py-2 text-xs font-bold font-['Montserrat'] rounded text-center transition-colors ${
                       item.active ? "bg-red-800 text-white" : "bg-red-700/60 hover:bg-red-700"

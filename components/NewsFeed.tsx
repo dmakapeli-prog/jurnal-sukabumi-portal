@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -37,12 +36,10 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           >
             {/* Thumbnail */}
             <div className="relative w-full sm:w-60 h-40 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0 shadow-sm">
-              <Image
+              <img
                 src={item.image}
                 alt={item.title}
-                fill
-                sizes="(max-width: 640px) 100vw, 240px"
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
 
@@ -52,7 +49,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
                 <span className="text-red-600 text-xs font-extrabold font-['Montserrat'] uppercase tracking-wider">
                   {item.category}
                 </span>
-                <Link href={item.link} target="_blank">
+                <Link href={`/berita/${item.slug || item.id}`}>
                   <h3 className="text-slate-900 group-hover:text-red-600 text-base sm:text-lg font-bold font-['Montserrat'] leading-snug transition-colors">
                     {item.title}
                   </h3>
