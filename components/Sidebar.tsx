@@ -3,29 +3,28 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LiveArticle } from "@/lib/wp";
 
-interface PopularItem {
-  id: number;
-  rank: number;
-  title: string;
-  category: string;
-  views: string;
+interface SidebarProps {
+  popularArticles?: LiveArticle[];
 }
 
-const popularArticles: PopularItem[] = [
+const fallbackPopular = [
   {
     id: 1,
     rank: 1,
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
     views: "1.4k dibaca",
+    link: "#",
   },
   {
     id: 2,
     rank: 2,
-    title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga Simpenan",
+    title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
     category: "HUKUM",
     views: "1.1k dibaca",
+    link: "#",
   },
   {
     id: 3,
@@ -33,13 +32,15 @@ const popularArticles: PopularItem[] = [
     title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
     category: "HEADLINE",
     views: "950 dibaca",
+    link: "#",
   },
   {
     id: 4,
     rank: 4,
-    title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten, Pelarian AC Berakhir",
+    title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten",
     category: "PERISTIWA",
     views: "820 dibaca",
+    link: "#",
   },
   {
     id: 5,
@@ -47,6 +48,7 @@ const popularArticles: PopularItem[] = [
     title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter Sesuai Prosedur",
     category: "PERISTIWA",
     views: "740 dibaca",
+    link: "#",
   },
 ];
 
@@ -58,9 +60,21 @@ const sidebarSocials = [
   { icon: "fab fa-tiktok", label: "TikTok", href: "https://tiktok.com", color: "bg-slate-900" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ popularArticles }: SidebarProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [voted, setVoted] = useState(false);
+
+  const displayArticles =
+    popularArticles && popularArticles.length > 0
+      ? popularArticles.slice(0, 5).map((item, idx) => ({
+          id: item.id,
+          rank: idx + 1,
+          title: item.title,
+          category: item.category,
+          views: item.date,
+          link: item.link,
+        }))
+      : fallbackPopular;
 
   return (
     <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-6">
@@ -89,10 +103,11 @@ export default function Sidebar() {
         </div>
 
         <div className="flex flex-col gap-3">
-          {popularArticles.map((item) => (
+          {displayArticles.map((item) => (
             <Link
               key={item.id}
-              href="#"
+              href={item.link}
+              target="_blank"
               className="flex gap-3 items-start group border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
             >
               <span className="w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center font-extrabold text-xs font-['Montserrat'] flex-shrink-0 group-hover:bg-slate-900 transition-colors shadow-sm">
@@ -106,7 +121,7 @@ export default function Sidebar() {
                   {item.title}
                 </h4>
                 <span className="text-gray-400 text-[10px] mt-0.5 font-['Montserrat'] flex items-center gap-1">
-                  <i className="far fa-eye text-[9px]"></i>
+                  <i className="far fa-clock text-[9px]"></i>
                   {item.views}
                 </span>
               </div>

@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
         hostname: "placehold.co",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "jurnalsukabumi.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.jurnalsukabumi.com",
+        pathname: "/**",
+      },
     ],
   },
 };
