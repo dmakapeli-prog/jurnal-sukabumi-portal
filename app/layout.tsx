@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="id" className={`${roboto.variable} antialiased`}>
       <head>
         <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           rel="stylesheet"
         />
         <link

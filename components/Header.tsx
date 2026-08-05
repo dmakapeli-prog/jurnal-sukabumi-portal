@@ -23,6 +23,7 @@ const navLinks = [
 
 const socialIcons = [
   {
+    type: "facebook",
     icon: "fab fa-facebook-f",
     label: "Facebook",
     href: "https://facebook.com",
@@ -30,13 +31,15 @@ const socialIcons = [
     hoverBg: "hover:bg-[#1877F2]/10",
   },
   {
+    type: "x-twitter",
     icon: "fab fa-x-twitter",
-    label: "Twitter",
+    label: "X (Twitter)",
     href: "https://twitter.com",
     colorClass: "text-black",
     hoverBg: "hover:bg-black/10",
   },
   {
+    type: "instagram",
     icon: "fab fa-instagram",
     label: "Instagram",
     href: "https://instagram.com",
@@ -44,6 +47,7 @@ const socialIcons = [
     hoverBg: "hover:bg-[#E4405F]/10",
   },
   {
+    type: "youtube",
     icon: "fab fa-youtube",
     label: "YouTube",
     href: "https://youtube.com",
@@ -51,6 +55,7 @@ const socialIcons = [
     hoverBg: "hover:bg-[#FF0000]/10",
   },
   {
+    type: "tiktok",
     icon: "fab fa-tiktok",
     label: "TikTok",
     href: "https://tiktok.com",
@@ -58,6 +63,7 @@ const socialIcons = [
     hoverBg: "hover:bg-black/10",
   },
   {
+    type: "linkedin",
     icon: "fab fa-linkedin-in",
     label: "LinkedIn",
     href: "https://linkedin.com",
@@ -65,6 +71,7 @@ const socialIcons = [
     hoverBg: "hover:bg-[#0A66C2]/10",
   },
   {
+    type: "pinterest",
     icon: "fab fa-pinterest-p",
     label: "Pinterest",
     href: "https://pinterest.com",
@@ -141,7 +148,17 @@ export default function Header() {
               className={`w-8 h-8 rounded-full bg-gray-100 ${s.hoverBg} flex items-center justify-center transition-all hover:scale-110 shadow-xs border border-gray-200/80`}
               aria-label={s.label}
             >
-              <i className={`${s.icon} ${s.colorClass} text-sm`} />
+              {s.type === "x-twitter" ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="w-3.5 h-3.5 fill-black"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              ) : (
+                <i className={`${s.icon} ${s.colorClass} text-sm`} />
+              )}
             </a>
           ))}
         </div>
@@ -196,7 +213,17 @@ export default function Header() {
                     className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform hover:scale-110 shadow-sm"
                     aria-label={s.label}
                   >
-                    <i className={`${s.icon} ${s.colorClass} text-sm`} />
+                    {s.type === "x-twitter" ? (
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="w-3.5 h-3.5 fill-black"
+                      >
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    ) : (
+                      <i className={`${s.icon} ${s.colorClass} text-sm`} />
+                    )}
                   </a>
                 ))}
               </div>

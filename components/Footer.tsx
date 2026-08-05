@@ -2,42 +2,49 @@ import Link from "next/link";
 
 const footerSocials = [
   {
+    type: "facebook",
     icon: "fab fa-facebook-f",
     label: "Facebook",
     href: "https://facebook.com",
     colorClass: "text-[#1877F2]",
   },
   {
+    type: "x-twitter",
     icon: "fab fa-x-twitter",
-    label: "Twitter",
+    label: "X (Twitter)",
     href: "https://twitter.com",
     colorClass: "text-black",
   },
   {
+    type: "instagram",
     icon: "fab fa-instagram",
     label: "Instagram",
     href: "https://instagram.com",
     colorClass: "text-[#E4405F]",
   },
   {
+    type: "youtube",
     icon: "fab fa-youtube",
     label: "YouTube",
     href: "https://youtube.com",
     colorClass: "text-[#FF0000]",
   },
   {
+    type: "tiktok",
     icon: "fab fa-tiktok",
     label: "TikTok",
     href: "https://tiktok.com",
     colorClass: "text-black",
   },
   {
+    type: "linkedin",
     icon: "fab fa-linkedin-in",
     label: "LinkedIn",
     href: "https://linkedin.com",
     colorClass: "text-[#0A66C2]",
   },
   {
+    type: "pinterest",
     icon: "fab fa-pinterest-p",
     label: "Pinterest",
     href: "https://pinterest.com",
@@ -85,7 +92,17 @@ export default function Footer() {
               className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-transform hover:scale-110 shadow-md border border-white/20"
               aria-label={s.label}
             >
-              <i className={`${s.icon} ${s.colorClass} text-base`} />
+              {s.type === "x-twitter" ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="w-4 h-4 fill-black"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              ) : (
+                <i className={`${s.icon} ${s.colorClass} text-base`} />
+              )}
             </a>
           ))}
         </div>
