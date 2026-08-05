@@ -76,34 +76,28 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
 
   return (
     <aside className="w-full flex-shrink-0 flex flex-col gap-5">
-      {/* 1. 3 TAG <img> BERTUMPUK VERTIKAL (FLEX-COL) DENGAN MARGIN BAWAH MB-4 */}
-      <div className="flex flex-col gap-3 mb-4">
-        {/* Gambar 1: Poster DPRD (Portrait) */}
-        <div className="w-full bg-gray-100 border border-gray-200 rounded-none overflow-hidden">
-          <img
-            src="https://picsum.photos/seed/dprd-poster/300/400"
-            alt="Poster DPRD Sukabumi"
-            className="w-full h-auto object-cover rounded-none"
-          />
-        </div>
+      {/* 1. 3 BANNER ASLI BERTUMPUK VERTIKAL (LIVE URL DARI JURNALSUKABUMI.COM) */}
+      <div className="flex flex-col mb-4">
+        {/* Banner 1: Poster DPRD (Pray For Kasepuhan Ciptamulya - Portrait) */}
+        <img
+          src="https://jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg"
+          alt="Poster DPRD Sukabumi - Pray For Kasepuhan Ciptamulya"
+          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+        />
 
-        {/* Gambar 2: Foto Ketua SMSI (Portrait) */}
-        <div className="w-full bg-gray-100 border border-gray-200 rounded-none overflow-hidden">
-          <img
-            src="https://picsum.photos/seed/ketua-smsi/300/400"
-            alt="Foto Ketua SMSI Sukabumi"
-            className="w-full h-auto object-cover rounded-none"
-          />
-        </div>
+        {/* Banner 2: Foto CEO / Ketua SMSI Eman Sulaeman (Portrait) */}
+        <img
+          src="https://jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
+          alt="Foto CEO SMSI Sukabumi - Eman Sulaeman"
+          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+        />
 
-        {/* Gambar 3: Sertifikat SMSI (Landscape) */}
-        <div className="w-full bg-gray-100 border border-gray-200 rounded-none overflow-hidden">
-          <img
-            src="https://picsum.photos/seed/sertifikat-smsi/400/250"
-            alt="Sertifikat SMSI Sukabumi"
-            className="w-full h-auto object-cover rounded-none"
-          />
-        </div>
+        {/* Banner 3: Sertifikat SMSI (Landscape) */}
+        <img
+          src="https://jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg"
+          alt="Sertifikat Media Siber SMSI Sukabumi"
+          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+        />
       </div>
 
       {/* 2. WIDGET "TOPIK TERKINI" (LIST DENGAN #) */}
