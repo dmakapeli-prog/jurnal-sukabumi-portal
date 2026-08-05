@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,41 +12,41 @@ interface PopularItem {
   views: string;
 }
 
-const popularNews: PopularItem[] = [
+const popularArticles: PopularItem[] = [
   {
     id: 1,
     rank: 1,
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
-    views: "1.2k views",
+    views: "1.4k dibaca",
   },
   {
     id: 2,
     rank: 2,
     title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga Simpenan",
     category: "HUKUM",
-    views: "980 views",
+    views: "1.1k dibaca",
   },
   {
     id: 3,
     rank: 3,
     title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
     category: "HEADLINE",
-    views: "850 views",
+    views: "950 dibaca",
   },
   {
     id: 4,
     rank: 4,
-    title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten, Pelarian AC Berakhir di Cibeber",
+    title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten, Pelarian AC Berakhir",
     category: "PERISTIWA",
-    views: "720 views",
+    views: "820 dibaca",
   },
   {
     id: 5,
     rank: 5,
-    title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter dan IPA Sesuai Prosedur",
+    title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter Sesuai Prosedur",
     category: "PERISTIWA",
-    views: "640 views",
+    views: "740 dibaca",
   },
 ];
 
@@ -58,17 +59,20 @@ const sidebarSocials = [
 ];
 
 export default function Sidebar() {
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [voted, setVoted] = useState(false);
+
   return (
-    <aside className="w-full lg:w-[320px] flex-shrink-0 flex flex-col gap-6">
-      {/* Sponsorship Ad Box 1 */}
+    <aside className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-6">
+      {/* Sponsorship Ad Slot 1 */}
       <div className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-center shadow-sm">
         <span className="text-[10px] uppercase font-extrabold text-gray-400 block mb-2 font-['Montserrat'] tracking-wider">
           SPONSORSHIP / IKLAN
         </span>
-        <div className="relative w-full aspect-[4/3] max-h-[250px] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
+        <div className="relative w-full aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
           <Image
             src="https://placehold.co/300x250/e2e8f0/475569?text=Iklan+Banner+300x250"
-            alt="Iklan Banner"
+            alt="Iklan Banner 300x250"
             fill
             sizes="300px"
             className="object-cover"
@@ -76,7 +80,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* BERITA TERPOPULER */}
+      {/* BERITA TERPOPULER WIDGET */}
       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
         <div className="border-b-2 border-red-600 pb-2">
           <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
@@ -85,7 +89,7 @@ export default function Sidebar() {
         </div>
 
         <div className="flex flex-col gap-3">
-          {popularNews.map((item) => (
+          {popularArticles.map((item) => (
             <Link
               key={item.id}
               href="#"
@@ -95,7 +99,7 @@ export default function Sidebar() {
                 {item.rank}
               </span>
               <div className="flex flex-col gap-0.5">
-                <span className="text-red-600 text-[10px] font-bold uppercase font-['Montserrat']">
+                <span className="text-red-600 text-[10px] font-extrabold uppercase font-['Montserrat']">
                   {item.category}
                 </span>
                 <h4 className="text-gray-800 group-hover:text-red-600 text-xs font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
@@ -111,7 +115,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* IKUTI KAMI - Social Media Widget */}
+      {/* IKUTI KAMI SOCIAL MEDIA WIDGET */}
       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-4">
         <div className="border-b-2 border-red-600 pb-2">
           <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
@@ -135,7 +139,53 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* INFOGRAFIS / E-PAPER WIDGET */}
+      {/* JAJAK PENDAPAT / POLLING WIDGET */}
+      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col gap-3">
+        <div className="border-b-2 border-red-600 pb-2">
+          <h3 className="text-slate-900 text-lg font-black font-['Montserrat'] uppercase tracking-wide">
+            JAJAK PENDAPAT
+          </h3>
+        </div>
+
+        <p className="text-xs font-bold text-slate-800 font-['Montserrat'] leading-snug">
+          Apakah Anda setuju dengan langkah penertiban tambang liar di kawasan Sukabumi?
+        </p>
+
+        {!voted ? (
+          <div className="flex flex-col gap-2 mt-1">
+            {[
+              { id: 1, label: "Setuju, demi kelestarian alam" },
+              { id: 2, label: "Tidak setuju, butuh solusi ekonomi" },
+              { id: 3, label: "Netral / Ragu-ragu" },
+            ].map((opt) => (
+              <button
+                key={opt.id}
+                onClick={() => setSelectedOption(opt.id)}
+                className={`w-full p-2.5 rounded-lg text-left text-xs font-['Montserrat'] transition-all border ${
+                  selectedOption === opt.id
+                    ? "border-red-600 bg-red-50 text-red-700 font-bold"
+                    : "border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+            <button
+              disabled={selectedOption === null}
+              onClick={() => setVoted(true)}
+              className="w-full mt-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold text-xs py-2 rounded-lg transition-colors font-['Montserrat'] shadow"
+            >
+              Kirim Pilihan
+            </button>
+          </div>
+        ) : (
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-lg text-xs font-bold text-center font-['Montserrat'] mt-1">
+            ✓ Terima kasih! Suara Anda telah berhasil direkam.
+          </div>
+        )}
+      </div>
+
+      {/* E-PAPER / INFOGRAFIS WIDGET */}
       <div className="bg-slate-900 text-white rounded-xl p-5 shadow-lg flex flex-col gap-3 border border-slate-800">
         <div>
           <span className="bg-red-600 text-white text-[10px] font-extrabold font-['Montserrat'] px-2 py-0.5 uppercase rounded">
@@ -157,22 +207,6 @@ export default function Sidebar() {
         <button className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-xs font-bold font-['Montserrat'] transition-colors shadow">
           BACA E-PAPER
         </button>
-      </div>
-
-      {/* Sponsorship Ad Box 2 */}
-      <div className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-center shadow-sm">
-        <span className="text-[10px] uppercase font-extrabold text-gray-400 block mb-2 font-['Montserrat'] tracking-wider">
-          SPONSORSHIP / IKLAN
-        </span>
-        <div className="relative w-full aspect-[4/3] max-h-[250px] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-          <Image
-            src="https://placehold.co/300x250/e2e8f0/475569?text=Iklan+Banner+300x250"
-            alt="Iklan Banner"
-            fill
-            sizes="300px"
-            className="object-cover"
-          />
-        </div>
       </div>
     </aside>
   );

@@ -1,136 +1,179 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-interface HeadlineItem {
+interface HeadlineArticle {
   id: number;
   category: string;
   title: string;
+  excerpt?: string;
+  date: string;
   image: string;
-  date?: string;
 }
 
-const headlines: HeadlineItem[] = [
-  {
-    id: 1,
-    category: "HEADLINE",
-    title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
-    image: "https://placehold.co/790x430/dc2626/ffffff?text=Headline+Alfamart",
-    date: "Selasa, 4 Agustus 2026 - 17:29 WIB",
-  },
+const mainHeadline: HeadlineArticle = {
+  id: 1,
+  category: "HEADLINE",
+  title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
+  excerpt:
+    "Satpol PP Kecamatan Cibadak melayangkan surat teguran keras terkait proyek pembangunan minimarket Alfamart yang disinyalir belum mengantongi izin resmi.",
+  date: "Selasa, 4 Agustus 2026 - 17:29 WIB",
+  image: "https://placehold.co/790x430/dc2626/ffffff?text=Headline+Alfamart",
+};
+
+const sideHeadlines: HeadlineArticle[] = [
   {
     id: 2,
-    category: "HEADLINE",
+    category: "HUKUM",
     title: "Guru Ngaji Terduga Pelaku Pencabulan Ditangkap di Banten, Pelarian AC Berakhir di Cibeber",
-    image: "https://placehold.co/790x430/1e293b/ffffff?text=Penangkapan+Guru+Ngaji",
     date: "Selasa, 4 Agustus 2026 - 16:10 WIB",
+    image: "https://placehold.co/400x250/1e293b/ffffff?text=Penangkapan+Guru+Ngaji",
   },
   {
     id: 3,
-    category: "HEADLINE",
+    category: "PERISTIWA",
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
-    image: "https://placehold.co/790x430/047857/ffffff?text=Penertiban+Tambang+Liar",
     date: "Selasa, 4 Agustus 2026 - 15:45 WIB",
+    image: "https://placehold.co/400x250/047857/ffffff?text=Penertiban+Tambang+Liar",
   },
+];
+
+const subHeadlines: HeadlineArticle[] = [
   {
     id: 4,
-    category: "HEADLINE",
+    category: "PERISTIWA",
     title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga Simpenan",
-    image: "https://placehold.co/790x430/b91c1c/ffffff?text=Gegerkan+Warga+Simpenan",
-    date: "Selasa, 4 Agustus 2026 - 14:20 WIB",
+    date: "4 Agt 2026",
+    image: "https://placehold.co/300x180/b91c1c/ffffff?text=Gegerkan+Warga",
+  },
+  {
+    id: 5,
+    category: "PERISTIWA",
+    title: "Perumda AMTJM Tanggapi Aksi Mahasiswa, Tegaskan Pengadaan Water Meter dan IPA Sesuai Prosedur",
+    date: "4 Agt 2026",
+    image: "https://placehold.co/300x180/0284c7/ffffff?text=Perumda+AMTJM",
+  },
+  {
+    id: 6,
+    category: "WISATA",
+    title: "Kamar 308 Samudra Beach Tak Hanya Dikunjungi, Kini Disebut Jadi Lokasi Berburu Mustika",
+    date: "4 Agt 2026",
+    image: "https://placehold.co/300x180/059669/ffffff?text=Kamar+308+Samudra",
+  },
+  {
+    id: 7,
+    category: "PARLEMEN",
+    title: "DPRD Dorong Pelaku Usaha Bangun Wisata yang Aman, Nyaman, dan Berkesan",
+    date: "4 Agt 2026",
+    image: "https://placehold.co/300x180/7c3aed/ffffff?text=DPRD+Wisata",
   },
 ];
 
 export default function HeroSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const activeHeadline = headlines[activeIndex];
-
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % headlines.length);
-  };
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + headlines.length) % headlines.length);
-  };
-
   return (
-    <section className="w-full mb-8 flex flex-col gap-3">
-      {/* Main Big Hero Banner */}
-      <div className="relative w-full aspect-[16/9] min-h-[320px] md:min-h-[420px] bg-slate-900 rounded-xl overflow-hidden group shadow-lg flex flex-col justify-end">
-        {/* Background Image */}
-        <Image
-          src={activeHeadline.image}
-          alt={activeHeadline.title}
-          fill
-          priority
-          sizes="(max-width: 1200px) 100vw, 800px"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-
-        {/* Gradient Layer & Content Overlay */}
-        <div className="relative z-10 w-full p-5 md:p-8 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <span className="bg-red-600 text-white text-xs font-black font-['Montserrat'] px-3 py-1 uppercase rounded tracking-wider shadow">
-              {activeHeadline.category}
-            </span>
-            {activeHeadline.date && (
-              <span className="text-gray-300 text-xs font-medium font-['Montserrat'] hidden sm:inline-block">
-                • {activeHeadline.date}
-              </span>
-            )}
+    <section className="w-full mb-8 flex flex-col gap-4">
+      {/* Top Main Grid: 1 Large Hero Card + 2 Stacked Side Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main Featured Hero Card */}
+        <div className="lg:col-span-2 bg-slate-900 rounded-xl overflow-hidden shadow-lg flex flex-col group border border-slate-800">
+          <div className="relative w-full aspect-[16/9] min-h-[280px] sm:min-h-[360px] bg-slate-800">
+            <Image
+              src={mainHeadline.image}
+              alt={mainHeadline.title}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 750px"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
           </div>
 
-          <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold font-['Montserrat'] leading-snug md:leading-tight drop-shadow-md">
-            {activeHeadline.title}
-          </h1>
+          <div className="p-5 md:p-6 bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col gap-2 border-t border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="bg-red-600 text-white text-xs font-black font-['Montserrat'] px-3 py-1 uppercase rounded tracking-wider shadow">
+                {mainHeadline.category}
+              </span>
+              <span className="text-gray-400 text-xs font-medium font-['Montserrat']">
+                • {mainHeadline.date}
+              </span>
+            </div>
+
+            <Link href="#">
+              <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold font-['Montserrat'] leading-snug group-hover:text-red-400 transition-colors">
+                {mainHeadline.title}
+              </h1>
+            </Link>
+
+            {mainHeadline.excerpt && (
+              <p className="text-gray-300 text-xs sm:text-sm font-['Montserrat'] line-clamp-2 leading-relaxed">
+                {mainHeadline.excerpt}
+              </p>
+            )}
+          </div>
         </div>
 
-        {/* Carousel Prev / Next Controls */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all shadow-md"
-          aria-label="Previous Slide"
-        >
-          <i className="fas fa-chevron-left text-sm"></i>
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all shadow-md"
-          aria-label="Next Slide"
-        >
-          <i className="fas fa-chevron-right text-sm"></i>
-        </button>
+        {/* Side Stacked Headline Cards */}
+        <div className="flex flex-col gap-4">
+          {sideHeadlines.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col group flex-1"
+            >
+              <div className="relative w-full h-44 bg-gray-100">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 400px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              <div className="p-4 flex flex-col gap-1.5 flex-1 justify-between">
+                <div className="flex flex-col gap-1">
+                  <span className="text-red-600 text-xs font-bold font-['Montserrat'] uppercase">
+                    {item.category}
+                  </span>
+                  <Link href="#">
+                    <h2 className="text-slate-900 group-hover:text-red-600 font-bold font-['Montserrat'] text-sm sm:text-base leading-snug transition-colors line-clamp-2">
+                      {item.title}
+                    </h2>
+                  </Link>
+                </div>
+                <span className="text-gray-400 text-[11px] font-['Montserrat'] mt-2">
+                  {item.date}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Grid of 4 Thumbnail Cards Below Main Hero */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-        {headlines.map((item, idx) => (
-          <button
+      {/* Sub-headline Grid Row (4 Cards) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {subHeadlines.map((item) => (
+          <div
             key={item.id}
-            onClick={() => setActiveIndex(idx)}
-            className={`text-left bg-slate-900 text-white rounded-lg overflow-hidden flex flex-col transition-all duration-200 border-2 ${
-              activeIndex === idx
-                ? "border-red-600 ring-2 ring-red-600/30 scale-[1.01]"
-                : "border-transparent opacity-85 hover:opacity-100"
-            }`}
+            className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col group"
           >
-            <div className="relative w-full h-24 sm:h-28 bg-slate-800">
+            <div className="relative w-full h-28 sm:h-32 bg-gray-100">
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
                 sizes="(max-width: 768px) 50vw, 250px"
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <div className="p-2.5 bg-slate-950 flex-1 flex items-center">
-              <p className="text-xs text-gray-200 font-bold font-['Montserrat'] line-clamp-2 leading-relaxed">
-                {item.title}
-              </p>
+            <div className="p-3 flex flex-col gap-1 flex-1 justify-between">
+              <span className="text-red-600 text-[10px] font-extrabold font-['Montserrat'] uppercase">
+                {item.category}
+              </span>
+              <Link href="#">
+                <h3 className="text-slate-900 group-hover:text-red-600 font-bold font-['Montserrat'] text-xs leading-snug transition-colors line-clamp-2">
+                  {item.title}
+                </h3>
+              </Link>
             </div>
-          </button>
+          </div>
         ))}
       </div>
     </section>

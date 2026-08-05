@@ -9,10 +9,13 @@ const footerSocials = [
   { icon: "fab fa-linkedin-in", label: "LinkedIn", href: "https://linkedin.com" },
 ];
 
-const footerNav = [
+const infoLinks = [
   { label: "Redaksi", href: "#" },
   { label: "Tentang Kami", href: "#" },
   { label: "Pedoman Media Siber", href: "#" },
+];
+
+const companyLinks = [
   { label: "Karir", href: "#" },
   { label: "Kontak", href: "#" },
   { label: "Kebijakan Privasi", href: "#" },
@@ -26,7 +29,7 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="md:col-span-2 flex flex-col gap-3">
             <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="bg-red-600 text-white font-extrabold text-lg px-2.5 py-1 rounded shadow">
+              <div className="bg-red-600 text-white font-black text-xl px-2.5 py-1 rounded shadow">
                 JS
               </div>
               <div className="flex flex-col">
@@ -39,7 +42,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-xs font-['Montserrat'] leading-relaxed max-w-md mt-1">
-              Jurnal Sukabumi adalah media informasi digital terdepan di Sukabumi, menyajikan berita terkini, akurat, dan terpercaya dengan menjunjung tinggi integritas jurnalistik.
+              Jurnal Sukabumi adalah portal berita digital terdepan di Sukabumi, menyajikan berita terkini, akurat, dan terpercaya dengan menjunjung tinggi integritas jurnalistik.
             </p>
             <div className="flex items-center gap-2.5 mt-2">
               {footerSocials.map((s) => (
@@ -57,13 +60,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links Column 1 */}
+          {/* Info Links */}
           <div className="flex flex-col gap-3">
             <h4 className="text-red-500 text-xs font-black font-['Montserrat'] uppercase tracking-wider">
               INFORMASI
             </h4>
             <ul className="flex flex-col gap-2">
-              {footerNav.slice(0, 3).map((item) => (
+              {infoLinks.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
@@ -77,13 +80,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Quick Links Column 2 */}
+          {/* Company Links */}
           <div className="flex flex-col gap-3">
             <h4 className="text-red-500 text-xs font-black font-['Montserrat'] uppercase tracking-wider">
               PERUSAHAAN
             </h4>
             <ul className="flex flex-col gap-2">
-              {footerNav.slice(3).map((item) => (
+              {companyLinks.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
@@ -98,7 +101,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar / Copyright */}
+        {/* Bottom Copyright Bar */}
         <div className="border-t border-slate-800/80 pt-6 flex flex-col md:flex-row items-center justify-between text-gray-500 text-xs font-['Montserrat'] gap-3">
           <p>© 2026 Jurnal Sukabumi. All Rights Reserved.</p>
           <p className="text-gray-500">Jelas & Seimbang</p>
