@@ -117,13 +117,15 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
 
   const scrollLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: -320, behavior: "smooth" });
+      const scrollAmount = containerRef.current.clientWidth;
+      containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: 320, behavior: "smooth" });
+      const scrollAmount = containerRef.current.clientWidth;
+      containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
