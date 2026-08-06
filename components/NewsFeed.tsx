@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -83,6 +83,41 @@ const fallbackArticles: LiveArticle[] = [
 
 export default function NewsFeed({ articles }: NewsFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [savedArticles, setSavedArticles] = useState<(number | string)[]>([]);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("scrapbook_jurnalsukabumi");
+      if (stored) {
+        setSavedArticles(JSON.parse(stored));
+      }
+    } catch (err) {
+      console.error("Gagal memuat Scrapbook dari localStorage:", err);
+    }
+  }, []);
+
+  const toggleSave = (item: LiveArticle, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setSavedArticles((prev) => {
+      const exists = prev.includes(item.id);
+      const updated = exists
+        ? prev.filter((id) => id !== item.id)
+        : [...prev, item.id];
+
+      try {
+        localStorage.setItem(
+          "scrapbook_jurnalsukabumi",
+          JSON.stringify(updated)
+        );
+      } catch (err) {
+        console.error("Gagal menyimpan ke Scrapbook:", err);
+      }
+
+      return updated;
+    });
+  };
 
   const feedData =
     articles && articles.length > 0 ? articles : fallbackArticles;
@@ -187,12 +222,42 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
             className="flex flex-row gap-3 sm:gap-4 items-start group border-b border-gray-200 pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
           >
             {/* Gambar thumbnail di kiri (w-1/3) */}
-            <div className="w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
+            <div className="relative w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
               <img
                 src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
               />
+              <button
+                type="button"
+                onClick={(e) => toggleSave(item, e)}
+                title={
+                  savedArticles.includes(item.id)
+                    ? "Hapus dari Scrapbook"
+                    : "Simpan ke Scrapbook"
+                }
+                aria-label="Simpan ke Scrapbook"
+                className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-white/90 shadow-sm flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all cursor-pointer"
+              >
+                {savedArticles.includes(item.id) ? (
+                  <svg
+                    className="w-4 h-4 text-red-600 fill-current"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-4 h-4 text-gray-700 fill-none stroke-current"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                  </svg>
+                )}
+              </button>
             </div>
 
             {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
@@ -284,6 +349,36 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
+                <button
+                  type="button"
+                  onClick={(e) => toggleSave(item, e)}
+                  title={
+                    savedArticles.includes(item.id)
+                      ? "Hapus dari Scrapbook"
+                      : "Simpan ke Scrapbook"
+                  }
+                  aria-label="Simpan ke Scrapbook"
+                  className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-white/90 shadow-sm flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  {savedArticles.includes(item.id) ? (
+                    <svg
+                      className="w-4 h-4 text-red-600 fill-current"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-4 h-4 text-gray-700 fill-none stroke-current"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                    </svg>
+                  )}
+                </button>
               </div>
               <span className="text-red-600 font-bold text-xs uppercase mb-1 font-['Montserrat']">
                 {item.category}
@@ -310,12 +405,42 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
               className="flex flex-row gap-3 sm:gap-4 items-start group border-b border-gray-200 pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0"
             >
               {/* Gambar thumbnail di kiri (w-1/3) */}
-              <div className="w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
+              <div className="relative w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
+                <button
+                  type="button"
+                  onClick={(e) => toggleSave(item, e)}
+                  title={
+                    savedArticles.includes(item.id)
+                      ? "Hapus dari Scrapbook"
+                      : "Simpan ke Scrapbook"
+                  }
+                  aria-label="Simpan ke Scrapbook"
+                  className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-white/90 shadow-sm flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  {savedArticles.includes(item.id) ? (
+                    <svg
+                      className="w-4 h-4 text-red-600 fill-current"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-4 h-4 text-gray-700 fill-none stroke-current"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                    </svg>
+                  )}
+                </button>
               </div>
 
               {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
@@ -344,4 +469,5 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
     </div>
   );
 }
+
 
