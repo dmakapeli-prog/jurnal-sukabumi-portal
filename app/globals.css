@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   /* === COLORS === */
   --color-outline-variant: #e9bcb5;
@@ -110,4 +112,45 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* === DARK MODE OVERRIDES === */
+html.dark body {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+html.dark header {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+html.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-slate-100\/50,
+html.dark .bg-slate-100,
+html.dark .bg-slate-50,
+html.dark .bg-gray-100,
+html.dark .bg-gray-50 {
+  background-color: #0f172a !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #334155 !important;
 }

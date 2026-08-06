@@ -85,8 +85,47 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [scrapbookOpen, setScrapbookOpen] = useState(false);
   const [savedItems, setSavedItems] = useState<any[]>([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const todayDate = "Selasa, 4 Agustus 2026";
+
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const initialDark = savedTheme ? savedTheme === "dark" : prefersDark;
+
+      setIsDarkMode(initialDark);
+      if (initialDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    } catch (err) {
+      console.error("Gagal membaca preferensi theme:", err);
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => {
+      const nextMode = !prev;
+      try {
+        localStorage.setItem("theme", nextMode ? "dark" : "light");
+      } catch (err) {
+        console.error("Gagal menyimpan preferensi theme:", err);
+      }
+
+      if (nextMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      return nextMode;
+    });
+  };
 
   const syncScrapbook = () => {
     try {
@@ -142,7 +181,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
-      {/* BARIS 1: Logo (Kiri), Tanggal & Search + Scrapbook (Tengah), Social Media (Kanan) */}
+      {/* BARIS 1: Logo (Kiri), Tanggal & Search + Scrapbook + DarkMode (Tengah), Social Media (Kanan) */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* KIRI: Logo Resmi Jurnal Sukabumi & Tombol Akses Mobile */}
         <div className="flex items-center justify-between w-full md:w-auto">
@@ -155,6 +194,47 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-2 md:hidden">
+            {/* Tombol Dark Mode Toggle di Mobile */}
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              aria-label={
+                isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
+              }
+              title={isDarkMode ? "Mode Terang" : "Mode Gelap"}
+              className="p-2 text-gray-700 hover:text-amber-500 transition-all transform hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center"
+            >
+              {isDarkMode ? (
+                <svg
+                  className="w-5 h-5 text-amber-400 hover:text-amber-300 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-5 h-5 text-gray-700 hover:text-amber-500 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
+              )}
+            </button>
+
             {/* Tombol Koleksi / Scrapbook di Mobile */}
             <button
               type="button"
@@ -197,7 +277,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* TENGAH: Tanggal, Form Pencarian & Tombol Scrapbook (Desktop) */}
+        {/* TENGAH: Tanggal, Form Pencarian, Scrapbook & Dark Mode (Desktop) */}
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-1 max-w-lg justify-center">
           <div className="text-gray-600 text-xs font-semibold font-['Montserrat'] whitespace-nowrap hidden sm:flex items-center gap-1.5">
             <i className="far fa-calendar-alt text-red-600"></i>
@@ -223,6 +303,47 @@ export default function Header() {
               <i className="fas fa-search text-xs"></i>
             </button>
           </form>
+
+          {/* Tombol Dark Mode Toggle di Desktop */}
+          <button
+            type="button"
+            onClick={toggleDarkMode}
+            aria-label={
+              isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
+            }
+            title={isDarkMode ? "Mode Terang" : "Mode Gelap"}
+            className="hidden md:flex p-2 text-gray-700 hover:text-amber-500 transition-all transform hover:scale-110 active:scale-95 cursor-pointer items-center justify-center"
+          >
+            {isDarkMode ? (
+              <svg
+                className="w-5 h-5 text-amber-400 hover:text-amber-300 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-5 h-5 text-gray-700 hover:text-amber-500 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            )}
+          </button>
 
           {/* Tombol Akses Scrapbook di Desktop */}
           <button
