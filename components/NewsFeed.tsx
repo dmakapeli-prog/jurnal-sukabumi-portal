@@ -117,15 +117,29 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
 
   const scrollLeft = () => {
     if (containerRef.current) {
-      const scrollAmount = containerRef.current.clientWidth;
-      containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      const { scrollLeft, scrollWidth } = containerRef.current;
+      if (scrollLeft <= 10) {
+        containerRef.current.scrollTo({ left: scrollWidth, behavior: "smooth" });
+      } else {
+        containerRef.current.scrollBy({
+          left: -(containerRef.current.clientWidth / 3),
+          behavior: "smooth",
+        });
+      }
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
-      const scrollAmount = containerRef.current.clientWidth;
-      containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        containerRef.current.scrollBy({
+          left: containerRef.current.clientWidth / 3,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
@@ -235,9 +249,9 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           ref={containerRef}
           className="flex overflow-x-auto scroll-smooth gap-3 snap-x snap-mandatory relative py-2 [&::-webkit-scrollbar]:hidden [ms-overflow-style:none] [scrollbar-width:none]"
         >
-          {darkBlockArticles.map((item) => (
+          {[...darkBlockArticles, ...darkBlockArticles].map((item, index) => (
             <div
-              key={item.id}
+              key={`${item.id}-${index}`}
               className="w-[calc(33.333%-0.75rem)] flex-shrink-0 snap-start flex flex-col gap-2 group"
             >
               <div className="relative w-full aspect-[16/10] bg-slate-800 rounded-none overflow-hidden border border-slate-700">
