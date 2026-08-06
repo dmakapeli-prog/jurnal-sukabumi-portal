@@ -70,7 +70,7 @@ const navFooterLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-red-950 text-white mt-12 border-t-4 border-red-800">
+    <footer className="w-full bg-gradient-to-r from-red-600 to-black text-white mt-12 border-t-4 border-red-800">
       <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col items-center text-center gap-8">
         {/* 1. Gambar Logo Resmi Footer */}
         <div className="flex justify-center">

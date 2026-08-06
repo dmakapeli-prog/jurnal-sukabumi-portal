@@ -165,7 +165,7 @@ export default function Header() {
       </div>
 
       {/* BARIS 2: Background Merah Full Width - Menu Navigasi Horizontal */}
-      <nav className="w-full bg-red-600 text-white shadow-md">
+      <nav className="w-full bg-gradient-to-r from-red-600 to-black text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4">
           {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center overflow-x-auto no-scrollbar py-1 gap-0.5">
