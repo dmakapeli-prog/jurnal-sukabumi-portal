@@ -177,7 +177,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           type="button"
           onClick={scrollLeft}
           aria-label="Scroll Left"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+          className="absolute left-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
         >
           <svg
             className="w-5 h-5"
@@ -199,7 +199,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           type="button"
           onClick={scrollRight}
           aria-label="Scroll Right"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+          className="absolute right-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
         >
           <svg
             className="w-5 h-5"
@@ -220,12 +220,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
         {/* Container Scroll Carousel */}
         <div
           ref={containerRef}
-          className="flex overflow-x-hidden scroll-smooth gap-4 relative w-full py-2"
+          className="flex overflow-x-hidden gap-3 snap-x snap-mandatory relative scroll-smooth py-2"
         >
           {darkBlockArticles.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col gap-2 group min-w-[280px] flex-shrink-0"
+              className="w-[calc(33.333%-0.75rem)] flex-shrink-0 snap-start flex flex-col gap-2 group"
             >
               <div className="relative w-full aspect-[16/10] bg-slate-800 rounded-none overflow-hidden border border-slate-700">
                 <img
@@ -234,11 +234,11 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
               </div>
-              <span className="text-red-400 text-[10px] font-black font-['Montserrat'] uppercase">
+              <span className="text-red-600 font-bold text-xs uppercase mb-1 font-['Montserrat']">
                 {item.category}
               </span>
               <Link href={`/berita/${item.slug || item.id}`}>
-                <h4 className="text-white group-hover:text-red-400 text-xs sm:text-sm font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
+                <h4 className="text-white font-semibold text-sm leading-tight font-['Montserrat'] group-hover:text-red-400 transition-colors line-clamp-2">
                   {item.title}
                 </h4>
               </Link>
