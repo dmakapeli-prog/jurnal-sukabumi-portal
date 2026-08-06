@@ -115,31 +115,55 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
   const remainingBatch =
     feedData.length >= 6 ? feedData.slice(6) : feedData.slice(3);
 
+  const infiniteArticles = [
+    ...darkBlockArticles,
+    ...darkBlockArticles,
+    ...darkBlockArticles,
+    ...darkBlockArticles,
+    ...darkBlockArticles,
+  ];
+
   const scrollLeft = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth } = containerRef.current;
-      if (scrollLeft <= 10) {
-        containerRef.current.scrollTo({ left: scrollWidth, behavior: "smooth" });
-      } else {
-        containerRef.current.scrollBy({
-          left: -(containerRef.current.clientWidth / 3),
-          behavior: "smooth",
-        });
+      const scrollStep = containerRef.current.clientWidth / 3;
+
+      if (scrollLeft <= scrollStep * 2) {
+        containerRef.current.style.scrollBehavior = "auto";
+        containerRef.current.scrollLeft = scrollWidth / 2;
+        containerRef.current.style.scrollBehavior = "smooth";
       }
+
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollBy({
+            left: -scrollStep,
+            behavior: "smooth",
+          });
+        }
+      });
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        containerRef.current.scrollBy({
-          left: containerRef.current.clientWidth / 3,
-          behavior: "smooth",
-        });
+      const scrollStep = clientWidth / 3;
+
+      if (scrollLeft + clientWidth >= scrollWidth - scrollStep * 2) {
+        containerRef.current.style.scrollBehavior = "auto";
+        containerRef.current.scrollLeft = scrollWidth / 2 - clientWidth;
+        containerRef.current.style.scrollBehavior = "smooth";
       }
+
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollBy({
+            left: scrollStep,
+            behavior: "smooth",
+          });
+        }
+      });
     }
   };
 
@@ -249,7 +273,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           ref={containerRef}
           className="flex overflow-x-auto scroll-smooth gap-3 snap-x snap-mandatory relative py-2 [&::-webkit-scrollbar]:hidden [ms-overflow-style:none] [scrollbar-width:none]"
         >
-          {[...darkBlockArticles, ...darkBlockArticles].map((item, index) => (
+          {infiniteArticles.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
               className="w-[calc(33.333%-0.75rem)] flex-shrink-0 snap-start flex flex-col gap-2 group"
