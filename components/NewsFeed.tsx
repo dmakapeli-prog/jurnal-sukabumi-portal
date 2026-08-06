@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -79,14 +82,37 @@ const fallbackArticles: LiveArticle[] = [
 ];
 
 export default function NewsFeed({ articles }: NewsFeedProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const feedData =
     articles && articles.length > 0 ? articles : fallbackArticles;
 
   const firstBatch = feedData.slice(0, 3);
+
+  const peristiwaArticles = feedData.filter(
+    (item) => item.category?.toUpperCase() === "PERISTIWA"
+  );
   const darkBlockArticles =
-    feedData.length >= 6 ? feedData.slice(3, 6) : fallbackArticles.slice(3, 6);
+    peristiwaArticles.length >= 2
+      ? peristiwaArticles
+      : feedData.length >= 6
+      ? feedData.slice(3)
+      : fallbackArticles.slice(3);
+
   const remainingBatch =
     feedData.length >= 6 ? feedData.slice(6) : feedData.slice(3);
+
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -320, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 320, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="w-full flex flex-col">
@@ -139,17 +165,68 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
         ))}
       </div>
 
-      {/* 3. SISIPKAN BLOK GELAP DENGAN LABEL MERAH OVERLAPPING (-TOP-4 LEFT-4) */}
+      {/* 3. SISIPKAN BLOK GELAP DENGAN LABEL MERAH OVERLAPPING (-TOP-4 LEFT-4) DAN CAROUSEL SLIDER */}
       <div className="relative mt-8 mb-6 p-4 sm:p-5 bg-slate-900 rounded-none border border-slate-800">
         {/* Label div berwarna merah menonjol ke luar atas */}
         <div className="absolute -top-4 left-4 bg-red-600 text-white font-black text-xs px-3 py-1.5 uppercase tracking-wider rounded-none z-10 shadow-sm">
           Peristiwa
         </div>
 
-        {/* 3 Kartu Berita Berjejer Horizontal (Gambar di atas, judul putih di bawah) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+        {/* Tombol Navigasi Kiri & Kanan */}
+        <button
+          type="button"
+          onClick={scrollLeft}
+          aria-label="Scroll Left"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          onClick={scrollRight}
+          aria-label="Scroll Right"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+
+        {/* Container Scroll Carousel */}
+        <div
+          ref={containerRef}
+          className="flex overflow-x-hidden scroll-smooth gap-4 relative w-full py-2"
+        >
           {darkBlockArticles.map((item) => (
-            <div key={item.id} className="flex flex-col gap-2 group">
+            <div
+              key={item.id}
+              className="flex flex-col gap-2 group min-w-[280px] flex-shrink-0"
+            >
               <div className="relative w-full aspect-[16/10] bg-slate-800 rounded-none overflow-hidden border border-slate-700">
                 <img
                   src={item.image}
@@ -216,3 +293,4 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
     </div>
   );
 }
+
