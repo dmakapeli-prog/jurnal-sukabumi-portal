@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { LiveArticle } from "@/lib/wp";
 
@@ -20,43 +22,43 @@ const topicTags = [
 const fallbackPopular = [
   {
     id: 1,
-    slug: "dprd-dan-pemkab-sukabumi-sepakati-nota-kua-ppas-ta-2026",
-    title: "DPRD dan Pemkab Sukabumi Sepakati Nota KUA-PPAS TA 2026",
-    category: "PARLEMEN",
-    date: "6 Agt 2026",
-    image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=200&auto=format&fit=crop&q=80",
+    slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
+    title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
+    category: "PERISTIWA",
+    date: "4 Agt 2026",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg",
   },
   {
     id: 2,
-    slug: "dprd-sukabumi-dorong-pengesahan-raperda-perlindungan-disabilitas",
-    title: "DPRD Sukabumi Dorong Pengesahan Raperda Perlindungan Disabilitas",
-    category: "HUKUM",
-    date: "6 Agt 2026",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=200&auto=format&fit=crop&q=80",
+    slug: "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas",
+    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
+    category: "PERISTIWA",
+    date: "4 Agt 2026",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
   },
   {
     id: 3,
-    slug: "syukuran-nelayan-ke-69-ciletuh-sukabumi-meriahkan-kawasan-geopark",
-    title: "Syukuran Nelayan ke-69 Ciletuh Sukabumi Meriahkan Kawasan Geopark",
-    category: "WISATA",
-    date: "5 Agt 2026",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&auto=format&fit=crop&q=80",
+    slug: "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi",
+    title: "Dugaan Hubungan Terlarang Oknum Guru dan Siswi SMA di Sukabumi",
+    category: "HUKUM",
+    date: "4 Agt 2026",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
   },
   {
     id: 4,
-    slug: "serap-5570-aspirasi-pemkab-sukabumi-gelar-musrenbang-anak-2026",
-    title: "Serap 5.570 Aspirasi, Pemkab Sukabumi Gelar Musrenbang Anak 2026",
-    category: "PERISTIWA",
+    slug: "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
+    title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
+    category: "HUKUM",
     date: "4 Agt 2026",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=200&auto=format&fit=crop&q=80",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
   },
   {
     id: 5,
-    slug: "turnamen-sepak-bola-dandim-cup-2026-kota-sukabumi-resmi-dibuka",
-    title: "Turnamen Sepak Bola Dandim Cup 2026 Kota Sukabumi Resmi Dibuka",
-    category: "PERISTIWA",
-    date: "3 Agt 2026",
-    image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=200&auto=format&fit=crop&q=80",
+    slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
+    title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
+    category: "HEADLINE",
+    date: "4 Agt 2026",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
   },
 ];
 
@@ -76,27 +78,39 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
 
   return (
     <aside className="w-full flex-shrink-0 flex flex-col gap-5">
-      {/* 1. 3 BANNER ASLI BERTUMPUK VERTIKAL (LIVE URL DARI JURNALSUKABUMI.COM) */}
+      {/* 1. 3 BANNER ASLI BERTUMPUK VERTIKAL (LIVE URL DARI JURNALSUKABUMI.COM MELEWATI PROXY WSRV.NL) */}
       <div className="flex flex-col mb-4">
         {/* Banner 1: Poster DPRD (Pray For Kasepuhan Ciptamulya - Portrait) */}
         <img
-          src="https://jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg"
+          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg"
           alt="Poster DPRD Sukabumi - Pray For Kasepuhan Ciptamulya"
           className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?w=400&auto=format&fit=crop&q=80";
+          }}
         />
 
         {/* Banner 2: Foto CEO / Ketua SMSI Eman Sulaeman (Portrait) */}
         <img
-          src="https://jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
+          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
           alt="Foto CEO SMSI Sukabumi - Eman Sulaeman"
           className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&auto=format&fit=crop&q=80";
+          }}
         />
 
         {/* Banner 3: Sertifikat SMSI (Landscape) */}
         <img
-          src="https://jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg"
+          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg"
           alt="Sertifikat Media Siber SMSI Sukabumi"
           className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format&fit=crop&q=80";
+          }}
         />
       </div>
 

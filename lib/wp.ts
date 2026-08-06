@@ -101,12 +101,12 @@ export async function fetchLiveArticles(): Promise<LiveArticle[]> {
       }
 
       // 3. Featured Image
-      let imageUrl = "https://placehold.co/790x430/dc2626/ffffff?text=Jurnal+Sukabumi";
+      let imageUrl = "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg";
       const media = item._embedded?.["wp:featuredmedia"]?.[0];
       if (media?.source_url) {
-        imageUrl = media.source_url;
+        imageUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.source_url)}`;
       } else if (media?.media_details?.sizes?.medium_large?.source_url) {
-        imageUrl = media.media_details.sizes.medium_large.source_url;
+        imageUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.media_details.sizes.medium_large.source_url)}`;
       }
 
       // 4. Excerpt
