@@ -53,10 +53,12 @@ const footerSocials = [
 ];
 
 const mediaNetworkLinks = [
-  { label: "SUKABUMI TODAY", href: "#" },
-  { label: "RADAR SUKABUMI", href: "#" },
-  { label: "SUKABUMI UPDATE", href: "#" },
-  { label: "KABAR SUKABUMI", href: "#" },
+  { label: "Facebook.com", href: "https://facebook.com" },
+  { label: "Instagram.com", href: "https://instagram.com" },
+  { label: "Whatsapp.com", href: "https://whatsapp.com" },
+  { label: "Tiktok.com", href: "https://tiktok.com" },
+  { label: "Twitter.com", href: "https://twitter.com" },
+  { label: "Youtube.com", href: "https://youtube.com" },
 ];
 
 const navFooterLinks = [
@@ -117,6 +119,8 @@ export default function Footer() {
               <a
                 key={partner.label}
                 href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
                 {partner.label}
