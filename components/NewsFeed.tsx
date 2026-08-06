@@ -85,38 +85,67 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [savedArticles, setSavedArticles] = useState<(number | string)[]>([]);
 
-  useEffect(() => {
+  const syncScrapbook = () => {
     try {
       const stored = localStorage.getItem("scrapbook_jurnalsukabumi");
       if (stored) {
-        setSavedArticles(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setSavedArticles(
+            parsed.map((s) => (typeof s === "object" ? s.id : s))
+          );
+        }
+      } else {
+        setSavedArticles([]);
       }
     } catch (err) {
       console.error("Gagal memuat Scrapbook dari localStorage:", err);
     }
+  };
+
+  useEffect(() => {
+    syncScrapbook();
+    window.addEventListener("scrapbook_updated", syncScrapbook);
+    window.addEventListener("storage", syncScrapbook);
+    return () => {
+      window.removeEventListener("scrapbook_updated", syncScrapbook);
+      window.removeEventListener("storage", syncScrapbook);
+    };
   }, []);
 
   const toggleSave = (item: LiveArticle, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    setSavedArticles((prev) => {
-      const exists = prev.includes(item.id);
-      const updated = exists
-        ? prev.filter((id) => id !== item.id)
-        : [...prev, item.id];
+    try {
+      const stored = localStorage.getItem("scrapbook_jurnalsukabumi");
+      let items: any[] = stored ? JSON.parse(stored) : [];
 
-      try {
-        localStorage.setItem(
-          "scrapbook_jurnalsukabumi",
-          JSON.stringify(updated)
+      const exists = items.some((s) =>
+        typeof s === "object" ? s.id === item.id : s === item.id
+      );
+
+      if (exists) {
+        items = items.filter((s) =>
+          typeof s === "object" ? s.id !== item.id : s !== item.id
         );
-      } catch (err) {
-        console.error("Gagal menyimpan ke Scrapbook:", err);
+      } else {
+        items.push({
+          id: item.id,
+          title: item.title,
+          slug: item.slug || item.id,
+          image: item.image,
+          category: item.category,
+          date: item.date,
+        });
       }
 
-      return updated;
-    });
+      localStorage.setItem("scrapbook_jurnalsukabumi", JSON.stringify(items));
+      setSavedArticles(items.map((s) => (typeof s === "object" ? s.id : s)));
+      window.dispatchEvent(new Event("scrapbook_updated"));
+    } catch (err) {
+      console.error("Gagal menyimpan ke Scrapbook:", err);
+    }
   };
 
   const feedData =
