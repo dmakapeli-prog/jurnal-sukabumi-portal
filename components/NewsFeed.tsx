@@ -89,15 +89,28 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
 
   const firstBatch = feedData.slice(0, 3);
 
-  const peristiwaArticles = feedData.filter(
+  const rawPeristiwa = feedData.filter(
     (item) => item.category?.toUpperCase() === "PERISTIWA"
   );
-  const darkBlockArticles =
-    peristiwaArticles.length >= 2
-      ? peristiwaArticles
-      : feedData.length >= 6
-      ? feedData.slice(3)
-      : fallbackArticles.slice(3);
+
+  let darkBlockArticles = [...rawPeristiwa];
+
+  if (darkBlockArticles.length < 6) {
+    const extraFeed = feedData.filter(
+      (item) => !darkBlockArticles.some((d) => d.id === item.id)
+    );
+    darkBlockArticles = [...darkBlockArticles, ...extraFeed];
+  }
+
+  if (darkBlockArticles.length < 6) {
+    const fillItems: LiveArticle[] = fallbackArticles.map((item, index) => ({
+      ...item,
+      id: item.id + 1000 + index,
+    }));
+    darkBlockArticles = [...darkBlockArticles, ...fillItems];
+  }
+
+  darkBlockArticles = darkBlockArticles.slice(0, 8);
 
   const remainingBatch =
     feedData.length >= 6 ? feedData.slice(6) : feedData.slice(3);
@@ -177,10 +190,10 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           type="button"
           onClick={scrollLeft}
           aria-label="Scroll Left"
-          className="absolute left-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+          className="absolute left-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 active:scale-95 transition-all cursor-pointer border border-gray-100"
         >
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-slate-900 stroke-[2.5]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -189,7 +202,6 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2.5}
               d="M15 19l-7-7 7-7"
             />
           </svg>
@@ -199,10 +211,10 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           type="button"
           onClick={scrollRight}
           aria-label="Scroll Right"
-          className="absolute right-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+          className="absolute right-2 top-[35%] -translate-y-1/2 z-10 w-9 h-9 bg-white text-slate-900 rounded-full shadow-md flex items-center justify-center hover:bg-slate-100 active:scale-95 transition-all cursor-pointer border border-gray-100"
         >
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-slate-900 stroke-[2.5]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -211,7 +223,6 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2.5}
               d="M9 5l7 7-7 7"
             />
           </svg>
@@ -220,7 +231,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
         {/* Container Scroll Carousel */}
         <div
           ref={containerRef}
-          className="flex overflow-x-hidden gap-3 snap-x snap-mandatory relative scroll-smooth py-2"
+          className="flex overflow-x-auto scroll-smooth gap-3 snap-x snap-mandatory relative py-2 [&::-webkit-scrollbar]:hidden [ms-overflow-style:none] [scrollbar-width:none]"
         >
           {darkBlockArticles.map((item) => (
             <div
