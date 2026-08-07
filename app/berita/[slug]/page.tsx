@@ -584,28 +584,148 @@ export default function BeritaDetailPage() {
                 <div className="border-t border-gray-200 mt-6 pt-4 text-xs font-bold text-slate-900 font-['Montserrat']">
                   Reporter: Ilham Nugraha | Redaktur: Ujang Herlan
                 </div>
-
-                {/* Tags */}
-                <div className="bg-gray-100 border border-gray-200 p-3.5 mt-4 rounded-none">
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-bold font-['Montserrat']">
-                    <span className="text-gray-500 font-normal">TAGS:</span>
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </article>
+            </div>
+
+            {/* TAGS BOX (Abu-abu muda dengan Pill Tag : Merah dan Tag Oval) */}
+            <div className="bg-[#e9ecef] p-5 mt-8 mb-8 rounded-none font-['Montserrat']">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="bg-red-700 text-white font-bold text-xs px-4 py-1.5 rounded-full shrink-0">
+                  Tag :
+                </span>
+                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
+                  Dewan Batman
+                </span>
+                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
+                  DPRD
+                </span>
+                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
+                  Oknum Kades Tamanjaya Positif Sabu
+                </span>
+                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
+                  Soroti Ciemas Darurat Narkoba
+                </span>
+                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
+                  Sukabumi
+                </span>
+              </div>
+            </div>
+
+            {/* FITUR BERITA TERBARU (3 Kolom Grid 2 Baris) */}
+            <div className="mt-4 font-['Montserrat']">
+              <h3 className="text-xl font-bold mb-6 border-b border-gray-200 pb-2">
+                <span className="border-b-4 border-red-600 pb-2">Berita</span> Terbaru
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {/* Card 1 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg"
+                      alt="Oknum Kades"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    PARLEMEN
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba
+                  </h4>
+                </div>
+
+                {/* Card 2 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80"
+                      alt="Dugaan Hubungan Terlarang"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    HUKUM
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    Dugaan Hubungan Terlarang Oknum Guru dan Istri Orang di Kalibunder, Polisi Mulai Periksa Saksi
+                  </h4>
+                </div>
+
+                {/* Card 3 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
+                      alt="US Oknum Kades"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    GERBANG DESA
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    US Oknum Kades Tamanjaya Ciemas Positif Narkoba, Polisi Ungkap Barang Bukti Alat Hisap Sabu
+                  </h4>
+                </div>
+
+                {/* Card 4 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
+                      alt="Gelar Sosialisasi"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    RAGAM
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    Gelar Sosialisasi Pemilih Berkelanjutan di Nyalindung, Heri Gunawan Dorong Masyarakat Jadi Pemilih Cerdas
+                  </h4>
+                </div>
+
+                {/* Card 5 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80"
+                      alt="Pesan Bung Karno"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    RAGAM
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    Sampaikan Pesan Bung Karno, Ono Surono: Bangsa yang Kuat Terlahir dari Ibu Hebat
+                  </h4>
+                </div>
+
+                {/* Card 6 */}
+                <div className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
+                    <img
+                      src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&auto=format&fit=crop&q=80"
+                      alt="DPRD Sukabumi"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
+                    PARLEMEN
+                  </span>
+                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                    DPRD Sukabumi Dorong Dua Regulasi Strategis, Disabilitas Disahkan dan Ketenagakerjaan Dibahas
+                  </h4>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* SIDEBAR KANAN (lg:col-span-4) */}
-          <div className="lg:col-span-4">
-            <div className="mb-8">
+          <div className="lg:col-span-4 flex flex-col gap-8 font-['Montserrat']">
+            {/* WIDGET BERITA TERPOPULER */}
+            <div>
               <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
                 <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
               </h3>
@@ -627,7 +747,69 @@ export default function BeritaDetailPage() {
                 </div>
               </div>
             </div>
-            <Sidebar hideBanners={true} hidePopular={true} />
+
+            {/* WIDGET NASIONAL (Menggantikan Topik Terkini) */}
+            <div>
+              <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
+                <span className="border-b-4 border-red-600 pb-2">NASIO</span>NAL
+              </h3>
+              <div className="flex flex-col">
+                {/* Featured Item Krisdayanti */}
+                <div className="flex flex-col mb-4 pb-4 border-b border-gray-200 group cursor-pointer">
+                  <img
+                    src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80"
+                    alt="Krisdayanti Hebohkan Cibadak"
+                    className="w-full aspect-[16/10] rounded-xl object-cover mb-3 group-hover:scale-[1.02] transition-transform"
+                  />
+                  <h4 className="font-bold text-base text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
+                    Krisdayanti Hebohkan Cibadak, Ribuan Warga Antusias hingga Berebut Foto Bersama
+                  </h4>
+                  <span className="text-xs text-gray-400 font-medium">
+                    6 Agustus 2026 | 12:04 WIB
+                  </span>
+                </div>
+
+                {/* List Item 2 */}
+                <div className="py-3 border-b border-gray-200 group cursor-pointer">
+                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
+                    Dipanggil ke Purwakarta, KDM Ingin Kampung Adat Ciptamulya Ditata
+                  </h4>
+                  <span className="text-xs text-gray-400 font-medium">
+                    2 Agustus 2026 | 19:30 WIB
+                  </span>
+                </div>
+
+                {/* List Item 3 */}
+                <div className="py-3 border-b border-gray-200 group cursor-pointer">
+                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
+                    Usung Perubahan di PWI Jabar, Kang Andhy Tawarkan Program Kesejahteraan hingga Karier Internasional
+                  </h4>
+                  <span className="text-xs text-gray-400 font-medium">
+                    31 Juli 2026 | 22:04 WIB
+                  </span>
+                </div>
+
+                {/* List Item 4 */}
+                <div className="py-3 border-b border-gray-200 group cursor-pointer">
+                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
+                    Hergun Usul Kemendagri Luncurkan Program Wirausaha Pemula untuk Kemandirian Ekonomi Ormas
+                  </h4>
+                  <span className="text-xs text-gray-400 font-medium">
+                    30 Juli 2026 | 15:09 WIB
+                  </span>
+                </div>
+
+                {/* List Item 5 */}
+                <div className="py-3 border-b border-gray-200 group cursor-pointer">
+                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
+                    Wamenko Tantang Sukabumi Bangun Budaya Pilah Sampah di Setiap Desa
+                  </h4>
+                  <span className="text-xs text-gray-400 font-medium">
+                    29 Juli 2026 | 14:29 WIB
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
