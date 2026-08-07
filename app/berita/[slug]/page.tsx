@@ -627,7 +627,7 @@ export default function BeritaDetailPage() {
                 </div>
               </div>
             </div>
-            <Sidebar />
+            <Sidebar hideBanners={true} />
           </div>
         </div>
       </main>

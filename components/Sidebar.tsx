@@ -5,6 +5,7 @@ import { LiveArticle } from "@/lib/wp";
 
 interface SidebarProps {
   popularArticles?: LiveArticle[];
+  hideBanners?: boolean;
 }
 
 const topicTags = [
@@ -62,7 +63,7 @@ const fallbackPopular = [
   },
 ];
 
-export default function Sidebar({ popularArticles }: SidebarProps) {
+export default function Sidebar({ popularArticles, hideBanners }: SidebarProps) {
   const displayArticles =
     popularArticles && popularArticles.length > 0
       ? popularArticles.slice(0, 5).map((item, idx) => ({
@@ -79,40 +80,42 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
   return (
     <aside className="w-full flex-shrink-0 flex flex-col gap-5">
       {/* 1. 3 BANNER ASLI BERTUMPUK VERTIKAL (LIVE URL DARI JURNALSUKABUMI.COM MELEWATI PROXY WSRV.NL) */}
-      <div className="flex flex-col mb-4">
-        {/* Banner 1: Poster DPRD (Pray For Kasepuhan Ciptamulya - Portrait) */}
-        <img
-          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg"
-          alt="Poster DPRD Sukabumi - Pray For Kasepuhan Ciptamulya"
-          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?w=400&auto=format&fit=crop&q=80";
-          }}
-        />
+      {!hideBanners && (
+        <div className="flex flex-col mb-4">
+          {/* Banner 1: Poster DPRD (Pray For Kasepuhan Ciptamulya - Portrait) */}
+          <img
+            src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg"
+            alt="Poster DPRD Sukabumi - Pray For Kasepuhan Ciptamulya"
+            className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?w=400&auto=format&fit=crop&q=80";
+            }}
+          />
 
-        {/* Banner 2: Foto CEO / Ketua SMSI Eman Sulaeman (Portrait) */}
-        <img
-          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
-          alt="Foto CEO SMSI Sukabumi - Eman Sulaeman"
-          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&auto=format&fit=crop&q=80";
-          }}
-        />
+          {/* Banner 2: Foto CEO / Ketua SMSI Eman Sulaeman (Portrait) */}
+          <img
+            src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
+            alt="Foto CEO SMSI Sukabumi - Eman Sulaeman"
+            className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&auto=format&fit=crop&q=80";
+            }}
+          />
 
-        {/* Banner 3: Sertifikat SMSI (Landscape) */}
-        <img
-          src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg"
-          alt="Sertifikat Media Siber SMSI Sukabumi"
-          className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format&fit=crop&q=80";
-          }}
-        />
-      </div>
+          {/* Banner 3: Sertifikat SMSI (Landscape) */}
+          <img
+            src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg"
+            alt="Sertifikat Media Siber SMSI Sukabumi"
+            className="w-full h-auto object-contain mb-4 rounded-none border border-gray-200 bg-gray-50"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format&fit=crop&q=80";
+            }}
+          />
+        </div>
+      )}
 
       {/* 2. WIDGET "TOPIK TERKINI" (LIST DENGAN #) */}
       <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col gap-3">
