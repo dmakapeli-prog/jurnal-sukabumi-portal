@@ -352,19 +352,25 @@ function resolveArticle(slugParam: string): ArticleDetail {
     : "Berita Utama Sukabumi";
 
   let dynamicImg = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
+  let dynamicCategory = "PARLEMEN";
+
   if (cleanSlug.includes("kebakaran") || cleanSlug.includes("api")) {
     dynamicImg = "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80";
-  } else if (cleanSlug.includes("guru") || cleanSlug.includes("hukum") || cleanSlug.includes("polisi")) {
+    dynamicCategory = "HEADLINE";
+  } else if (cleanSlug.includes("guru") || cleanSlug.includes("hukum") || cleanSlug.includes("polisi") || cleanSlug.includes("pencabulan")) {
     dynamicImg = "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80";
-  } else if (cleanSlug.includes("wisata") || cleanSlug.includes("pantai") || cleanSlug.includes("laut")) {
+    dynamicCategory = "HUKUM";
+  } else if (cleanSlug.includes("wisata") || cleanSlug.includes("pantai") || cleanSlug.includes("laut") || cleanSlug.includes("penyu")) {
     dynamicImg = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80";
-  } else if (cleanSlug.includes("truk") || cleanSlug.includes("jalan") || cleanSlug.includes("macet")) {
+    dynamicCategory = "WISATA";
+  } else if (cleanSlug.includes("truk") || cleanSlug.includes("jalan") || cleanSlug.includes("macet") || cleanSlug.includes("sungai") || cleanSlug.includes("tambang")) {
     dynamicImg = "https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80";
+    dynamicCategory = "PERISTIWA";
   }
 
   return {
     title: rawTitle,
-    category: "BERITA",
+    category: dynamicCategory,
     date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
     image: dynamicImg,
     paragraphs: [
@@ -373,7 +379,7 @@ function resolveArticle(slugParam: string): ArticleDetail {
       "Warga diimbau tetap menjaga kondusivitas wilayah serta mengikuti pembaruan informasi resmi dari pihak berwenang.",
       "Tim redaksi Jurnal Sukabumi terus memantau perkembangan situasi terkini di lapangan."
     ],
-    tags: ["#Sukabumi", "#Berita", "#Terkini"],
+    tags: ["#Sukabumi", `#${dynamicCategory}`, "#BeritaTerkini"],
     relatedNews: defaultRelatedNews,
   };
 }
@@ -443,27 +449,33 @@ export default function BeritaDetailPage() {
           <div className="lg:col-span-8 flex flex-col">
             {/* BAGIAN ATAS (Full Width di dalam area Konten Kiri col-span-8) */}
             {/* Breadcrumb Navigation */}
-            <div className="text-sm font-bold mb-4">
-              <Link href="/" className="hover:underline">
-                <span className="text-red-600">Home</span>
-              </Link>{" "}
-              <span className="text-gray-400 font-normal">/</span>{" "}
-              <span className="text-blue-700 uppercase">{article.category}</span>
+            <div className="text-sm font-bold mb-4 flex items-center gap-1.5 font-['Montserrat']">
+              <Link href="/" className="text-red-600 hover:underline">
+                Home
+              </Link>
+              <span className="text-gray-400 font-normal">/</span>
+              <Link href="#" className="text-blue-700 uppercase hover:underline">
+                {article.category}
+              </Link>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl md:text-4xl font-extrabold text-black leading-tight tracking-tight mb-6">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-black leading-tight tracking-tight mb-6 font-['Montserrat']">
               {article.title}
             </h1>
 
             {/* Meta & Share Buttons Flex Container */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-2 border-b-0">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-2 border-b-0 font-['Montserrat']">
               {/* Sisi Kiri: Pembuat & Tanggal */}
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-1">
                   <span className="text-red-600 font-bold text-base">Redaksi</span>
-                  <svg className="w-5 h-5 text-blue-600 fill-current" viewBox="0 0 20 20">
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                  {/* Verified Blue Checkmark Badge */}
+                  <svg
+                    className="w-4 h-4 shrink-0 text-[#1DA1F2] fill-current"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.05 1.273 2.42 2.148 4 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.05 2.148-2.42 2.148-4zM9.9 16.75l-4.25-4.25 1.41-1.41 2.84 2.83 6.84-6.84 1.41 1.41-8.25 8.26z" />
                   </svg>
                 </div>
                 <span className="text-sm text-gray-600">{article.date}</span>
