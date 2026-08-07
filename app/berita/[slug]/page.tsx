@@ -892,33 +892,6 @@ export default function BeritaDetailPage() {
         </div>
       </main>
 
-      {/* FLOATING BUTTON BACK TO TOP */}
-      <button
-        type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Kembali ke Atas"
-        className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-all duration-300 transform ${
-          showBackToTop
-            ? "opacity-100 scale-100 cursor-pointer"
-            : "opacity-0 scale-0 pointer-events-none"
-        }`}
-        title="Kembali ke Atas"
-      >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2.5}
-            d="M5 15l7-7 7 7"
-          />
-        </svg>
-      </button>
-
       <Footer />
     </div>
   );

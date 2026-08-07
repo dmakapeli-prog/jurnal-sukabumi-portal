@@ -30,7 +30,7 @@ export default async function Home() {
         </div>
 
         {/* Kolom Kanan (Sidebar - 30%): 3 Banner Teratas + Topik Terkini + Populer */}
-        <div className="w-full lg:w-[30%] flex-shrink-0">
+        <div className="w-full lg:w-[30%] flex-shrink-0 sticky top-8 self-start">
           <Sidebar popularArticles={liveArticles} />
         </div>
       </main>

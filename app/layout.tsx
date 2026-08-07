@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import BackToTop from "@/components/BackToTop";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -33,6 +34,7 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-on-surface font-[Roboto,sans-serif]">
         {children}
+        <BackToTop />
       </body>
     </html>
   );
