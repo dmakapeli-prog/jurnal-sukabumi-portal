@@ -443,82 +443,76 @@ export default function BeritaDetailPage() {
           <div className="lg:col-span-8 flex flex-col">
             {/* BAGIAN ATAS (Full Width di dalam area Konten Kiri col-span-8) */}
             {/* Breadcrumb Navigation */}
-            <nav className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-1.5 uppercase font-['Montserrat']">
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-red-600 transition-colors"
-              >
-                Home
-              </Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-red-600 font-extrabold">
-                {article.category}
-              </span>
-            </nav>
+            <div className="text-sm font-bold mb-4">
+              <Link href="/" className="hover:underline">
+                <span className="text-red-600">Home</span>
+              </Link>{" "}
+              <span className="text-gray-400 font-normal">/</span>{" "}
+              <span className="text-blue-700 uppercase">{article.category}</span>
+            </div>
 
             {/* Headline */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-3 font-['Montserrat']">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-black leading-tight tracking-tight mb-6">
               {article.title}
             </h1>
 
-            {/* Metadata */}
-            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 border-b border-gray-200 pb-3 mb-3 font-['Montserrat']">
-              <span className="inline-flex items-center gap-1 font-bold text-slate-800">
-                Redaksi
-                <svg
-                  className="w-4 h-4 text-blue-500 fill-current"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
-                </svg>
-              </span>
-              <span>|</span>
-              <span>{article.date}</span>
-            </div>
+            {/* Meta & Share Buttons Flex Container */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-2 border-b-0">
+              {/* Sisi Kiri: Pembuat & Tanggal */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1">
+                  <span className="text-red-600 font-bold text-base">Redaksi</span>
+                  <svg className="w-5 h-5 text-blue-600 fill-current" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                  </svg>
+                </div>
+                <span className="text-sm text-gray-600">{article.date}</span>
+              </div>
 
-            {/* Share Buttons */}
-            <div className="flex items-center gap-2 mb-4">
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Facebook"
-              >
-                <i className="fab fa-facebook-f" />
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="X (Twitter)"
-              >
-                <i className="fab fa-x-twitter" />
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="WhatsApp"
-              >
-                <i className="fab fa-whatsapp" />
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Telegram"
-              >
-                <i className="fab fa-telegram" />
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Line"
-              >
-                <i className="fab fa-line" />
-              </a>
-              <button
-                className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Copy Link"
-              >
-                <i className="fas fa-link" />
-              </button>
+              {/* Sisi Kanan: Share Buttons */}
+              <div className="flex items-center gap-2 mt-4 sm:mt-0">
+                <a
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="Facebook"
+                >
+                  <i className="fab fa-facebook-f" />
+                </a>
+                <a
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="X (Twitter)"
+                >
+                  <i className="fab fa-x-twitter" />
+                </a>
+                <a
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="WhatsApp"
+                >
+                  <i className="fab fa-whatsapp" />
+                </a>
+                <a
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-blue-400 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="Telegram"
+                >
+                  <i className="fab fa-telegram" />
+                </a>
+                <a
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="Line"
+                >
+                  <i className="fab fa-line" />
+                </a>
+                <button
+                  className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                  title="Copy Link"
+                >
+                  <i className="fas fa-link" />
+                </button>
+              </div>
             </div>
 
             {/* Gambar Utama (100% Full Width dari area col-span-8) */}
