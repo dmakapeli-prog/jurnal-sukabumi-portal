@@ -532,19 +532,20 @@ export default function BeritaDetailPage() {
             {/* BAGIAN BAWAH: INNER GRID DI BAWAH GAMBAR */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* KIRI BAWAH (lg:col-span-4): BERITA TERKAIT */}
-              <aside className="lg:col-span-4 bg-white border-t-2 border-red-600 pt-2">
-                <h3 className="text-slate-900 text-sm font-black uppercase tracking-wide mb-2 font-['Montserrat']">
+              <aside className="lg:col-span-4 bg-white">
+                <h3 className="text-lg font-bold mb-4 border-b-2 border-blue-800 pb-1 inline-block font-['Montserrat']">
                   Berita Terkait
                 </h3>
-                <div className="flex flex-col border-t border-gray-200">
+                <div className="flex flex-col">
                   {article.relatedNews.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href="#"
-                      className="text-xs text-gray-600 hover:text-red-600 py-2.5 border-b border-gray-200 leading-snug font-medium transition-colors"
-                    >
-                      {item}
-                    </Link>
+                    <div key={idx} className="py-3 border-b border-gray-200">
+                      <a
+                        href="#"
+                        className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600 transition-colors font-['Montserrat'] block"
+                      >
+                        {item}
+                      </a>
+                    </div>
                   ))}
                 </div>
               </aside>

@@ -134,47 +134,35 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
         </div>
       </div>
 
-      {/* 3. WIDGET "BERITA TERPOPULER" (LIST BERITA DENGAN ANGKA URUTAN BESAR BERWARNA MERAH DI SISI KIRI) */}
-      <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col gap-3">
-        <div className="border-b-2 border-red-600 pb-1.5">
-          <h3 className="text-slate-900 text-base font-black font-['Montserrat'] uppercase tracking-wide">
-            BERITA TERPOPULER
-          </h3>
-        </div>
+      {/* 3. WIDGET "BERITA TERPOPULER" */}
+      <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col">
+        <h3 className="text-xl font-bold mb-4 relative pb-2 border-b border-gray-100 font-['Montserrat']">
+          <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
+        </h3>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
           {displayArticles.map((item) => (
             <Link
               key={item.id}
               href={`/berita/${item.slug}`}
-              className="flex items-center gap-3 group border-b border-gray-100 pb-3 last:border-b-0 last:pb-0"
+              className="flex items-center gap-4 p-4 odd:bg-gray-50 even:bg-white group transition-colors"
             >
-              {/* Angka urutan besar berwarna merah di sisi kiri */}
-              <span className="text-3xl font-black text-red-600 font-['Montserrat'] w-7 text-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              {/* Angka Urutan: Buat sangat besar dan merah */}
+              <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center font-['Montserrat']">
                 {item.rank}
-              </span>
-
-              {/* Thumbnail Small */}
-              <div className="w-16 h-12 bg-gray-200 rounded-none overflow-hidden flex-shrink-0 border border-gray-200">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform rounded-none"
-                />
               </div>
 
-              {/* Detail Text */}
-              <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                <span className="text-red-600 text-[9px] font-black uppercase font-['Montserrat']">
-                  {item.category}
-                </span>
-                <h4 className="text-slate-900 group-hover:text-red-600 text-xs font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2">
-                  {item.title}
-                </h4>
-                <span className="text-gray-400 text-[9px] font-['Montserrat'] mt-0.5">
-                  {item.date}
-                </span>
-              </div>
+              {/* Thumbnail: Kotak bersudut melengkung */}
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-16 h-16 rounded-md object-cover shrink-0"
+              />
+
+              {/* Teks Berita: Hitam, tebal, jarak rapat */}
+              <h4 className="font-bold text-sm text-black leading-tight group-hover:text-red-600 transition-colors line-clamp-2 font-['Montserrat']">
+                {item.title}
+              </h4>
             </Link>
           ))}
         </div>
