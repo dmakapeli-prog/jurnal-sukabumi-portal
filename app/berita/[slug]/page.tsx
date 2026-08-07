@@ -1,283 +1,204 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Sidebar from "@/components/Sidebar";
 
-interface LiveArticleDetail {
-  id: number;
-  title: string;
-  category: string;
-  date: string;
-  image: string;
-  contentHtml: string;
-  excerpt: string;
-}
-
-function decodeHTMLEntities(text: string): string {
-  if (!text) return "";
-  return text
-    .replace(/<[^>]*>/g, "")
-    .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(Number(dec)))
-    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) =>
-      String.fromCharCode(parseInt(hex, 16))
-    )
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#8211;/g, "-")
-    .replace(/&#8212;/g, "—")
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&#038;/g, "&")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function formatIndonesianDate(isoString: string): string {
-  try {
-    const d = new Date(isoString);
-    if (isNaN(d.getTime())) return isoString;
-
-    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const months = [
-      "Januari",
-      "Februari",
-      "Maret",
-      "April",
-      "Mei",
-      "Juni",
-      "Juli",
-      "Agustus",
-      "September",
-      "Oktober",
-      "November",
-      "Desember",
-    ];
-
-    const dayName = days[d.getDay()];
-    const dateNum = d.getDate();
-    const monthName = months[d.getMonth()];
-    const year = d.getFullYear();
-    const hours = d.getHours().toString().padStart(2, "0");
-    const minutes = d.getMinutes().toString().padStart(2, "0");
-
-    return `${dayName}, ${dateNum} ${monthName} ${year} - ${hours}:${minutes} WIB`;
-  } catch {
-    return isoString;
-  }
-}
+const relatedNews = [
+  "Dewan Batman Desak Pemkab Sukabumi Sanksi Tegas Oknum Kades Terlibat Narkoba",
+  "Tes Urine Serentak, Belasan Perangkat Desa di Ciemas Diperiksa BNN",
+  "Ciemas Darurat Narkoba, Tokoh Masyarakat Minta Kepolisian Tindak Tegas Jaringan Pengedar",
+  "Pemkab Sukabumi Siapkan Pj Kades Gantikan Oknum Kades Tamanjaya",
+  "DPRD Sukabumi Dorong Pembentukan Perda Pencegahan Narkoba di Tingkat Desa",
+  "Satresnarkoba Polres Sukabumi Kembangkan Kasus Sabu Kades Tamanjaya",
+];
 
 export default function BeritaDetailPage() {
-  const params = useParams();
-  const rawSlug = params?.slug;
-  const slugParam = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
-
-  const [article, setArticle] = useState<LiveArticleDetail | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
-
-  useEffect(() => {
-    async function loadPost() {
-      if (!slugParam) return;
-      setLoading(true);
-      setNotFound(false);
-
-      try {
-        let apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(
-          slugParam
-        )}&_embed`;
-
-        // If numeric ID passed
-        if (/^\d+$/.test(slugParam)) {
-          apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts/${slugParam}?_embed`;
-        }
-
-        const res = await fetch(apiUrl);
-        if (!res.ok) {
-          setNotFound(true);
-          setLoading(false);
-          return;
-        }
-
-        const data = await res.json();
-        const item = Array.isArray(data) ? data[0] : data;
-
-        if (!item || !item.id) {
-          setNotFound(true);
-          setLoading(false);
-          return;
-        }
-
-        let catName = "BERITA";
-        if (item._embedded?.["wp:term"]?.[0]?.length > 0) {
-          catName = item._embedded["wp:term"][0][0].name.toUpperCase();
-        }
-
-        let imgUrl =
-          "https://placehold.co/790x430/dc2626/ffffff?text=Jurnal+Sukabumi";
-        const media = item._embedded?.["wp:featuredmedia"]?.[0];
-        if (media?.source_url) {
-          imgUrl = media.source_url;
-        }
-
-        setArticle({
-          id: item.id,
-          title: decodeHTMLEntities(item.title?.rendered || ""),
-          category: catName,
-          date: formatIndonesianDate(item.date),
-          image: imgUrl,
-          contentHtml: item.content?.rendered || "",
-          excerpt: decodeHTMLEntities(item.excerpt?.rendered || ""),
-        });
-      } catch (e) {
-        console.error("Failed to load post:", e);
-        setNotFound(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadPost();
-  }, [slugParam]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col font-['Montserrat',sans-serif]">
-        <Header />
-        <main className="max-w-4xl mx-auto px-4 py-12 flex-1 w-full space-y-6">
-          <div className="h-8 w-32 bg-gray-200 animate-pulse rounded" />
-          <div className="h-12 w-full bg-gray-200 animate-pulse rounded" />
-          <div className="h-6 w-48 bg-gray-200 animate-pulse rounded" />
-          <div className="w-full aspect-video bg-gray-200 animate-pulse rounded-xl" />
-          <div className="space-y-3 pt-4">
-            <div className="h-4 w-full bg-gray-200 animate-pulse rounded" />
-            <div className="h-4 w-full bg-gray-200 animate-pulse rounded" />
-            <div className="h-4 w-3/4 bg-gray-200 animate-pulse rounded" />
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (notFound || !article) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col font-['Montserrat',sans-serif]">
-        <Header />
-        <main className="max-w-4xl mx-auto px-4 py-16 text-center flex-1">
-          <h1 className="text-3xl font-black text-slate-900 mb-2">
-            Artikel Tidak Ditemukan
-          </h1>
-          <p className="text-gray-600 mb-6 text-sm">
-            Maaf, berita yang Anda cari tidak dapat dimuat atau telah dipindahkan.
-          </p>
-          <Link
-            href="/"
-            className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-lg text-sm transition-colors shadow"
-          >
-            Kembali ke Beranda
-          </Link>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-['Montserrat',sans-serif]">
+    <div className="min-h-screen bg-white flex flex-col font-['Montserrat',sans-serif]">
       <Header />
 
-      {/* Breadcrumb Navigation */}
-      <div className="bg-white border-b border-gray-200 py-3">
-        <div className="max-w-5xl mx-auto px-4 text-xs font-semibold text-gray-500 flex items-center gap-2">
-          <Link href="/" className="text-red-600 hover:underline">
-            Home
-          </Link>
-          <span>/</span>
-          <span className="text-red-600">{article.category}</span>
-          <span>/</span>
-          <span className="line-clamp-1 text-gray-800">{article.title}</span>
-        </div>
-      </div>
-
-      {/* Main Article Detail */}
-      <main className="max-w-4xl w-full mx-auto px-4 py-8 flex-1 bg-white my-6 border border-gray-200 rounded-xl shadow-sm">
-        <article className="flex flex-col gap-5">
-          <div>
-            <span className="inline-block bg-red-600 text-white text-xs font-black uppercase px-3 py-1 rounded tracking-wider mb-2">
-              {article.category}
-            </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
-              {article.title}
-            </h1>
-            <div className="flex items-center gap-2 text-gray-500 text-xs font-semibold mt-3 pt-3 border-t border-gray-100">
-              <i className="far fa-clock text-red-600"></i>
-              <span>{article.date}</span>
-              <span>• Redaksi Jurnal Sukabumi</span>
+      <main className="max-w-7xl w-full mx-auto px-4 py-6 flex-1">
+        {/* Layout 3 Kolom CSS Grid (grid-cols-12) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          {/* KOLOM KIRI (span 3): BERITA TERKAIT */}
+          <aside className="lg:col-span-3 bg-white">
+            <div className="border-b-2 border-red-600 pb-1.5 mb-3">
+              <h3 className="text-slate-900 text-sm font-black uppercase tracking-wide font-['Montserrat']">
+                Berita Terkait
+              </h3>
             </div>
+            <div className="flex flex-col border-t border-gray-200">
+              {relatedNews.map((item, idx) => (
+                <Link
+                  key={idx}
+                  href="#"
+                  className="text-xs text-gray-600 hover:text-red-600 py-2.5 border-b border-gray-200 leading-snug font-medium transition-colors"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </aside>
+
+          {/* KOLOM TENGAH (span 6): KONTEN UTAMA */}
+          <article className="lg:col-span-6 bg-white flex flex-col">
+            {/* Breadcrumb Navigation */}
+            <nav className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-1.5 uppercase font-['Montserrat']">
+              <Link href="/" className="text-gray-700 hover:text-red-600 transition-colors">
+                Home
+              </Link>
+              <span className="text-gray-400">/</span>
+              <span className="text-red-600 font-extrabold">PARLEMEN</span>
+            </nav>
+
+            {/* Headline */}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mb-3 font-['Montserrat']">
+              Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba
+            </h1>
+
+            {/* Metadata */}
+            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 border-b border-gray-200 pb-3 mb-3 font-['Montserrat']">
+              <span className="inline-flex items-center gap-1 font-bold text-slate-800">
+                Redaksi
+                <svg className="w-4 h-4 text-blue-500 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                </svg>
+              </span>
+              <span>|</span>
+              <span>Kamis, 6 Agustus 2026 - 19:30 WIB</span>
+            </div>
+
+            {/* Share Buttons */}
+            <div className="flex items-center gap-2 mb-4">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Facebook"
+              >
+                <i className="fab fa-facebook-f" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="X (Twitter)"
+              >
+                <i className="fab fa-x-twitter" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="WhatsApp"
+              >
+                <i className="fab fa-whatsapp" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Telegram"
+              >
+                <i className="fab fa-telegram" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Line"
+              >
+                <i className="fab fa-line" />
+              </a>
+              <button
+                className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Copy Link"
+              >
+                <i className="fas fa-link" />
+              </button>
+            </div>
+
+            {/* Gambar Utama & Tombol Teks */}
+            <div className="relative w-full mb-4">
+              <div className="w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200">
+                <img
+                  src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
+                  alt="Dewan Batman Soroti Ciemas Darurat Narkoba"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://images.unsplash.com/photo-1575320181282-9afab399332c?w=800&auto=format&fit=crop&q=80";
+                  }}
+                />
+              </div>
+              {/* Tombol Teks A A A di kanan bawah */}
+              <div className="flex items-center justify-end gap-1.5 mt-2 text-gray-600 font-bold font-['Montserrat']">
+                <span className="text-[10px] cursor-pointer hover:text-red-600 transition-colors px-1.5 py-0.5 border border-gray-200 rounded bg-white">
+                  A
+                </span>
+                <span className="text-xs cursor-pointer hover:text-red-600 transition-colors px-1.5 py-0.5 border border-gray-200 rounded bg-white">
+                  A
+                </span>
+                <span className="text-sm cursor-pointer hover:text-red-600 transition-colors px-1.5 py-0.5 border border-gray-200 rounded bg-white">
+                  A
+                </span>
+              </div>
+            </div>
+
+            {/* Isi Berita */}
+            <div className="prose max-w-none text-slate-800 text-sm sm:text-base leading-relaxed space-y-4 font-['Montserrat'] text-justify">
+              <p>
+                <span className="font-bold text-red-600">JURNALSUKABUMI.COM - </span>
+                Anggota DPRD Kabupaten Sukabumi, H. Ujang Abdurohim yang akrab disapa Dewan Batman, angkat suara prihatin mendalam atas terungkapnya kasus oknum Kepala Desa (Kades) Tamanjaya, Kecamatan Ciemas, yang terbukti positif menggunakan narkotika jenis sabu.
+              </p>
+              <p>
+                Menurut Dewan Batman, kejadian ini menjadi tamparan keras bagi jajaran pemerintahan daerah serta mempertegas kondisi bahwa wilayah Kecamatan Ciemas dan sekitarnya sudah memasuki kondisi darurat penyalahgunaan narkoba.
+              </p>
+              <p>
+                "Seorang kepala desa seharusnya menjadi pengayom dan teladan utama bagi masyarakat. Ketika figur pemimpin desa justru terjerat barang haram ini, kita tidak boleh tinggal diam. Ini sinyal kuat bahwa Ciemas sudah darurat narkoba," ujar Dewan Batman saat ditemui wartawan di gedung DPRD Kabupaten Sukabumi.
+              </p>
+              <p>
+                Ia meminta aparat penegak hukum (APH) dari Kepolisian dan BNN untuk mengusut tuntas jaringan peredarannya hingga ke akar-akarnya, serta melakukan tes urine secara berkala kepada seluruh aparatur pemerintahan desa di Kabupaten Sukabumi guna menjaga integritas instansi publik.
+              </p>
+            </div>
+
+            {/* Footer Berita */}
+            <div className="border-t border-gray-200 mt-6 pt-4 text-xs font-bold text-slate-900 font-['Montserrat']">
+              Reporter: Ilham Nugraha | Redaktur: Ujang Herlan
+            </div>
+
+            {/* Tags */}
+            <div className="bg-gray-100 border border-gray-200 p-3 mt-4 rounded-none">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-bold font-['Montserrat']">
+                <span className="text-gray-500 font-normal">TAGS:</span>
+                <span className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer">
+                  #DPRD
+                </span>
+                <span className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer">
+                  #Sukabumi
+                </span>
+                <span className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer">
+                  #Ciemas
+                </span>
+                <span className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer">
+                  #Narkoba
+                </span>
+                <span className="bg-white border border-gray-300 text-slate-800 px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer">
+                  #Tamanjaya
+                </span>
+              </div>
+            </div>
+          </article>
+
+          {/* KOLOM KANAN (span 3): SIDEBAR */}
+          <div className="lg:col-span-3">
+            <Sidebar />
           </div>
 
-          {/* Featured Image */}
-          <div className="w-full aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden shadow-md">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Article Body Content */}
-          <div
-            className="prose max-w-none text-slate-800 text-sm sm:text-base leading-relaxed space-y-4 pt-2 font-['Montserrat']"
-            dangerouslySetInnerHTML={{ __html: article.contentHtml }}
-          />
-
-          {/* Share Buttons */}
-          <div className="border-t border-gray-200 pt-6 mt-6 flex items-center gap-3">
-            <span className="text-xs font-bold uppercase text-gray-600">
-              Bagikan Berita:
-            </span>
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                typeof window !== "undefined" ? window.location.href : ""
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs hover:opacity-90"
-            >
-              <i className="fab fa-facebook-f" />
-            </a>
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                article.title
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90"
-            >
-              <i className="fab fa-x-twitter" />
-            </a>
-            <a
-              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                article.title
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs hover:opacity-90"
-            >
-              <i className="fab fa-whatsapp" />
-            </a>
-          </div>
-        </article>
+        </div>
       </main>
 
       <Footer />
     </div>
   );
 }
+
