@@ -86,34 +86,6 @@ const defaultRelatedNews = [
 ];
 
 const knownArticlesMap: Record<string, ArticleDetail> = {
-  "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba": {
-    title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
-    category: "PARLEMEN",
-    date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-    paragraphs: [
-      "Anggota DPRD Kabupaten Sukabumi, H. Ujang Abdurohim yang akrab disapa Dewan Batman, angkat suara prihatin mendalam atas terungkapnya kasus oknum Kepala Desa (Kades) Tamanjaya, Kecamatan Ciemas, yang terbukti positif menggunakan narkotika jenis sabu.",
-      "Menurut Dewan Batman, kejadian ini menjadi tamparan keras bagi jajaran pemerintahan daerah serta mempertegas kondisi bahwa wilayah Kecamatan Ciemas dan sekitarnya sudah memasuki kondisi darurat penyalahgunaan narkoba.",
-      "\"Seorang kepala desa seharusnya menjadi pengayom dan teladan utama bagi masyarakat. Ketika figur pemimpin desa justru terjerat barang haram ini, kita tidak boleh tinggal diam. Ini sinyal kuat bahwa Ciemas sudah darurat narkoba,\" ujar Dewan Batman saat ditemui wartawan di gedung DPRD Kabupaten Sukabumi.",
-      "Ia meminta aparat penegak hukum (APH) dari Kepolisian dan BNN untuk mengusut tuntas jaringan peredarannya hingga ke akar-akarnya, serta melakukan tes urine secara berkala kepada seluruh aparatur pemerintahan desa di Kabupaten Sukabumi guna menjaga integritas instansi publik."
-    ],
-    tags: ["#DPRD", "#Sukabumi", "#Ciemas", "#Narkoba", "#Tamanjaya"],
-    relatedNews: defaultRelatedNews,
-  },
-  "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas": {
-    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
-    category: "PERISTIWA",
-    date: "Senin, 3 Agustus 2026 - 14:45 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-    paragraphs: [
-      "Pemerintah Kabupaten Sukabumi memberikan respon tegas terkait hasil pemeriksaan kepolisian yang menyatakan oknum Kepala Desa Tamanjaya, Kecamatan Ciemas, positif mengonsumsi narkotika jenis sabu.",
-      "Sekretaris Daerah (Sekda) Kabupaten Sukabumi menyatakan bahwa instansinya tidak akan mentolerir segala bentuk pelanggaran hukum berat yang dilakukan oleh aparatur desa.",
-      "\"Proses sanksi administratif hingga pemberhentian sementara dari jabatan kades sedang diproses sesuai ketentuan peraturan perundang-undangan yang berlaku. Kita menyerahkan sepenuhnya proses hukum kepada aparat Kepolisian,\" tegas Sekda.",
-      "Saat ini, Dinas Pemberdayaan Masyarakat dan Desa (DPMD) tengah menyiapkan penunjukan Penjabat (Pj) Kades agar roda pelayanan publik di Desa Tamanjaya tetap berjalan normal."
-    ],
-    tags: ["#PemkabSukabumi", "#Tamanjaya", "#Narkoba", "#Ciemas", "#SanksiKades"],
-    relatedNews: defaultRelatedNews,
-  },
   "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar": {
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
@@ -132,6 +104,34 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
       "Satpol PP Layangkan Surat Peringatan Pertama ke Pengelola Tambang",
       "DPRD Minta Pemkab Sediakan Air Bersih Darurat Bagi Penyintas",
     ],
+  },
+  "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas": {
+    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
+    category: "PERISTIWA",
+    date: "Senin, 3 Agustus 2026 - 14:45 WIB",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+    paragraphs: [
+      "Pemerintah Kabupaten Sukabumi memberikan respon tegas terkait hasil pemeriksaan kepolisian yang menyatakan oknum Kepala Desa Tamanjaya, Kecamatan Ciemas, positif mengonsumsi narkotika jenis sabu.",
+      "Sekretaris Daerah (Sekda) Kabupaten Sukabumi menyatakan bahwa instansinya tidak akan mentolerir segala bentuk pelanggaran hukum berat yang dilakukan oleh aparatur desa.",
+      "\"Proses sanksi administratif hingga pemberhentian sementara dari jabatan kades sedang diproses sesuai ketentuan peraturan perundang-undangan yang berlaku. Kita menyerahkan sepenuhnya proses hukum kepada aparat Kepolisian,\" tegas Sekda.",
+      "Saat ini, Dinas Pemberdayaan Masyarakat dan Desa (DPMD) tengah menyiapkan penunjukan Penjabat (Pj) Kades agar roda pelayanan publik di Desa Tamanjaya tetap berjalan normal."
+    ],
+    tags: ["#PemkabSukabumi", "#Tamanjaya", "#Narkoba", "#Ciemas", "#SanksiKades"],
+    relatedNews: defaultRelatedNews,
+  },
+  "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba": {
+    title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
+    category: "PARLEMEN",
+    date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
+    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+    paragraphs: [
+      "Anggota DPRD Kabupaten Sukabumi, H. Ujang Abdurohim yang akrab disapa Dewan Batman, angkat suara prihatin mendalam atas terungkapnya kasus oknum Kepala Desa (Kades) Tamanjaya, Kecamatan Ciemas, yang terbukti positif menggunakan narkotika jenis sabu.",
+      "Menurut Dewan Batman, kejadian ini menjadi tamparan keras bagi jajaran pemerintahan daerah serta mempertegas kondisi bahwa wilayah Kecamatan Ciemas dan sekitarnya sudah memasuki kondisi darurat penyalahgunaan narkoba.",
+      "\"Seorang kepala desa seharusnya menjadi pengayom dan teladan utama bagi masyarakat. Ketika figur pemimpin desa justru terjerat barang haram ini, kita tidak boleh tinggal diam. Ini sinyal kuat bahwa Ciemas sudah darurat narkoba,\" ujar Dewan Batman saat ditemui wartawan di gedung DPRD Kabupaten Sukabumi.",
+      "Ia meminta aparat penegak hukum (APH) dari Kepolisian dan BNN untuk mengusut tuntas jaringan peredarannya hingga ke akar-akarnya, serta melakukan tes urine secara berkala kepada seluruh aparatur pemerintahan desa di Kabupaten Sukabumi guna menjaga integritas instansi publik."
+    ],
+    tags: ["#DPRD", "#Sukabumi", "#Ciemas", "#Narkoba", "#Tamanjaya"],
+    relatedNews: defaultRelatedNews,
   },
   "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi": {
     title: "Dugaan Hubungan Terlarang Oknum Guru dan Siswi SMA di Sukabumi",
@@ -155,7 +155,7 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
     title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga Simpenan",
     category: "HUKUM",
     date: "Jumat, 1 Agustus 2026 - 09:15 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80",
     paragraphs: [
       "Warga Kecamatan Simpenan, Kabupaten Sukabumi, dihebohkan dengan dugaan pencabulan yang dilakukan oleh seorang oknum guru ngaji terhadap beberapa santrinya. Kejadian tersebut memicu amarah warga yang kemudian mengepung rumah tersangka pada Kamis malam.",
       "Kapolsek Simpenan mengkonfirmasi bahwa pihaknya telah bertindak cepat mengamankan tersangka berinisial AS (45) dari amukan massa untuk dibawa ke Mapolres Sukabumi.",
@@ -172,7 +172,7 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
     title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
     category: "HEADLINE",
     date: "Senin, 3 Agustus 2026 - 11:00 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
+    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&auto=format&fit=crop&q=80",
     paragraphs: [
       "Satuan Polisi Pamong Praja (Satpol PP) Kecamatan Cibadak, Kabupaten Sukabumi, menindak tegas pembangunan minimarket Alfamart yang diduga belum memiliki kelengkapan izin mendirikan bangunan (PBG) dan izin usaha toko modern.",
       "Petugas memasang stiker peringatan dan meminta penanggung jawab proyek untuk menghentikan sementara aktivitas konstruksi hingga seluruh proses perizinan diselesaikan.",
@@ -185,74 +185,209 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
       "Asosiasi Pedagang Pasar Cibadak Dukung Penertiban Minimarket",
     ],
   },
+  "52-korban-kebakaran-ciptamulya-diundang-kdm-ke-lembur-pakuan": {
+    title: "Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan",
+    category: "HEADLINE",
+    date: "Jumat, 1 Agustus 2026 - 10:22 WIB",
+    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Sebanyak 52 warga korban kebakaran Kampung Adat Ciptamulya, Kecamatan Cikakak, Kabupaten Sukabumi dijadwalkan berangkat besok menuju Lembur Pakuan. Kunjungan ini atas undangan langsung dari Komunitas Dayeuh Mangraga (KDM).",
+      "Ketua Paguyuban Kampung Adat Ciptamulya mengungkapkan rasa syukurnya atas undangan tersebut. Undangan ini menjadi obat pelipur lara bagi warga yang rumahnya terbakar.",
+      "Kebakaran yang melanda Kampung Adat Ciptamulya menghanguskan belasan rumah adat dan bangunan pendukung. Peristiwa tersebut meninggalkan duka mendalam bagi komunitas adat setempat.",
+      "Program kunjungan ini diharapkan dapat memberikan semangat baru bagi para korban sekaligus mempererat tali silaturahmi antarkomunitas adat."
+    ],
+    tags: ["#Ciptamulya", "#Kebakaran", "#KDM", "#Sukabumi"],
+    relatedNews: [
+      "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
+      "Warga Desa Cipanengah Galang Bantuan untuk Korban Kebakaran Ciptamulya",
+    ],
+  },
+  "kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman": {
+    title: "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
+    category: "NASIONAL",
+    date: "Jumat, 1 Agustus 2026 - 08:30 WIB",
+    image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Pemerintah Kabupaten Sukabumi melalui Dinas Sosial memastikan bahwa kebutuhan dasar para penyintas kebakaran Kampung Adat Ciptamulya dalam kondisi aman dan terkendali.",
+      "Pemerintah mendistribusikan bantuan berupa bahan makanan pokok, selimut, pakaian layak pakai, serta kebutuhan sanitasi darurat.",
+      "Tim medis Dinas Kesehatan secara rutin melakukan pemeriksaan kesehatan terhadap para pengungsi, terutama anak-anak dan lansia.",
+      "Proses rehabilitasi dan rekonstruksi rumah-rumah adat yang terbakar sudah mulai dirancang bekerja sama dengan balai pelestarian cagar budaya."
+    ],
+    tags: ["#Ciptamulya", "#Dinsos", "#Penyintas", "#Sukabumi"],
+    relatedNews: [
+      "52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan",
+      "Warga Desa Cipanengah Galang Bantuan untuk Ciptamulya",
+    ],
+  },
+  "warga-desa-cipanengah-galang-bantuan-korban-kebakaran-ciptamulya": {
+    title: "Warga Desa Cipanengah Galang Bantuan untuk Korban Kebakaran Kampung Adat Ciptamulya",
+    category: "GERBANG DESA",
+    date: "Sabtu, 1 Agustus 2026 - 13:41 WIB",
+    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Warga Desa Cipanengah, Kecamatan Surade, Kabupaten Sukabumi menunjukkan solidaritas tinggi dengan menggalang bantuan untuk para korban kebakaran Kampung Adat Ciptamulya.",
+      "Inisiatif ini muncul secara spontan dari warga desa. Bantuan yang terkumpul berupa beras, makanan siap saji, pakaian layak pakai, dan donasi uang tunai.",
+      "Bantuan tersebut disalurkan langsung ke posko pengungsian Ciptamulya oleh perwakilan pemerintah desa dan tokoh pemuda.",
+      "Gerakan solidaritas ini menjadi bukti tingginya nilai kebersamaan dan gotong royong warga Sukabumi."
+    ],
+    tags: ["#Cipanengah", "#Ciptamulya", "#GotongRoyong", "#GerbangDesa"],
+    relatedNews: [
+      "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
+      "52 Korban Kebakaran Ciptamulya Diundang KDM",
+    ],
+  },
+  "truk-kayu-terguling-di-cibangban-sukabumi": {
+    title: "Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban Sukabumi",
+    category: "PERISTIWA",
+    date: "Sabtu, 1 Agustus 2026 - 13:37 WIB",
+    image: "https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Sebuah truk pengangkut kayu mengalami kecelakaan tunggal di kawasan tanjakan Cibangban, Kecamatan Cibadak, Kabupaten Sukabumi. Truk terguling akibat tidak kuat menanjak di jalan yang curam.",
+      "Truk yang mengangkut kayu gelondong tersebut mundur saat menanjak dan akhirnya terguling menutup sebagian bahu jalan.",
+      "Sopir truk berhasil menyelamatkan diri dan hanya mengalami luka ringan. Namun arus lalu lintas di jalur tersebut sempat mengalami kemacetan.",
+      "Petugas gabungan dan alat berat diterjunkan ke lokasi untuk mengevakuasi badan truk dan muatan kayu dari badan jalan."
+    ],
+    tags: ["#Cibangban", "#Kecelakaan", "#TrukTerguling", "#Sukabumi"],
+    relatedNews: [
+      "Satlantas Evakuasi Truk Kayu Terguling di Cibangban",
+      "Jalur Cibadak Kembali Normal Setelah Evakuasi",
+    ],
+  },
+  "desa-wisata-tegalega-disiapkan-jadi-magnet-baru-pariwisata": {
+    title: "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
+    category: "WISATA",
+    date: "Kamis, 31 Juli 2026 - 15:20 WIB",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Pemerintah Kabupaten Sukabumi melalui Dinas Pariwisata sedang menyiapkan Desa Tegalega, Kecamatan Ciracap, sebagai destinasi wisata baru yang menyajikan keindahan alam pesisir dan terasering persawahan.",
+      "Desa yang terletak di kawasan selatan Sukabumi ini memiliki lanskap perbukitan eksotis serta pantai tersembunyi yang belum terjamah.",
+      "Pemerintah daerah mengalokasikan anggaran infrastruktur untuk penataan jalan akses, titik pandang swafoto, serta fasilitas umum tempat wisata.",
+      "Pelaku pariwisata lokal menyambut optimistis pengembangan desa wisata ini dalam menggerakkan ekonomi masyarakat desa."
+    ],
+    tags: ["#Tegalega", "#WisataSukabumi", "#Ciracap", "#DesaWisata"],
+    relatedNews: [
+      "Dispar Sukabumi Alokasikan Anggaran Penataan Desa Wisata",
+      "PENYU Cari Lokasi Ideal di Pesisir Selatan",
+    ],
+  },
+  "penyu-cari-lokasi-ideal-gadobangkong-hingga-citepus-dibidik": {
+    title: "PENYU Cari Lokasi Ideal, Gadobangkong hingga Citepus Dibidik",
+    category: "WISATA",
+    date: "Rabu, 30 Juli 2026 - 11:05 WIB",
+    image: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Tim konsentrasi pelestarian penyu melakukan survei lokasi penangkaran ideal di sepanjang garis pantai Kabupaten Sukabumi. Pantai Gadobangkong dan Citepus menjadi kandidat utama.",
+      "Pemilihan lokasi memperhatikan tekstur pasir pantai, kondisi gelombang laut, serta tingkat keamanan lingkungan dari pemukiman.",
+      "Program konservasi ini bertujuan melindungi habitat penyu hijau yang terancam punah dari maraknya perburuan liar.",
+      "Hasil studi kelayakan lapangan akan diserahkan kepada Pemkab Sukabumi untuk penetapan zonasi lindung pantai."
+    ],
+    tags: ["#PENYU", "#Citepus", "#Gadobangkong", "#Konservasi", "#Wisata"],
+    relatedNews: [
+      "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
+      "8 Tahun Padjadjaran Anyar Menjaga Warisan Karuhun",
+    ],
+  },
+  "8-tahun-padjadjaran-anyar-menjaga-warisan-karuhun": {
+    title: "8 Tahun Padjadjaran Anyar, Menjaga Warisan Karuhun",
+    category: "WISATA",
+    date: "Selasa, 29 Juli 2026 - 14:30 WIB",
+    image: "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?w=800&auto=format&fit=crop&q=80",
+    paragraphs: [
+      "Komunitas Padjadjaran Anyar merayakan milangkala ke-8 dengan mempergelarkan kebudayaan tradisional Sunda di Kabupaten Sukabumi.",
+      "Acara diisi dengan pergelaran seni wayang golek, pencak silat, seni tari jaipong, serta ritual syukuran Seren Taun.",
+      "Penggiat budaya menegaskan pentingnya konsistensi generasi muda dalam merawat warisan adat leluhur di tengah arus modernisasi.",
+      "Dinas Pendidikan dan Kebudayaan memberikan apresiasi atas peran aktif komunitas dalam melestarikan seni kebudayaan daerah."
+    ],
+    tags: ["#PadjadjaranAnyar", "#BudayaSunda", "#Sukabumi", "#SerenTaun"],
+    relatedNews: [
+      "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
+      "PENYU Cari Lokasi Ideal di Pesisir Selatan",
+    ],
+  },
 };
+
+function resolveArticle(slugParam: string): ArticleDetail {
+  const cleanSlug = decodeURIComponent(slugParam || "").toLowerCase().trim();
+
+  // 1. Direct match in map
+  if (cleanSlug && knownArticlesMap[cleanSlug]) {
+    return knownArticlesMap[cleanSlug];
+  }
+
+  // 2. Substring / Partial match
+  for (const [key, article] of Object.entries(knownArticlesMap)) {
+    if (cleanSlug.includes(key) || key.includes(cleanSlug)) {
+      return article;
+    }
+  }
+
+  // 3. ID / Fallback numeric match
+  if (cleanSlug === "1" || cleanSlug === "101") return knownArticlesMap["sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar"];
+  if (cleanSlug === "2" || cleanSlug === "102") return knownArticlesMap["oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas"];
+  if (cleanSlug === "3" || cleanSlug === "103") return knownArticlesMap["dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi"];
+  if (cleanSlug === "4" || cleanSlug === "104") return knownArticlesMap["rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji"];
+  if (cleanSlug === "5" || cleanSlug === "105") return knownArticlesMap["belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp"];
+
+  // 4. Match localArticles from lib/articles.ts
+  const localMatch = localArticles.find(
+    (a) => a.slug.toLowerCase() === cleanSlug || cleanSlug.includes(a.slug.toLowerCase())
+  );
+  if (localMatch) {
+    return {
+      title: localMatch.title,
+      category: localMatch.category.toUpperCase(),
+      date: localMatch.date,
+      image: localMatch.image.startsWith("http")
+        ? localMatch.image
+        : `https://wsrv.nl/?url=${encodeURIComponent(localMatch.image)}`,
+      paragraphs: localMatch.content,
+      tags: ["#Sukabumi", `#${localMatch.category}`],
+      relatedNews: defaultRelatedNews,
+    };
+  }
+
+  // 5. Dynamic Title & Image Generator based on slug string keywords
+  const rawTitle = cleanSlug
+    ? cleanSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "Berita Utama Sukabumi";
+
+  let dynamicImg = "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
+  if (cleanSlug.includes("kebakaran") || cleanSlug.includes("api")) {
+    dynamicImg = "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80";
+  } else if (cleanSlug.includes("guru") || cleanSlug.includes("hukum") || cleanSlug.includes("polisi")) {
+    dynamicImg = "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80";
+  } else if (cleanSlug.includes("wisata") || cleanSlug.includes("pantai") || cleanSlug.includes("laut")) {
+    dynamicImg = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80";
+  } else if (cleanSlug.includes("truk") || cleanSlug.includes("jalan") || cleanSlug.includes("macet")) {
+    dynamicImg = "https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80";
+  }
+
+  return {
+    title: rawTitle,
+    category: "BERITA",
+    date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
+    image: dynamicImg,
+    paragraphs: [
+      `Laporan mendalam mengenai ${rawTitle} menyita perhatian masyarakat di Kabupaten Sukabumi.`,
+      "Pihak instansi terkait saat ini telah menerjunkan tim khusus ke lokasi guna melakukan pengawasan dan penanganan secara transparan.",
+      "Warga diimbau tetap menjaga kondusivitas wilayah serta mengikuti pembaruan informasi resmi dari pihak berwenang.",
+      "Tim redaksi Jurnal Sukabumi terus memantau perkembangan situasi terkini di lapangan."
+    ],
+    tags: ["#Sukabumi", "#Berita", "#Terkini"],
+    relatedNews: defaultRelatedNews,
+  };
+}
 
 export default function BeritaDetailPage() {
   const params = useParams();
   const rawSlug = params?.slug;
   const slugParam = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
 
-  const [article, setArticle] = useState<ArticleDetail>(() => {
-    if (slugParam && knownArticlesMap[slugParam]) {
-      return knownArticlesMap[slugParam];
-    }
-    const localMatch = localArticles.find((a) => a.slug === slugParam);
-    if (localMatch) {
-      return {
-        title: localMatch.title,
-        category: localMatch.category.toUpperCase(),
-        date: localMatch.date,
-        image: localMatch.image.startsWith("http")
-          ? localMatch.image
-          : `https://wsrv.nl/?url=${encodeURIComponent(localMatch.image)}`,
-        paragraphs: localMatch.content,
-        tags: ["#Sukabumi", `#${localMatch.category}`],
-        relatedNews: defaultRelatedNews,
-      };
-    }
-    const formattedTitle = slugParam
-      ? slugParam.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-      : "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba";
-
-    return {
-      title: formattedTitle,
-      category: "BERITA",
-      date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
-      image:
-        "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-      paragraphs: [
-        `Anggota DPRD Kabupaten Sukabumi angkat suara prihatin atas kabar terkini mengenai ${formattedTitle}.`,
-        "Pemerintah daerah dan aparat penegak hukum diimbau untuk bertindak cepat menindaklanjuti laporan masyarakat guna menjaga kondusivitas wilayah.",
-        "Informasi perkembangan kasus ini akan terus diperbarui secara berkala oleh tim redaksi di lapangan.",
-      ],
-      tags: ["#Sukabumi", "#Berita", "#Terkini"],
-      relatedNews: defaultRelatedNews,
-    };
-  });
+  const [article, setArticle] = useState<ArticleDetail>(() => resolveArticle(slugParam));
 
   useEffect(() => {
     if (!slugParam) return;
-
-    if (knownArticlesMap[slugParam]) {
-      setArticle(knownArticlesMap[slugParam]);
-      return;
-    }
-
-    const localMatch = localArticles.find((a) => a.slug === slugParam);
-    if (localMatch) {
-      setArticle({
-        title: localMatch.title,
-        category: localMatch.category.toUpperCase(),
-        date: localMatch.date,
-        image: localMatch.image.startsWith("http")
-          ? localMatch.image
-          : `https://wsrv.nl/?url=${encodeURIComponent(localMatch.image)}`,
-        paragraphs: localMatch.content,
-        tags: ["#Sukabumi", `#${localMatch.category}`],
-        relatedNews: defaultRelatedNews,
-      });
-      return;
-    }
+    setArticle(resolveArticle(slugParam));
 
     async function fetchWpPost() {
       try {
@@ -272,13 +407,10 @@ export default function BeritaDetailPage() {
             if (item._embedded?.["wp:term"]?.[0]?.length > 0) {
               catName = item._embedded["wp:term"][0][0].name.toUpperCase();
             }
-            let imgUrl =
-              "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg";
+            let imgUrl = "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
             const media = item._embedded?.["wp:featuredmedia"]?.[0];
             if (media?.source_url) {
-              imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(
-                media.source_url
-              )}`;
+              imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.source_url)}`;
             }
 
             setArticle({
@@ -290,31 +422,11 @@ export default function BeritaDetailPage() {
               tags: ["#Sukabumi", `#${catName}`, "#BeritaTerkini"],
               relatedNews: defaultRelatedNews,
             });
-            return;
           }
         }
       } catch (e) {
-        console.error("WP API Fetch error:", e);
+        // Silently use resolved local article
       }
-
-      const formattedTitle = slugParam
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-
-      setArticle({
-        title: formattedTitle,
-        category: "BERITA",
-        date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
-        image:
-          "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-        paragraphs: [
-          `Laporan terkini mengenai ${formattedTitle} terus menjadi sorotan publik di Kabupaten Sukabumi.`,
-          "Berbagai pihak terkait telah mengambil langkah cepat guna menangani permasalahan ini secara profesional dan transparan.",
-          "Masyarakat diimbau tetap menjaga situasi kondusif serta mengedepankan informasi dari sumber resmi.",
-        ],
-        tags: ["#Sukabumi", "#Berita", "#Terkini"],
-        relatedNews: defaultRelatedNews,
-      });
     }
 
     fetchWpPost();
@@ -325,14 +437,8 @@ export default function BeritaDetailPage() {
       <Header />
 
       <main className="max-w-7xl w-full mx-auto px-4 py-6 flex-1">
-        {/* 1. GRID UTAMA (Membagi Konten Kiri col-span-8 dan Sidebar Kanan col-span-4) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-          {/* KONTEN KIRI (lg:col-span-8) */}
           <div className="lg:col-span-8 flex flex-col">
-            
-            {/* BAGIAN ATAS (Full Width di dalam area Konten Kiri col-span-8) */}
-            {/* Breadcrumb Navigation */}
             <nav className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-1.5 uppercase font-['Montserrat']">
               <Link href="/" className="text-gray-700 hover:text-red-600 transition-colors">
                 Home
@@ -341,12 +447,10 @@ export default function BeritaDetailPage() {
               <span className="text-red-600 font-extrabold">{article.category}</span>
             </nav>
 
-            {/* Headline */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-3 font-['Montserrat']">
               {article.title}
             </h1>
 
-            {/* Metadata */}
             <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 border-b border-gray-200 pb-3 mb-3 font-['Montserrat']">
               <span className="inline-flex items-center gap-1 font-bold text-slate-800">
                 Redaksi
@@ -358,52 +462,27 @@ export default function BeritaDetailPage() {
               <span>{article.date}</span>
             </div>
 
-            {/* Share Buttons */}
             <div className="flex items-center gap-2 mb-4">
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Facebook"
-              >
+              <a href="#" className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
                 <i className="fab fa-facebook-f" />
               </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="X (Twitter)"
-              >
+              <a href="#" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
                 <i className="fab fa-x-twitter" />
               </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="WhatsApp"
-              >
+              <a href="#" className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
                 <i className="fab fa-whatsapp" />
               </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Telegram"
-              >
+              <a href="#" className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
                 <i className="fab fa-telegram" />
               </a>
-              <a
-                href="#"
-                className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Line"
-              >
+              <a href="#" className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
                 <i className="fab fa-line" />
               </a>
-              <button
-                className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                title="Copy Link"
-              >
+              <button className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity" title="Copy Link">
                 <i className="fas fa-link" />
               </button>
             </div>
 
-            {/* Gambar Utama (100% Full Width dari area col-span-8) */}
             <div className="w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4">
               <img
                 src={article.image}
@@ -412,15 +491,12 @@ export default function BeritaDetailPage() {
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1575320181282-9afab399332c?w=800&auto=format&fit=crop&q=80";
+                    "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
                 }}
               />
             </div>
 
-            {/* BAGIAN BAWAH: INNER GRID DI BAWAH GAMBAR */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              
-              {/* KIRI BAWAH (lg:col-span-4): BERITA TERKAIT */}
               <aside className="lg:col-span-4 bg-white border-t-2 border-red-600 pt-2">
                 <h3 className="text-slate-900 text-sm font-black uppercase tracking-wide mb-2 font-['Montserrat']">
                   Berita Terkait
@@ -438,22 +514,13 @@ export default function BeritaDetailPage() {
                 </div>
               </aside>
 
-              {/* KANAN BAWAH (lg:col-span-8): TOMBOL TEXT A A A & ISI BERITA & FOOTER & TAGS */}
               <article className="lg:col-span-8 flex flex-col">
-                {/* Tombol Teks "A A A" Rata Kanan Tepat Di Bawah Gambar / Di Atas Teks */}
                 <div className="flex items-center justify-end gap-1.5 mb-3 text-gray-600 font-bold font-['Montserrat']">
-                  <span className="text-[10px] cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
-                    A
-                  </span>
-                  <span className="text-xs cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
-                    A
-                  </span>
-                  <span className="text-sm cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
-                    A
-                  </span>
+                  <span className="text-[10px] cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
+                  <span className="text-xs cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
+                  <span className="text-sm cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
                 </div>
 
-                {/* Isi Berita */}
                 <div className="prose max-w-none text-slate-800 text-sm sm:text-base leading-relaxed sm:leading-loose space-y-5 font-['Montserrat'] text-justify">
                   {article.contentHtml ? (
                     <div dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
@@ -461,9 +528,7 @@ export default function BeritaDetailPage() {
                     article.paragraphs?.map((p, idx) => (
                       <p key={idx}>
                         {idx === 0 && (
-                          <span className="font-bold text-red-600">
-                            JURNALSUKABUMI.COM -{" "}
-                          </span>
+                          <span className="font-bold text-red-600">JURNALSUKABUMI.COM - </span>
                         )}
                         {p}
                       </p>
@@ -471,12 +536,10 @@ export default function BeritaDetailPage() {
                   )}
                 </div>
 
-                {/* Footer Berita */}
                 <div className="border-t border-gray-200 mt-6 pt-4 text-xs font-bold text-slate-900 font-['Montserrat']">
                   Reporter: Ilham Nugraha | Redaktur: Ujang Herlan
                 </div>
 
-                {/* Tags */}
                 <div className="bg-gray-100 border border-gray-200 p-3.5 mt-4 rounded-none">
                   <div className="flex flex-wrap items-center gap-2 text-xs font-bold font-['Montserrat']">
                     <span className="text-gray-500 font-normal">TAGS:</span>
@@ -491,16 +554,12 @@ export default function BeritaDetailPage() {
                   </div>
                 </div>
               </article>
-
             </div>
-
           </div>
 
-          {/* SIDEBAR KANAN (lg:col-span-4) */}
           <div className="lg:col-span-4">
             <Sidebar />
           </div>
-
         </div>
       </main>
 
@@ -508,6 +567,3 @@ export default function BeritaDetailPage() {
     </div>
   );
 }
-
-
-
