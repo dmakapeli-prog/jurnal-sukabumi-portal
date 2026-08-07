@@ -533,20 +533,16 @@ export default function BeritaDetailPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* KIRI BAWAH (lg:col-span-4): BERITA TERKAIT */}
               <aside className="lg:col-span-4 bg-white">
-                <h3 className="text-lg font-bold mb-4 border-b-2 border-blue-800 pb-1 inline-block font-['Montserrat']">
-                  Berita Terkait
-                </h3>
-                <div className="flex flex-col">
-                  {article.relatedNews.map((item, idx) => (
-                    <div key={idx} className="py-3 border-b border-gray-200">
-                      <a
-                        href="#"
-                        className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600 transition-colors font-['Montserrat'] block"
-                      >
-                        {item}
-                      </a>
+                <div className="mt-8">
+                  <h3 className="text-lg font-bold mb-4 border-b-2 border-blue-800 pb-1 inline-block">Berita Terkait</h3>
+                  <div className="flex flex-col">
+                    <div className="py-3 border-b border-gray-200">
+                      <a href="#" className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600">DPRD Sukabumi Dorong Dua Regulasi Strategis, Disabilitas Disahkan...</a>
                     </div>
-                  ))}
+                    <div className="py-3 border-b border-gray-200">
+                      <a href="#" className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600">DPRD Dorong Pelaku Usaha Bangun Wisata yang Aman, Nyaman...</a>
+                    </div>
+                  </div>
                 </div>
               </aside>
 
@@ -609,6 +605,28 @@ export default function BeritaDetailPage() {
 
           {/* SIDEBAR KANAN (lg:col-span-4) */}
           <div className="lg:col-span-4">
+            <div className="mb-8">
+              <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
+                <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
+              </h3>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-4 p-4 bg-gray-50">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">1</div>
+                  <img src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg" alt="US Oknum Kades" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">US Oknum Kades Tamanjaya Ciemas Positif Narkoba...</h4>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-white">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">2</div>
+                  <img src="https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg" alt="Dewan Batman" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti...</h4>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-gray-50">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">3</div>
+                  <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80" alt="Kades Ciemas" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">Kades di Ciemas Berada di Satresnarkoba...</h4>
+                </div>
+              </div>
+            </div>
             <Sidebar />
           </div>
         </div>
