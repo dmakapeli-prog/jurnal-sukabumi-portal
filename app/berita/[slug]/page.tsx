@@ -86,6 +86,34 @@ const defaultRelatedNews = [
 ];
 
 const knownArticlesMap: Record<string, ArticleDetail> = {
+  "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba": {
+    title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
+    category: "PARLEMEN",
+    date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
+    image: "https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg",
+    paragraphs: [
+      "Anggota DPRD Kabupaten Sukabumi, H. Ujang Abdurohim yang akrab disapa Dewan Batman, angkat suara prihatin mendalam atas terungkapnya kasus oknum Kepala Desa (Kades) Tamanjaya, Kecamatan Ciemas, yang terbukti positif menggunakan narkotika jenis sabu.",
+      "Menurut Dewan Batman, kejadian ini menjadi tamparan keras bagi jajaran pemerintahan daerah serta mempertegas kondisi bahwa wilayah Kecamatan Ciemas dan sekitarnya sudah memasuki kondisi darurat penyalahgunaan narkoba.",
+      "\"Seorang kepala desa seharusnya menjadi pengayom dan teladan utama bagi masyarakat. Ketika figur pemimpin desa justru terjerat barang haram ini, kita tidak boleh tinggal diam. Ini sinyal kuat bahwa Ciemas sudah darurat narkoba,\" ujar Dewan Batman saat ditemui wartawan di gedung DPRD Kabupaten Sukabumi.",
+      "Ia meminta aparat penegak hukum (APH) dari Kepolisian dan BNN untuk mengusut tuntas jaringan peredarannya hingga ke akar-akarnya, serta melakukan tes urine secara berkala kepada seluruh aparatur pemerintahan desa di Kabupaten Sukabumi guna menjaga integritas instansi publik."
+    ],
+    tags: ["#DPRD", "#Sukabumi", "#Ciemas", "#Narkoba", "#Tamanjaya"],
+    relatedNews: defaultRelatedNews,
+  },
+  "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas": {
+    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
+    category: "PERISTIWA",
+    date: "Senin, 3 Agustus 2026 - 14:45 WIB",
+    image: "https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg",
+    paragraphs: [
+      "Pemerintah Kabupaten Sukabumi memberikan respon tegas terkait hasil pemeriksaan kepolisian yang menyatakan oknum Kepala Desa Tamanjaya, Kecamatan Ciemas, positif mengonsumsi narkotika jenis sabu.",
+      "Sekretaris Daerah (Sekda) Kabupaten Sukabumi menyatakan bahwa instansinya tidak akan mentolerir segala bentuk pelanggaran hukum berat yang dilakukan oleh aparatur desa.",
+      "\"Proses sanksi administratif hingga pemberhentian sementara dari jabatan kades sedang diproses sesuai ketentuan peraturan perundang-undangan yang berlaku. Kita menyerahkan sepenuhnya proses hukum kepada aparat Kepolisian,\" tegas Sekda.",
+      "Saat ini, Dinas Pemberdayaan Masyarakat dan Desa (DPMD) tengah menyiapkan penunjukan Penjabat (Pj) Kades agar roda pelayanan publik di Desa Tamanjaya tetap berjalan normal."
+    ],
+    tags: ["#PemkabSukabumi", "#Tamanjaya", "#Narkoba", "#Ciemas", "#SanksiKades"],
+    relatedNews: defaultRelatedNews,
+  },
   "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar": {
     title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
     category: "PERISTIWA",
@@ -105,39 +133,11 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
       "DPRD Minta Pemkab Sediakan Air Bersih Darurat Bagi Penyintas",
     ],
   },
-  "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas": {
-    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
-    category: "PERISTIWA",
-    date: "Senin, 3 Agustus 2026 - 14:45 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-    paragraphs: [
-      "Pemerintah Kabupaten Sukabumi memberikan respon tegas terkait hasil pemeriksaan kepolisian yang menyatakan oknum Kepala Desa Tamanjaya, Kecamatan Ciemas, positif mengonsumsi narkotika jenis sabu.",
-      "Sekretaris Daerah (Sekda) Kabupaten Sukabumi menyatakan bahwa instansinya tidak akan mentolerir segala bentuk pelanggaran hukum berat yang dilakukan oleh aparatur desa.",
-      "\"Proses sanksi administratif hingga pemberhentian sementara dari jabatan kades sedang diproses sesuai ketentuan peraturan perundang-undangan yang berlaku. Kita menyerahkan sepenuhnya proses hukum kepada aparat Kepolisian,\" tegas Sekda.",
-      "Saat ini, Dinas Pemberdayaan Masyarakat dan Desa (DPMD) tengah menyiapkan penunjukan Penjabat (Pj) Kades agar roda pelayanan publik di Desa Tamanjaya tetap berjalan normal."
-    ],
-    tags: ["#PemkabSukabumi", "#Tamanjaya", "#Narkoba", "#Ciemas", "#SanksiKades"],
-    relatedNews: defaultRelatedNews,
-  },
-  "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba": {
-    title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
-    category: "PARLEMEN",
-    date: "Kamis, 6 Agustus 2026 - 19:30 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
-    paragraphs: [
-      "Anggota DPRD Kabupaten Sukabumi, H. Ujang Abdurohim yang akrab disapa Dewan Batman, angkat suara prihatin mendalam atas terungkapnya kasus oknum Kepala Desa (Kades) Tamanjaya, Kecamatan Ciemas, yang terbukti positif menggunakan narkotika jenis sabu.",
-      "Menurut Dewan Batman, kejadian ini menjadi tamparan keras bagi jajaran pemerintahan daerah serta mempertegas kondisi bahwa wilayah Kecamatan Ciemas dan sekitarnya sudah memasuki kondisi darurat penyalahgunaan narkoba.",
-      "\"Seorang kepala desa seharusnya menjadi pengayom dan teladan utama bagi masyarakat. Ketika figur pemimpin desa justru terjerat barang haram ini, kita tidak boleh tinggal diam. Ini sinyal kuat bahwa Ciemas sudah darurat narkoba,\" ujar Dewan Batman saat ditemui wartawan di gedung DPRD Kabupaten Sukabumi.",
-      "Ia meminta aparat penegak hukum (APH) dari Kepolisian dan BNN untuk mengusut tuntas jaringan peredarannya hingga ke akar-akarnya, serta melakukan tes urine secara berkala kepada seluruh aparatur pemerintahan desa di Kabupaten Sukabumi guna menjaga integritas instansi publik."
-    ],
-    tags: ["#DPRD", "#Sukabumi", "#Ciemas", "#Narkoba", "#Tamanjaya"],
-    relatedNews: defaultRelatedNews,
-  },
   "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi": {
     title: "Dugaan Hubungan Terlarang Oknum Guru dan Siswi SMA di Sukabumi",
     category: "HUKUM",
     date: "Senin, 3 Agustus 2026 - 13:20 WIB",
-    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f002?w=800&auto=format&fit=crop&q=80",
     paragraphs: [
       "Dunia pendidikan di Kabupaten Sukabumi mendadak dihebohkan oleh dugaan kasus hubungan terlarang antara seorang oknum guru SMA dengan salah satu siswinya.",
       "Kasus ini mencuat setelah pihak keluarga korban mendapati bukti perpesanan dan melaporkan oknum tenaga pendidik tersebut ke pihak kepolisian serta Dinas Pendidikan Wilayah setempat.",
@@ -351,7 +351,7 @@ function resolveArticle(slugParam: string): ArticleDetail {
     ? cleanSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Berita Utama Sukabumi";
 
-  let dynamicImg = "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
+  let dynamicImg = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
   if (cleanSlug.includes("kebakaran") || cleanSlug.includes("api")) {
     dynamicImg = "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80";
   } else if (cleanSlug.includes("guru") || cleanSlug.includes("hukum") || cleanSlug.includes("polisi")) {
@@ -407,7 +407,7 @@ export default function BeritaDetailPage() {
             if (item._embedded?.["wp:term"]?.[0]?.length > 0) {
               catName = item._embedded["wp:term"][0][0].name.toUpperCase();
             }
-            let imgUrl = "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
+            let imgUrl = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
             const media = item._embedded?.["wp:featuredmedia"]?.[0];
             if (media?.source_url) {
               imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.source_url)}`;
@@ -437,24 +437,38 @@ export default function BeritaDetailPage() {
       <Header />
 
       <main className="max-w-7xl w-full mx-auto px-4 py-6 flex-1">
+        {/* 1. GRID UTAMA (Membagi Konten Kiri col-span-8 dan Sidebar Kanan col-span-4) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* KONTEN KIRI (lg:col-span-8) */}
           <div className="lg:col-span-8 flex flex-col">
+            {/* BAGIAN ATAS (Full Width di dalam area Konten Kiri col-span-8) */}
+            {/* Breadcrumb Navigation */}
             <nav className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-1.5 uppercase font-['Montserrat']">
-              <Link href="/" className="text-gray-700 hover:text-red-600 transition-colors">
+              <Link
+                href="/"
+                className="text-gray-700 hover:text-red-600 transition-colors"
+              >
                 Home
               </Link>
               <span className="text-gray-400">/</span>
-              <span className="text-red-600 font-extrabold">{article.category}</span>
+              <span className="text-red-600 font-extrabold">
+                {article.category}
+              </span>
             </nav>
 
+            {/* Headline */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-3 font-['Montserrat']">
               {article.title}
             </h1>
 
+            {/* Metadata */}
             <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 border-b border-gray-200 pb-3 mb-3 font-['Montserrat']">
               <span className="inline-flex items-center gap-1 font-bold text-slate-800">
                 Redaksi
-                <svg className="w-4 h-4 text-blue-500 fill-current" viewBox="0 0 20 20">
+                <svg
+                  className="w-4 h-4 text-blue-500 fill-current"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                 </svg>
               </span>
@@ -462,27 +476,52 @@ export default function BeritaDetailPage() {
               <span>{article.date}</span>
             </div>
 
+            {/* Share Buttons */}
             <div className="flex items-center gap-2 mb-4">
-              <a href="#" className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Facebook"
+              >
                 <i className="fab fa-facebook-f" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="X (Twitter)"
+              >
                 <i className="fab fa-x-twitter" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="WhatsApp"
+              >
                 <i className="fab fa-whatsapp" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Telegram"
+              >
                 <i className="fab fa-telegram" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity">
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-[#00B900] text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Line"
+              >
                 <i className="fab fa-line" />
               </a>
-              <button className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity" title="Copy Link">
+              <button
+                className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
+                title="Copy Link"
+              >
                 <i className="fas fa-link" />
               </button>
             </div>
 
+            {/* Gambar Utama (100% Full Width dari area col-span-8) */}
             <div className="w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4">
               <img
                 src={article.image}
@@ -491,12 +530,14 @@ export default function BeritaDetailPage() {
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&auto=format&fit=crop&q=80";
+                    "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
                 }}
               />
             </div>
 
+            {/* BAGIAN BAWAH: INNER GRID DI BAWAH GAMBAR */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* KIRI BAWAH (lg:col-span-4): BERITA TERKAIT */}
               <aside className="lg:col-span-4 bg-white border-t-2 border-red-600 pt-2">
                 <h3 className="text-slate-900 text-sm font-black uppercase tracking-wide mb-2 font-['Montserrat']">
                   Berita Terkait
@@ -514,21 +555,33 @@ export default function BeritaDetailPage() {
                 </div>
               </aside>
 
+              {/* KANAN BAWAH (lg:col-span-8): TOMBOL TEXT A A A & ISI BERITA & FOOTER & TAGS */}
               <article className="lg:col-span-8 flex flex-col">
                 <div className="flex items-center justify-end gap-1.5 mb-3 text-gray-600 font-bold font-['Montserrat']">
-                  <span className="text-[10px] cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
-                  <span className="text-xs cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
-                  <span className="text-sm cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">A</span>
+                  <span className="text-[10px] cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
+                    A
+                  </span>
+                  <span className="text-xs cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
+                    A
+                  </span>
+                  <span className="text-sm cursor-pointer hover:text-red-600 transition-colors px-2 py-0.5 border border-gray-200 rounded bg-white">
+                    A
+                  </span>
                 </div>
 
+                {/* Isi Berita */}
                 <div className="prose max-w-none text-slate-800 text-sm sm:text-base leading-relaxed sm:leading-loose space-y-5 font-['Montserrat'] text-justify">
                   {article.contentHtml ? (
-                    <div dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
+                    <div
+                      dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+                    />
                   ) : (
                     article.paragraphs?.map((p, idx) => (
                       <p key={idx}>
                         {idx === 0 && (
-                          <span className="font-bold text-red-600">JURNALSUKABUMI.COM - </span>
+                          <span className="font-bold text-red-600">
+                            JURNALSUKABUMI.COM -{" "}
+                          </span>
                         )}
                         {p}
                       </p>
@@ -536,10 +589,12 @@ export default function BeritaDetailPage() {
                   )}
                 </div>
 
+                {/* Footer Berita */}
                 <div className="border-t border-gray-200 mt-6 pt-4 text-xs font-bold text-slate-900 font-['Montserrat']">
                   Reporter: Ilham Nugraha | Redaktur: Ujang Herlan
                 </div>
 
+                {/* Tags */}
                 <div className="bg-gray-100 border border-gray-200 p-3.5 mt-4 rounded-none">
                   <div className="flex flex-wrap items-center gap-2 text-xs font-bold font-['Montserrat']">
                     <span className="text-gray-500 font-normal">TAGS:</span>
@@ -557,6 +612,7 @@ export default function BeritaDetailPage() {
             </div>
           </div>
 
+          {/* SIDEBAR KANAN (lg:col-span-4) */}
           <div className="lg:col-span-4">
             <Sidebar />
           </div>
