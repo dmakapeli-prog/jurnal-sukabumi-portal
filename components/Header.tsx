@@ -2,23 +2,24 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "HOME", href: "/", active: true },
-  { label: "PERISTIWA", href: "#" },
-  { label: "POLITIK", href: "#" },
-  { label: "HUKUM", href: "#" },
-  { label: "NASIONAL", href: "#" },
-  { label: "PARLEMEN", href: "#" },
-  { label: "EKBIS", href: "#" },
-  { label: "WISATA", href: "#" },
-  { label: "RAGAM", href: "#" },
-  { label: "SOSOK", href: "#" },
-  { label: "OPINI", href: "#" },
-  { label: "GERBANG DESA", href: "#" },
-  { label: "PENDIDIKAN", href: "#" },
-  { label: "RELIGI", href: "#" },
-  { label: "VIDEO", href: "#" },
+  { label: "HOME", href: "/" },
+  { label: "PERISTIWA", href: "/kategori/peristiwa" },
+  { label: "POLITIK", href: "/kategori/politik" },
+  { label: "HUKUM", href: "/kategori/hukum" },
+  { label: "NASIONAL", href: "/kategori/nasional" },
+  { label: "PARLEMEN", href: "/kategori/parlemen" },
+  { label: "EKBIS", href: "/kategori/ekbis" },
+  { label: "WISATA", href: "/kategori/wisata" },
+  { label: "RAGAM", href: "/kategori/ragam" },
+  { label: "SOSOK", href: "/kategori/sosok" },
+  { label: "OPINI", href: "/kategori/opini" },
+  { label: "GERBANG DESA", href: "/kategori/gerbang-desa" },
+  { label: "PENDIDIKAN", href: "/kategori/pendidikan" },
+  { label: "RELIGI", href: "/kategori/religi" },
+  { label: "VIDEO", href: "/kategori/video" },
 ];
 
 const socialIcons = [
@@ -81,6 +82,7 @@ const socialIcons = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [scrapbookOpen, setScrapbookOpen] = useState(false);
@@ -406,19 +408,25 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           {/* Desktop Nav Items - Balanced & Centered across Container */}
           <div className="hidden md:flex items-center justify-center lg:justify-between flex-wrap lg:flex-nowrap py-1 gap-0.5 lg:gap-1">
-            {navLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`px-2.5 py-1.5 text-[11px] lg:text-xs font-black font-['Montserrat'] uppercase whitespace-nowrap transition-colors rounded hover:bg-red-800 ${
-                  item.active
-                    ? "bg-red-900 text-white shadow-inner font-black"
-                    : "text-white/95"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navLinks.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`px-2.5 py-1.5 text-[11px] lg:text-xs font-black font-['Montserrat'] uppercase whitespace-nowrap transition-colors rounded hover:bg-red-800 ${
+                    isActive
+                      ? "bg-red-900 text-white shadow-inner font-black"
+                      : "text-white/95"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile Collapsible Navigation Menu */}
@@ -431,20 +439,26 @@ export default function Header() {
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-1.5 pt-1">
-                {navLinks.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-3 py-2 text-xs font-bold font-['Montserrat'] rounded text-center transition-colors ${
-                      item.active
-                        ? "bg-red-800 text-white"
-                        : "bg-red-700/60 hover:bg-red-700"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {navLinks.map((item) => {
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname?.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`px-3 py-2 text-xs font-bold font-['Montserrat'] rounded text-center transition-colors ${
+                        isActive
+                          ? "bg-red-800 text-white"
+                          : "bg-red-700/60 hover:bg-red-700"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </div>
               <div className="flex items-center justify-center gap-2 pt-3 border-t border-red-500 mt-2">
                 {socialIcons.map((s) => (
