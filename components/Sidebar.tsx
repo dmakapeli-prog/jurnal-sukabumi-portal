@@ -6,6 +6,7 @@ import { LiveArticle } from "@/lib/wp";
 interface SidebarProps {
   popularArticles?: LiveArticle[];
   hideBanners?: boolean;
+  hidePopular?: boolean;
 }
 
 const topicTags = [
@@ -63,7 +64,11 @@ const fallbackPopular = [
   },
 ];
 
-export default function Sidebar({ popularArticles, hideBanners }: SidebarProps) {
+export default function Sidebar({
+  popularArticles,
+  hideBanners,
+  hidePopular,
+}: SidebarProps) {
   const displayArticles =
     popularArticles && popularArticles.length > 0
       ? popularArticles.slice(0, 5).map((item, idx) => ({
@@ -138,38 +143,40 @@ export default function Sidebar({ popularArticles, hideBanners }: SidebarProps) 
       </div>
 
       {/* 3. WIDGET "BERITA TERPOPULER" */}
-      <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col">
-        <h3 className="text-xl font-bold mb-4 relative pb-2 border-b border-gray-100 font-['Montserrat']">
-          <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
-        </h3>
+      {!hidePopular && (
+        <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col">
+          <h3 className="text-xl font-bold mb-4 relative pb-2 border-b border-gray-100 font-['Montserrat']">
+            <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
+          </h3>
 
-        <div className="flex flex-col">
-          {displayArticles.map((item) => (
-            <Link
-              key={item.id}
-              href={`/berita/${item.slug}`}
-              className="flex items-center gap-4 p-4 odd:bg-gray-50 even:bg-white group transition-colors"
-            >
-              {/* Angka Urutan: Buat sangat besar dan merah */}
-              <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center font-['Montserrat']">
-                {item.rank}
-              </div>
+          <div className="flex flex-col">
+            {displayArticles.map((item) => (
+              <Link
+                key={item.id}
+                href={`/berita/${item.slug}`}
+                className="flex items-center gap-4 p-4 odd:bg-gray-50 even:bg-white group transition-colors"
+              >
+                {/* Angka Urutan: Buat sangat besar dan merah */}
+                <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center font-['Montserrat']">
+                  {item.rank}
+                </div>
 
-              {/* Thumbnail: Kotak bersudut melengkung */}
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-16 h-16 rounded-md object-cover shrink-0"
-              />
+                {/* Thumbnail: Kotak bersudut melengkung */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-16 h-16 rounded-md object-cover shrink-0"
+                />
 
-              {/* Teks Berita: Hitam, tebal, jarak rapat */}
-              <h4 className="font-bold text-sm text-black leading-tight group-hover:text-red-600 transition-colors line-clamp-2 font-['Montserrat']">
-                {item.title}
-              </h4>
-            </Link>
-          ))}
+                {/* Teks Berita: Hitam, tebal, jarak rapat */}
+                <h4 className="font-bold text-sm text-black leading-tight group-hover:text-red-600 transition-colors line-clamp-2 font-['Montserrat']">
+                  {item.title}
+                </h4>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </aside>
   );
 }
