@@ -461,7 +461,7 @@ export default function BeritaDetailPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl md:text-4xl font-extrabold text-black leading-tight tracking-tight mb-6 font-['Montserrat']">
+            <h1 className="text-2xl md:text-3xl lg:text-[32px] font-extrabold text-black leading-tight tracking-tight mb-5 font-['Montserrat']">
               {article.title}
             </h1>
 

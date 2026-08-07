@@ -182,14 +182,14 @@ export default function Header() {
   return (
     <header className="w-full bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
       {/* BARIS 1: Logo (Kiri), Tanggal & Search + Scrapbook + DarkMode (Tengah), Social Media (Kanan) */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex flex-col md:flex-row items-center justify-between gap-3">
         {/* KIRI: Logo Resmi Jurnal Sukabumi & Tombol Akses Mobile */}
         <div className="flex items-center justify-between w-full md:w-auto">
           <Link href="/" className="flex items-center gap-2">
             <img
               src="https://jurnalsukabumi.com/wp-content/uploads/2025/11/cropped-Logo-jurnalsukabumi-2025-01.png"
               alt="Jurnal Sukabumi Logo Resmi"
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-10 md:h-11 w-auto object-contain"
             />
           </Link>
 
@@ -279,7 +279,7 @@ export default function Header() {
 
         {/* TENGAH: Tanggal, Form Pencarian, Scrapbook & Dark Mode (Desktop) */}
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-1 max-w-lg justify-center">
-          <div className="text-gray-600 text-xs font-semibold font-['Montserrat'] whitespace-nowrap hidden sm:flex items-center gap-1.5">
+          <div className="text-gray-600 text-xs font-semibold font-['Montserrat'] whitespace-nowrap hidden lg:flex items-center gap-1.5">
             <i className="far fa-calendar-alt text-red-600"></i>
             <span>{todayDate}</span>
           </div>
@@ -375,14 +375,14 @@ export default function Header() {
         </div>
 
         {/* KANAN: Ikon Sosial Media Warna Resmi App */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-1.5">
           {socialIcons.map((s) => (
             <a
               key={s.label}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-8 h-8 rounded-full bg-gray-100 ${s.hoverBg} flex items-center justify-center transition-all hover:scale-110 shadow-xs border border-gray-200/80`}
+              className={`w-7 h-7 rounded-full bg-gray-100 ${s.hoverBg} flex items-center justify-center transition-all hover:scale-110 shadow-xs border border-gray-200/80`}
               aria-label={s.label}
             >
               {s.type === "x-twitter" ? (
@@ -394,25 +394,25 @@ export default function Header() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               ) : (
-                <i className={`${s.icon} ${s.colorClass} text-sm`} />
+                <i className={`${s.icon} ${s.colorClass} text-xs`} />
               )}
             </a>
           ))}
         </div>
       </div>
 
-      {/* BARIS 2: Background Merah Full Width - Menu Navigasi Horizontal */}
-      <nav className="w-full bg-gradient-to-r from-red-600 to-black text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Desktop Nav Items */}
-          <div className="hidden md:flex items-center overflow-x-auto no-scrollbar py-1 gap-0.5">
+      {/* BARIS 2: Background Merah - Menu Navigasi Horizontal Simetris & Pas di Tengah */}
+      <nav className="w-full bg-[#cc0000] text-white shadow-sm border-t border-red-700">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Desktop Nav Items - Balanced & Centered across Container */}
+          <div className="hidden md:flex items-center justify-center lg:justify-between flex-wrap lg:flex-nowrap py-1 gap-0.5 lg:gap-1">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`px-3 py-2 text-xs font-black font-['Montserrat'] uppercase whitespace-nowrap transition-colors rounded hover:bg-red-700 ${
+                className={`px-2.5 py-1.5 text-[11px] lg:text-xs font-black font-['Montserrat'] uppercase whitespace-nowrap transition-colors rounded hover:bg-red-800 ${
                   item.active
-                    ? "bg-red-800 text-white shadow-inner"
+                    ? "bg-red-900 text-white shadow-inner font-black"
                     : "text-white/95"
                 }`}
               >
