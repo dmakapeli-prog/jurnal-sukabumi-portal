@@ -724,7 +724,7 @@ export default function BeritaDetailPage() {
 
           {/* SIDEBAR KANAN (lg:col-span-4) */}
           <div className="lg:col-span-4 flex flex-col gap-8 font-['Montserrat']">
-            {/* WIDGET BERITA TERPOPULER */}
+            {/* WIDGET BERITA TERPOPULER (6 Item) */}
             <div>
               <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
                 <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
@@ -744,6 +744,21 @@ export default function BeritaDetailPage() {
                   <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">3</div>
                   <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80" alt="Kades Ciemas" className="w-16 h-16 rounded-md shrink-0 object-cover" />
                   <h4 className="font-bold text-sm text-black leading-tight">Kades di Ciemas Berada di Satresnarkoba...</h4>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-white">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">4</div>
+                  <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&auto=format&fit=crop&q=80" alt="Alfamart Cibadak" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP...</h4>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-gray-50">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">5</div>
+                  <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80" alt="Kebakaran Ciptamulya" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM...</h4>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-white">
+                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">6</div>
+                  <img src="https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80" alt="Truk Terguling" className="w-16 h-16 rounded-md shrink-0 object-cover" />
+                  <h4 className="font-bold text-sm text-black leading-tight">Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban...</h4>
                 </div>
               </div>
             </div>
