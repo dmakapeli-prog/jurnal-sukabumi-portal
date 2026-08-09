@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import QuoteCard from "./QuoteCard";
 
 interface FontSizeReaderProps {
   contentHtml?: string;
@@ -68,17 +69,24 @@ export default function FontSizeReader({
         }`}
       >
         {contentHtml ? (
-          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <>
+            <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            <QuoteCard />
+          </>
         ) : (
           paragraphs?.map((p, idx) => (
-            <p key={idx}>
-              {idx === 0 && (
-                <span className="font-bold text-red-600">
-                  JURNALSUKABUMI.COM -{" "}
-                </span>
-              )}
-              {p}
-            </p>
+            <Fragment key={idx}>
+              <p>
+                {idx === 0 && (
+                  <span className="font-bold text-red-600">
+                    JURNALSUKABUMI.COM -{" "}
+                  </span>
+                )}
+                {p}
+              </p>
+              {/* Quote Card Diselipkan di Tengah-Tengah Paragraf (Setelah Paragraf Kedua) */}
+              {idx === 1 && <QuoteCard />}
+            </Fragment>
           ))
         )}
       </div>
