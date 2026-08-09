@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import BackToTop from "@/components/BackToTop";
 import FontSizeReader from "@/components/FontSizeReader";
 import ShareButtons from "@/components/ShareButtons";
+import AudioPlayer from "@/components/AudioPlayer";
 import { articles as localArticles } from "@/lib/articles";
 
 export const revalidate = 60;
@@ -415,6 +416,9 @@ export default async function BeritaDetailPage({
               {/* Sisi Kanan: Client Interactive Share Buttons */}
               <ShareButtons />
             </div>
+
+            {/* Audio Player Inline (Dengarkan Berita) */}
+            <AudioPlayer />
 
             {/* Gambar Utama (Optimized Next.js Image dengan Priority) */}
             <div className="relative w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4 rounded-none">
