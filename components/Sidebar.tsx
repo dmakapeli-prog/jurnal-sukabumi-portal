@@ -130,15 +130,18 @@ export default function Sidebar({
           </h3>
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {topicTags.map((tag) => (
-            <Link
-              key={tag}
-              href="#"
-              className="bg-gray-100 border border-gray-200 text-slate-800 text-[11px] font-bold font-['Montserrat'] px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors"
-            >
-              {tag}
-            </Link>
-          ))}
+          {topicTags.map((tag) => {
+            const tagSlug = tag.replace(/^#\s*/, "").toLowerCase().trim().replace(/\s+/g, "-");
+            return (
+              <Link
+                key={tag}
+                href={`/kategori/${tagSlug}`}
+                className="bg-gray-100 border border-gray-200 text-slate-800 text-[11px] font-bold font-['Montserrat'] px-2.5 py-1 rounded-none hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors"
+              >
+                {tag}
+              </Link>
+            );
+          })}
         </div>
       </div>
 

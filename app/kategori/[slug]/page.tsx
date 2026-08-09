@@ -17,15 +17,49 @@ interface CategoryPageProps {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   const cleanSlug = decodeURIComponent(slug || "").toLowerCase().trim();
-  const categoryTitle = cleanSlug.replace(/-/g, " ").toUpperCase();
+  const searchCategory = cleanSlug.replace(/-/g, " ");
+  const categoryTitle = searchCategory.toUpperCase();
 
   // Fetch live articles or fallback to local
   const liveArticles = await fetchLiveArticles();
   
-  // Filter or generate articles for category
-  const matchingArticles = liveArticles.filter(
-    (a) => a.category?.toLowerCase().includes(cleanSlug) || cleanSlug.includes(a.category?.toLowerCase() || "")
+  // Filter live articles by category
+  const matchingLive = liveArticles.filter(
+    (a) =>
+      a.category?.toLowerCase().includes(searchCategory) ||
+      searchCategory.includes(a.category?.toLowerCase() || "") ||
+      a.category?.toLowerCase().includes(cleanSlug)
   );
+
+  // Filter local articles by category
+  const matchingLocal = localArticles
+    .filter(
+      (a) =>
+        a.category.toLowerCase().includes(searchCategory) ||
+        searchCategory.includes(a.category.toLowerCase()) ||
+        a.category.toLowerCase().includes(cleanSlug)
+    )
+    .map((item, idx) => ({
+      id: idx + 300,
+      slug: item.slug,
+      link: `/berita/${item.slug}`,
+      title: item.title,
+      category: item.category.toUpperCase(),
+      date: item.date,
+      image: item.image,
+      excerpt: item.content[0] || "Berita terbaru dan terpercaya seputar Sukabumi dan sekitarnya.",
+    }));
+
+  // Combine matching articles avoiding duplicates by slug
+  const combinedMap = new Map<string, LiveArticle>();
+  matchingLive.forEach((item) => combinedMap.set(item.slug, item));
+  matchingLocal.forEach((item) => {
+    if (!combinedMap.has(item.slug)) {
+      combinedMap.set(item.slug, item);
+    }
+  });
+
+  const matchingArticles = Array.from(combinedMap.values());
 
   const displayList: LiveArticle[] =
     matchingArticles.length >= 3
@@ -33,14 +67,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       : [
           ...matchingArticles,
           ...localArticles.map((item, idx) => ({
-            id: idx + 200,
-            slug: item.slug,
+            id: idx + 500,
+            slug: `${cleanSlug}-${item.slug}`,
             link: `/berita/${item.slug}`,
-            title: item.title,
+            title: `[${categoryTitle}] ${item.title}`,
             category: categoryTitle,
             date: item.date,
             image: item.image,
-            excerpt: item.content[0] || "Berita terbaru dan terpercaya seputar Sukabumi dan sekitarnya.",
+            excerpt: item.content[0] || `Berita terbaru kategori ${categoryTitle} seputar Sukabumi dan sekitarnya.`,
           })),
         ].slice(0, 7);
 

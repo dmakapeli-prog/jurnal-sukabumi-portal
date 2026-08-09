@@ -291,9 +291,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
 
             {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
             <div className="w-2/3 flex flex-col justify-between flex-1 py-0.5 gap-1">
-              <span className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide">
+              <Link
+                href={`/kategori/${(item.category || "berita").toLowerCase().trim().replace(/\s+/g, "-")}`}
+                className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide hover:underline inline-block w-fit"
+              >
                 {item.category}
-              </span>
+              </Link>
               <Link href={`/berita/${item.slug || item.id}`}>
                 <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
                   {item.title}
@@ -315,9 +318,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
       {/* 3. SISIPKAN BLOK GELAP DENGAN LABEL MERAH OVERLAPPING (-TOP-4 LEFT-4) DAN CAROUSEL SLIDER */}
       <div className="relative mt-8 mb-6 p-4 sm:p-5 bg-slate-900 rounded-none border border-slate-800">
         {/* Label div berwarna merah menonjol ke luar atas */}
-        <div className="absolute -top-4 left-4 bg-red-600 text-white font-black text-xs px-3 py-1.5 uppercase tracking-wider rounded-none z-10 shadow-sm">
+        <Link
+          href="/kategori/peristiwa"
+          className="absolute -top-4 left-4 bg-red-600 text-white font-black text-xs px-3 py-1.5 uppercase tracking-wider rounded-none z-10 shadow-sm hover:bg-red-700 transition-colors"
+        >
           Peristiwa
-        </div>
+        </Link>
 
         {/* Tombol Navigasi Kiri & Kanan */}
         <button
@@ -409,9 +415,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
                   )}
                 </button>
               </div>
-              <span className="text-red-600 font-bold text-xs uppercase mb-1 font-['Montserrat']">
+              <Link
+                href={`/kategori/${(item.category || "berita").toLowerCase().trim().replace(/\s+/g, "-")}`}
+                className="text-red-600 font-bold text-xs uppercase mb-1 font-['Montserrat'] hover:underline inline-block w-fit"
+              >
                 {item.category}
-              </span>
+              </Link>
               <Link href={`/berita/${item.slug || item.id}`}>
                 <h4 className="text-white font-semibold text-sm leading-tight font-['Montserrat'] group-hover:text-red-400 transition-colors line-clamp-2">
                   {item.title}
@@ -474,9 +483,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
 
               {/* Teks judul, kategori (warna merah), dan tanggal di kanan (w-2/3) */}
               <div className="w-2/3 flex flex-col justify-between flex-1 py-0.5 gap-1">
-                <span className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide">
+                <Link
+                  href={`/kategori/${(item.category || "berita").toLowerCase().trim().replace(/\s+/g, "-")}`}
+                  className="text-red-600 text-xs font-black font-['Montserrat'] uppercase tracking-wide hover:underline inline-block w-fit"
+                >
                   {item.category}
-                </span>
+                </Link>
                 <Link href={`/berita/${item.slug || item.id}`}>
                   <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
                     {item.title}

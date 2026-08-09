@@ -4,22 +4,29 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const categoryLabels = [
+  "PERISTIWA",
+  "POLITIK",
+  "HUKUM",
+  "NASIONAL",
+  "PARLEMEN",
+  "EKBIS",
+  "WISATA",
+  "RAGAM",
+  "SOSOK",
+  "OPINI",
+  "GERBANG DESA",
+  "PENDIDIKAN",
+  "RELIGI",
+  "VIDEO",
+];
+
 const navLinks = [
   { label: "HOME", href: "/" },
-  { label: "PERISTIWA", href: "/kategori/peristiwa" },
-  { label: "POLITIK", href: "/kategori/politik" },
-  { label: "HUKUM", href: "/kategori/hukum" },
-  { label: "NASIONAL", href: "/kategori/nasional" },
-  { label: "PARLEMEN", href: "/kategori/parlemen" },
-  { label: "EKBIS", href: "/kategori/ekbis" },
-  { label: "WISATA", href: "/kategori/wisata" },
-  { label: "RAGAM", href: "/kategori/ragam" },
-  { label: "SOSOK", href: "/kategori/sosok" },
-  { label: "OPINI", href: "/kategori/opini" },
-  { label: "GERBANG DESA", href: "/kategori/gerbang-desa" },
-  { label: "PENDIDIKAN", href: "/kategori/pendidikan" },
-  { label: "RELIGI", href: "/kategori/religi" },
-  { label: "VIDEO", href: "/kategori/video" },
+  ...categoryLabels.map((cat) => ({
+    label: cat,
+    href: `/kategori/${cat.toLowerCase().trim().replace(/\s+/g, "-")}`,
+  })),
 ];
 
 const socialIcons = [

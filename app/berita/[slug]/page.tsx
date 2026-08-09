@@ -469,7 +469,10 @@ export default function BeritaDetailPage() {
                 Home
               </Link>
               <span className="text-gray-400 font-normal">/</span>
-              <Link href="#" className="text-blue-700 uppercase hover:underline">
+              <Link
+                href={`/kategori/${(article.category || "berita").toLowerCase().trim().replace(/\s+/g, "-")}`}
+                className="text-blue-700 uppercase hover:underline font-bold"
+              >
                 {article.category}
               </Link>
             </div>

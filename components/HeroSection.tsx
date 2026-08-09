@@ -92,9 +92,12 @@ export default function HeroSection({ articles }: HeroSectionProps) {
 
         {/* Judul di dalam gambar (posisi bawah) dengan background gradient hitam transparan */}
         <div className="relative z-10 p-4 sm:p-6 md:p-8 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex flex-col gap-1.5 transition-all duration-500">
-          <span className="text-red-400 text-xs font-bold font-['Montserrat'] uppercase tracking-wide">
+          <Link
+            href={`/kategori/${(mainHeadline.category || "headline").toLowerCase().trim().replace(/\s+/g, "-")}`}
+            className="text-red-400 text-xs font-bold font-['Montserrat'] uppercase tracking-wide hover:underline inline-block w-fit z-30"
+          >
             {mainHeadline.category || "HEADLINE"}
-          </span>
+          </Link>
           <Link href={`/berita/${mainHeadline.slug || mainHeadline.id}`}>
             <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold font-['Montserrat'] leading-tight hover:text-red-400 transition-colors max-w-4xl drop-shadow">
               {mainHeadline.title}
