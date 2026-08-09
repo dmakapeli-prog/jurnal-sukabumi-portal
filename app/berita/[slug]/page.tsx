@@ -306,11 +306,14 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
   },
 };
 
-function resolveArticle(slugParam: string): ArticleDetail {
+import ArticleSkeleton from "./loading";
+
+function resolveArticle(slugParam: string): ArticleDetail | null {
   const cleanSlug = decodeURIComponent(slugParam || "").toLowerCase().trim();
+  if (!cleanSlug) return null;
 
   // 1. Direct match in map
-  if (cleanSlug && knownArticlesMap[cleanSlug]) {
+  if (knownArticlesMap[cleanSlug]) {
     return knownArticlesMap[cleanSlug];
   }
 
@@ -389,7 +392,8 @@ export default function BeritaDetailPage() {
   const rawSlug = params?.slug;
   const slugParam = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
 
-  const [article, setArticle] = useState<ArticleDetail>(() => resolveArticle(slugParam));
+  const [article, setArticle] = useState<ArticleDetail | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fontSize, setFontSize] = useState<"small" | "medium" | "large">("medium");
   const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -407,8 +411,21 @@ export default function BeritaDetailPage() {
   }, []);
 
   useEffect(() => {
-    if (!slugParam) return;
-    setArticle(resolveArticle(slugParam));
+    if (!slugParam) {
+      setArticle(null);
+      setIsLoading(true);
+      return;
+    }
+
+    setIsLoading(true);
+    let isCancelled = false;
+
+    const localArticle = resolveArticle(slugParam);
+    if (localArticle) {
+      setArticle(localArticle);
+    } else {
+      setArticle(null);
+    }
 
     async function fetchWpPost() {
       try {
@@ -420,7 +437,7 @@ export default function BeritaDetailPage() {
         }
 
         const res = await fetch(apiUrl);
-        if (res.ok) {
+        if (res.ok && !isCancelled) {
           const data = await res.json();
           const item = Array.isArray(data) ? data[0] : data;
           if (item && item.title) {
@@ -447,11 +464,27 @@ export default function BeritaDetailPage() {
         }
       } catch (e) {
         // Silently use resolved local article
+      } finally {
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
       }
     }
 
-    fetchWpPost();
+    fetchWpPost().then(() => {
+      if (!isCancelled) {
+        setIsLoading(false);
+      }
+    });
+
+    return () => {
+      isCancelled = true;
+    };
   }, [slugParam]);
+
+  if (isLoading || !article) {
+    return <ArticleSkeleton />;
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-['Montserrat',sans-serif]">
