@@ -7,6 +7,7 @@ import BackToTop from "@/components/BackToTop";
 import FontSizeReader from "@/components/FontSizeReader";
 import ShareButtons from "@/components/ShareButtons";
 import AudioPlayer from "@/components/AudioPlayer";
+import SmartTLDR from "@/components/SmartTLDR";
 import { articles as localArticles } from "@/lib/articles";
 
 export const revalidate = 60;
@@ -419,6 +420,9 @@ export default async function BeritaDetailPage({
 
             {/* Audio Player Inline (Dengarkan Berita) */}
             <AudioPlayer />
+
+            {/* Smart TL;DR (Ringkasan Cepat) */}
+            <SmartTLDR />
 
             {/* Gambar Utama (Optimized Next.js Image dengan Priority) */}
             <div className="relative w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4 rounded-none">
