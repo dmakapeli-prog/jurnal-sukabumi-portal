@@ -523,9 +523,83 @@ export default async function BeritaDetailPage({
             </div>
           </div>
 
-          {/* SIDEBAR KANAN (lg:col-span-4) - STICKY */}
-          <div className="lg:col-span-4 flex flex-col gap-8 font-['Montserrat'] sticky top-8 self-start">
-            <Sidebar />
+          {/* KOLOM KANAN (SIDEBAR) */}
+          <div className="lg:col-span-4 sticky top-8 self-start font-['Montserrat']">
+            {/* BLOK BERITA TERPOPULER HARUS BERADA PALING ATAS DI SINI */}
+            <div className="bg-white border border-gray-200 p-4 rounded-none flex flex-col mb-8">
+              <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2 font-['Montserrat']">
+                <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
+              </h3>
+              <div className="flex flex-col">
+                {[
+                  {
+                    id: 1,
+                    slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
+                    title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
+                    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg",
+                  },
+                  {
+                    id: 2,
+                    slug: "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas",
+                    title: "Oknum Kades Tamanjaya Positif Sabu, Pemkab Sukabumi Siapkan Sanksi Tegas",
+                    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+                  },
+                  {
+                    id: 3,
+                    slug: "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi",
+                    title: "Dugaan Hubungan Terlarang Oknum Guru dan Siswi SMA di Sukabumi",
+                    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
+                  },
+                  {
+                    id: 4,
+                    slug: "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
+                    title: "Rumah Dikepung Massa, Dugaan Pencabulan Oknum Guru Ngaji Gegerkan Warga",
+                    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+                  },
+                  {
+                    id: 5,
+                    slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
+                    title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
+                    image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-22-at-13.42.46-e1782111035175.jpeg",
+                  },
+                  {
+                    id: 6,
+                    slug: "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba",
+                    title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
+                    image: "https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg",
+                  },
+                ].map((item, idx) => (
+                  <Link
+                    key={item.id}
+                    href={`/berita/${item.slug}`}
+                    prefetch={true}
+                    className="flex items-center gap-4 p-4 odd:bg-gray-50 even:bg-white group transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    {/* Angka Urutan: Buat sangat besar dan merah */}
+                    <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center font-['Montserrat']">
+                      {idx + 1}
+                    </div>
+
+                    {/* Thumbnail: Kotak bersudut melengkung */}
+                    <div className="w-16 h-16 rounded-md overflow-hidden shrink-0 relative bg-gray-100 border border-gray-200">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        loading="lazy"
+                        sizes="64px"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+
+                    {/* Teks Berita: Hitam, tebal, jarak rapat */}
+                    <h4 className="font-bold text-sm text-black leading-tight group-hover:text-red-600 transition-colors line-clamp-2 font-['Montserrat']">
+                      {item.title}
+                    </h4>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
