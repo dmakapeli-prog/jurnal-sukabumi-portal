@@ -525,7 +525,7 @@ export default async function BeritaDetailPage({
 
           {/* KOLOM KANAN (SIDEBAR) */}
           <div className="lg:col-span-4 sticky top-8 self-start font-['Montserrat']">
-            <Sidebar />
+            <Sidebar variant="article" />
           </div>
         </div>
 
