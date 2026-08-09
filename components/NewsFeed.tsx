@@ -301,7 +301,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
               >
                 {item.category}
               </Link>
-              <Link href={`/berita/${item.slug || item.id}`}>
+              <Link href={`/berita/${item.slug || item.id}`} prefetch={true}>
                 <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
                   {item.title}
                 </h3>
@@ -428,7 +428,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
               >
                 {item.category}
               </Link>
-              <Link href={`/berita/${item.slug || item.id}`}>
+              <Link href={`/berita/${item.slug || item.id}`} prefetch={true}>
                 <h4 className="text-white font-semibold text-sm leading-tight font-['Montserrat'] group-hover:text-red-400 transition-colors line-clamp-2">
                   {item.title}
                 </h4>
@@ -499,7 +499,7 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
                 >
                   {item.category}
                 </Link>
-                <Link href={`/berita/${item.slug || item.id}`}>
+                <Link href={`/berita/${item.slug || item.id}`} prefetch={true}>
                   <h3 className="text-slate-900 group-hover:text-red-600 text-sm sm:text-base font-bold font-['Montserrat'] leading-snug transition-colors line-clamp-2 sm:line-clamp-3">
                     {item.title}
                   </h3>

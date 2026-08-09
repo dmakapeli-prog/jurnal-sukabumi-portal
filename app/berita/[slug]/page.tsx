@@ -189,6 +189,27 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
   },
 };
 
+export async function generateStaticParams() {
+  const staticSlugs = [
+    "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba",
+    "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas",
+    "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
+    "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi",
+    "rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji",
+    "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
+    "52-korban-kebakaran-ciptamulya-diundang-kdm-ke-lembur-pakuan",
+    "kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman",
+    "warga-desa-cipanengah-galang-bantuan-korban-kebakaran-ciptamulya",
+    "truk-kayu-terguling-di-cibangban-sukabumi",
+    "desa-wisata-tegalega-disiapkan-jadi-magnet-baru-pariwisata",
+    "penyu-cari-lokasi-ideal-gadobangkong-hingga-citepus-dibidik",
+    "8-tahun-padjadjaran-anyar-menjaga-warisan-karuhun",
+    ...localArticles.map((a) => a.slug),
+  ];
+
+  return staticSlugs.map((slug) => ({ slug }));
+}
+
 async function getArticleDetail(slugParam: string): Promise<ArticleDetail> {
   const cleanSlug = decodeURIComponent(slugParam || "").toLowerCase().trim();
 
@@ -222,7 +243,7 @@ async function getArticleDetail(slugParam: string): Promise<ArticleDetail> {
     };
   }
 
-  // 4. Fetch Live WP Post on Server
+  // 4. Fetch Live WP Post on Server with Aggressive Cache
   try {
     let apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(
       cleanSlug
@@ -231,7 +252,7 @@ async function getArticleDetail(slugParam: string): Promise<ArticleDetail> {
       apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts/${cleanSlug}?_embed`;
     }
 
-    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+    const res = await fetch(apiUrl, { cache: "force-cache" });
     if (res.ok) {
       const data = await res.json();
       const item = Array.isArray(data) ? data[0] : data;
@@ -419,6 +440,7 @@ export default async function BeritaDetailPage({
                     <div className="py-3 border-b border-gray-200">
                       <Link
                         href="/berita/oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba"
+                        prefetch={true}
                         className="text-gray-600 font-bold text-sm leading-snug hover:text-red-600 transition-colors"
                       >
                         DPRD Sukabumi Dorong Pembentukan Perda Pencegahan Narkoba di Tingkat Desa...
@@ -427,6 +449,7 @@ export default async function BeritaDetailPage({
                     <div className="py-3 border-b border-gray-200">
                       <Link
                         href="/berita/oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas"
+                        prefetch={true}
                         className="text-gray-600 font-bold text-sm leading-snug hover:text-red-600 transition-colors"
                       >
                         Pemkab Sukabumi Siapkan Pj Kades Gantikan Oknum Kades Tamanjaya...
@@ -489,7 +512,7 @@ export default async function BeritaDetailPage({
                     >
                       {item.category}
                     </Link>
-                    <Link href={`/berita/${item.slug}`}>
+                    <Link href={`/berita/${item.slug}`} prefetch={true}>
                       <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
                         {item.title}
                       </h4>

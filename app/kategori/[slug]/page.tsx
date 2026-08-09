@@ -125,6 +125,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     {/* Thumbnail Gambar di Sebelah Kiri */}
                     <Link
                       href={`/berita/${articleSlug}`}
+                      prefetch={true}
                       className="w-full sm:w-56 h-40 sm:h-36 rounded-lg overflow-hidden shrink-0 bg-gray-100 border border-gray-200 block relative"
                     >
                       <Image
@@ -146,7 +147,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         </span>
 
                         {/* Judul Berita */}
-                        <Link href={`/berita/${articleSlug}`}>
+                        <Link href={`/berita/${articleSlug}`} prefetch={true}>
                           <h2 className="text-base sm:text-lg font-bold text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-2 mt-1 mb-2 font-['Montserrat']">
                             {article.title}
                           </h2>

@@ -96,7 +96,7 @@ export default function ParlemenSection() {
                 <span className="bg-red-600 text-white text-[10px] font-extrabold font-['Montserrat'] uppercase px-2 py-0.5 rounded w-fit">
                   PARLEMEN
                 </span>
-                <Link href="#">
+                <Link href="/kategori/parlemen" prefetch={true}>
                   <h3 className="text-white text-xs sm:text-sm font-bold font-['Montserrat'] leading-snug group-hover:text-red-400 transition-colors line-clamp-3">
                     {card.title}
                   </h3>

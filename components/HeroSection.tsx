@@ -102,7 +102,7 @@ export default function HeroSection({ articles }: HeroSectionProps) {
           >
             {mainHeadline.category || "HEADLINE"}
           </Link>
-          <Link href={`/berita/${mainHeadline.slug || mainHeadline.id}`}>
+          <Link href={`/berita/${mainHeadline.slug || mainHeadline.id}`} prefetch={true}>
             <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold font-['Montserrat'] leading-tight hover:text-red-400 transition-colors max-w-4xl drop-shadow">
               {mainHeadline.title}
             </h1>

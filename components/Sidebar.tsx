@@ -161,6 +161,7 @@ export default function Sidebar({
               <Link
                 key={item.id}
                 href={`/berita/${item.slug}`}
+                prefetch={true}
                 className="flex items-center gap-4 p-4 odd:bg-gray-50 even:bg-white group transition-colors"
               >
                 {/* Angka Urutan: Buat sangat besar dan merah */}
