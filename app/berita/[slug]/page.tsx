@@ -1,12 +1,14 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
+import BackToTop from "@/components/BackToTop";
+import FontSizeReader from "@/components/FontSizeReader";
+import ShareButtons from "@/components/ShareButtons";
 import { articles as localArticles } from "@/lib/articles";
+
+export const revalidate = 60;
 
 interface ArticleDetail {
   title: string;
@@ -185,153 +187,24 @@ const knownArticlesMap: Record<string, ArticleDetail> = {
       "Asosiasi Pedagang Pasar Cibadak Dukung Penertiban Minimarket",
     ],
   },
-  "52-korban-kebakaran-ciptamulya-diundang-kdm-ke-lembur-pakuan": {
-    title: "Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan",
-    category: "HEADLINE",
-    date: "Jumat, 1 Agustus 2026 - 10:22 WIB",
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Sebanyak 52 warga korban kebakaran Kampung Adat Ciptamulya, Kecamatan Cikakak, Kabupaten Sukabumi dijadwalkan berangkat besok menuju Lembur Pakuan. Kunjungan ini atas undangan langsung dari Komunitas Dayeuh Mangraga (KDM).",
-      "Ketua Paguyuban Kampung Adat Ciptamulya mengungkapkan rasa syukurnya atas undangan tersebut. Undangan ini menjadi obat pelipur lara bagi warga yang rumahnya terbakar.",
-      "Kebakaran yang melanda Kampung Adat Ciptamulya menghanguskan belasan rumah adat dan bangunan pendukung. Peristiwa tersebut meninggalkan duka mendalam bagi komunitas adat setempat.",
-      "Program kunjungan ini diharapkan dapat memberikan semangat baru bagi para korban sekaligus mempererat tali silaturahmi antarkomunitas adat."
-    ],
-    tags: ["#Ciptamulya", "#Kebakaran", "#KDM", "#Sukabumi"],
-    relatedNews: [
-      "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
-      "Warga Desa Cipanengah Galang Bantuan untuk Korban Kebakaran Ciptamulya",
-    ],
-  },
-  "kebutuhan-dasar-penyintas-ciptamulya-dipastikan-aman": {
-    title: "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
-    category: "NASIONAL",
-    date: "Jumat, 1 Agustus 2026 - 08:30 WIB",
-    image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Pemerintah Kabupaten Sukabumi melalui Dinas Sosial memastikan bahwa kebutuhan dasar para penyintas kebakaran Kampung Adat Ciptamulya dalam kondisi aman dan terkendali.",
-      "Pemerintah mendistribusikan bantuan berupa bahan makanan pokok, selimut, pakaian layak pakai, serta kebutuhan sanitasi darurat.",
-      "Tim medis Dinas Kesehatan secara rutin melakukan pemeriksaan kesehatan terhadap para pengungsi, terutama anak-anak dan lansia.",
-      "Proses rehabilitasi dan rekonstruksi rumah-rumah adat yang terbakar sudah mulai dirancang bekerja sama dengan balai pelestarian cagar budaya."
-    ],
-    tags: ["#Ciptamulya", "#Dinsos", "#Penyintas", "#Sukabumi"],
-    relatedNews: [
-      "52 Korban Kebakaran Ciptamulya Diundang KDM ke Lembur Pakuan",
-      "Warga Desa Cipanengah Galang Bantuan untuk Ciptamulya",
-    ],
-  },
-  "warga-desa-cipanengah-galang-bantuan-korban-kebakaran-ciptamulya": {
-    title: "Warga Desa Cipanengah Galang Bantuan untuk Korban Kebakaran Kampung Adat Ciptamulya",
-    category: "GERBANG DESA",
-    date: "Sabtu, 1 Agustus 2026 - 13:41 WIB",
-    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Warga Desa Cipanengah, Kecamatan Surade, Kabupaten Sukabumi menunjukkan solidaritas tinggi dengan menggalang bantuan untuk para korban kebakaran Kampung Adat Ciptamulya.",
-      "Inisiatif ini muncul secara spontan dari warga desa. Bantuan yang terkumpul berupa beras, makanan siap saji, pakaian layak pakai, dan donasi uang tunai.",
-      "Bantuan tersebut disalurkan langsung ke posko pengungsian Ciptamulya oleh perwakilan pemerintah desa dan tokoh pemuda.",
-      "Gerakan solidaritas ini menjadi bukti tingginya nilai kebersamaan dan gotong royong warga Sukabumi."
-    ],
-    tags: ["#Cipanengah", "#Ciptamulya", "#GotongRoyong", "#GerbangDesa"],
-    relatedNews: [
-      "Kebutuhan Dasar Penyintas Ciptamulya Dipastikan Aman",
-      "52 Korban Kebakaran Ciptamulya Diundang KDM",
-    ],
-  },
-  "truk-kayu-terguling-di-cibangban-sukabumi": {
-    title: "Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban Sukabumi",
-    category: "PERISTIWA",
-    date: "Sabtu, 1 Agustus 2026 - 13:37 WIB",
-    image: "https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Sebuah truk pengangkut kayu mengalami kecelakaan tunggal di kawasan tanjakan Cibangban, Kecamatan Cibadak, Kabupaten Sukabumi. Truk terguling akibat tidak kuat menanjak di jalan yang curam.",
-      "Truk yang mengangkut kayu gelondong tersebut mundur saat menanjak dan akhirnya terguling menutup sebagian bahu jalan.",
-      "Sopir truk berhasil menyelamatkan diri dan hanya mengalami luka ringan. Namun arus lalu lintas di jalur tersebut sempat mengalami kemacetan.",
-      "Petugas gabungan dan alat berat diterjunkan ke lokasi untuk mengevakuasi badan truk dan muatan kayu dari badan jalan."
-    ],
-    tags: ["#Cibangban", "#Kecelakaan", "#TrukTerguling", "#Sukabumi"],
-    relatedNews: [
-      "Satlantas Evakuasi Truk Kayu Terguling di Cibangban",
-      "Jalur Cibadak Kembali Normal Setelah Evakuasi",
-    ],
-  },
-  "desa-wisata-tegalega-disiapkan-jadi-magnet-baru-pariwisata": {
-    title: "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
-    category: "WISATA",
-    date: "Kamis, 31 Juli 2026 - 15:20 WIB",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Pemerintah Kabupaten Sukabumi melalui Dinas Pariwisata sedang menyiapkan Desa Tegalega, Kecamatan Ciracap, sebagai destinasi wisata baru yang menyajikan keindahan alam pesisir dan terasering persawahan.",
-      "Desa yang terletak di kawasan selatan Sukabumi ini memiliki lanskap perbukitan eksotis serta pantai tersembunyi yang belum terjamah.",
-      "Pemerintah daerah mengalokasikan anggaran infrastruktur untuk penataan jalan akses, titik pandang swafoto, serta fasilitas umum tempat wisata.",
-      "Pelaku pariwisata lokal menyambut optimistis pengembangan desa wisata ini dalam menggerakkan ekonomi masyarakat desa."
-    ],
-    tags: ["#Tegalega", "#WisataSukabumi", "#Ciracap", "#DesaWisata"],
-    relatedNews: [
-      "Dispar Sukabumi Alokasikan Anggaran Penataan Desa Wisata",
-      "PENYU Cari Lokasi Ideal di Pesisir Selatan",
-    ],
-  },
-  "penyu-cari-lokasi-ideal-gadobangkong-hingga-citepus-dibidik": {
-    title: "PENYU Cari Lokasi Ideal, Gadobangkong hingga Citepus Dibidik",
-    category: "WISATA",
-    date: "Rabu, 30 Juli 2026 - 11:05 WIB",
-    image: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Tim konsentrasi pelestarian penyu melakukan survei lokasi penangkaran ideal di sepanjang garis pantai Kabupaten Sukabumi. Pantai Gadobangkong dan Citepus menjadi kandidat utama.",
-      "Pemilihan lokasi memperhatikan tekstur pasir pantai, kondisi gelombang laut, serta tingkat keamanan lingkungan dari pemukiman.",
-      "Program konservasi ini bertujuan melindungi habitat penyu hijau yang terancam punah dari maraknya perburuan liar.",
-      "Hasil studi kelayakan lapangan akan diserahkan kepada Pemkab Sukabumi untuk penetapan zonasi lindung pantai."
-    ],
-    tags: ["#PENYU", "#Citepus", "#Gadobangkong", "#Konservasi", "#Wisata"],
-    relatedNews: [
-      "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
-      "8 Tahun Padjadjaran Anyar Menjaga Warisan Karuhun",
-    ],
-  },
-  "8-tahun-padjadjaran-anyar-menjaga-warisan-karuhun": {
-    title: "8 Tahun Padjadjaran Anyar, Menjaga Warisan Karuhun",
-    category: "WISATA",
-    date: "Selasa, 29 Juli 2026 - 14:30 WIB",
-    image: "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?w=800&auto=format&fit=crop&q=80",
-    paragraphs: [
-      "Komunitas Padjadjaran Anyar merayakan milangkala ke-8 dengan mempergelarkan kebudayaan tradisional Sunda di Kabupaten Sukabumi.",
-      "Acara diisi dengan pergelaran seni wayang golek, pencak silat, seni tari jaipong, serta ritual syukuran Seren Taun.",
-      "Penggiat budaya menegaskan pentingnya konsistensi generasi muda dalam merawat warisan adat leluhur di tengah arus modernisasi.",
-      "Dinas Pendidikan dan Kebudayaan memberikan apresiasi atas peran aktif komunitas dalam melestarikan seni kebudayaan daerah."
-    ],
-    tags: ["#PadjadjaranAnyar", "#BudayaSunda", "#Sukabumi", "#SerenTaun"],
-    relatedNews: [
-      "Desa Wisata Tegalega Disiapkan Jadi Magnet Baru Pariwisata",
-      "PENYU Cari Lokasi Ideal di Pesisir Selatan",
-    ],
-  },
 };
 
-import ArticleSkeleton from "./loading";
-
-function resolveArticle(slugParam: string): ArticleDetail | null {
+async function getArticleDetail(slugParam: string): Promise<ArticleDetail> {
   const cleanSlug = decodeURIComponent(slugParam || "").toLowerCase().trim();
-  if (!cleanSlug) return null;
 
   // 1. Direct match in map
-  if (knownArticlesMap[cleanSlug]) {
+  if (cleanSlug && knownArticlesMap[cleanSlug]) {
     return knownArticlesMap[cleanSlug];
   }
 
-  // 2. Substring / Partial match
+  // 2. Substring match
   for (const [key, article] of Object.entries(knownArticlesMap)) {
     if (cleanSlug.includes(key) || key.includes(cleanSlug)) {
       return article;
     }
   }
 
-  // 3. ID / Fallback numeric match
-  if (cleanSlug === "1" || cleanSlug === "101") return knownArticlesMap["sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar"];
-  if (cleanSlug === "2" || cleanSlug === "102") return knownArticlesMap["oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas"];
-  if (cleanSlug === "3" || cleanSlug === "103") return knownArticlesMap["dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi"];
-  if (cleanSlug === "4" || cleanSlug === "104") return knownArticlesMap["rumah-dikepung-massa-dugaan-pencabulan-oknum-guru-ngaji"];
-  if (cleanSlug === "5" || cleanSlug === "105") return knownArticlesMap["belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp"];
-
-  // 4. Match localArticles from lib/articles.ts
+  // 3. Match localArticles
   const localMatch = localArticles.find(
     (a) => a.slug.toLowerCase() === cleanSlug || cleanSlug.includes(a.slug.toLowerCase())
   );
@@ -349,7 +222,46 @@ function resolveArticle(slugParam: string): ArticleDetail | null {
     };
   }
 
-  // 5. Dynamic Title & Image Generator based on slug string keywords
+  // 4. Fetch Live WP Post on Server
+  try {
+    let apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(
+      cleanSlug
+    )}&_embed`;
+    if (/^\d+$/.test(cleanSlug)) {
+      apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts/${cleanSlug}?_embed`;
+    }
+
+    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const data = await res.json();
+      const item = Array.isArray(data) ? data[0] : data;
+      if (item && item.title) {
+        let catName = "BERITA";
+        if (item._embedded?.["wp:term"]?.[0]?.length > 0) {
+          catName = item._embedded["wp:term"][0][0].name.toUpperCase();
+        }
+        let imgUrl = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
+        const media = item._embedded?.["wp:featuredmedia"]?.[0];
+        if (media?.source_url) {
+          imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.source_url)}`;
+        }
+
+        return {
+          title: decodeHTMLEntities(item.title.rendered || ""),
+          category: catName,
+          date: formatIndonesianDate(item.date),
+          image: imgUrl,
+          contentHtml: item.content?.rendered || "",
+          tags: ["#Sukabumi", `#${catName}`, "#BeritaTerkini"],
+          relatedNews: defaultRelatedNews,
+        };
+      }
+    }
+  } catch (e) {
+    // Fallback below
+  }
+
+  // 5. Dynamic Title & Image Generator based on slug
   const rawTitle = cleanSlug
     ? cleanSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Berita Utama Sukabumi";
@@ -387,115 +299,63 @@ function resolveArticle(slugParam: string): ArticleDetail | null {
   };
 }
 
-export default function BeritaDetailPage() {
-  const params = useParams();
-  const rawSlug = params?.slug;
-  const slugParam = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "";
+export default async function BeritaDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = await getArticleDetail(slug);
+  const categorySlug = (article.category || "berita").toLowerCase().trim().replace(/\s+/g, "-");
 
-  const [article, setArticle] = useState<ArticleDetail | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [fontSize, setFontSize] = useState<"small" | "medium" | "large">("medium");
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (!slugParam) {
-      setArticle(null);
-      setIsLoading(true);
-      return;
-    }
-
-    setIsLoading(true);
-    let isCancelled = false;
-
-    const localArticle = resolveArticle(slugParam);
-    if (localArticle) {
-      setArticle(localArticle);
-    } else {
-      setArticle(null);
-    }
-
-    async function fetchWpPost() {
-      try {
-        let apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(
-          slugParam
-        )}&_embed`;
-        if (/^\d+$/.test(slugParam)) {
-          apiUrl = `https://jurnalsukabumi.com/wp-json/wp/v2/posts/${slugParam}?_embed`;
-        }
-
-        const res = await fetch(apiUrl);
-        if (res.ok && !isCancelled) {
-          const data = await res.json();
-          const item = Array.isArray(data) ? data[0] : data;
-          if (item && item.title) {
-            let catName = "BERITA";
-            if (item._embedded?.["wp:term"]?.[0]?.length > 0) {
-              catName = item._embedded["wp:term"][0][0].name.toUpperCase();
-            }
-            let imgUrl = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
-            const media = item._embedded?.["wp:featuredmedia"]?.[0];
-            if (media?.source_url) {
-              imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(media.source_url)}`;
-            }
-
-            setArticle({
-              title: decodeHTMLEntities(item.title.rendered || ""),
-              category: catName,
-              date: formatIndonesianDate(item.date),
-              image: imgUrl,
-              contentHtml: item.content?.rendered || "",
-              tags: ["#Sukabumi", `#${catName}`, "#BeritaTerkini"],
-              relatedNews: defaultRelatedNews,
-            });
-          }
-        }
-      } catch (e) {
-        // Silently use resolved local article
-      } finally {
-        if (!isCancelled) {
-          setIsLoading(false);
-        }
-      }
-    }
-
-    fetchWpPost().then(() => {
-      if (!isCancelled) {
-        setIsLoading(false);
-      }
-    });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [slugParam]);
-
-  if (isLoading || !article) {
-    return <ArticleSkeleton />;
-  }
+  const latestNewsList = [
+    {
+      title: "Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba",
+      category: "PARLEMEN",
+      slug: "oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba",
+      image: "https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg",
+    },
+    {
+      title: "Dugaan Hubungan Terlarang Oknum Guru dan Siswi SMA di Sukabumi",
+      category: "HUKUM",
+      slug: "dugaan-hubungan-terlarang-oknum-guru-dan-siswi-sma-di-sukabumi",
+      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      title: "Oknum Kades Tamanjaya Ciemas Positif Narkoba, Polisi Ungkap Barang Bukti",
+      category: "GERBANG DESA",
+      slug: "oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas",
+      image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg",
+    },
+    {
+      title: "Sungai Tak Lagi Jernih, Warga Simpenan Desak Penertiban Tambang Liar",
+      category: "PERISTIWA",
+      slug: "sungai-tak-lagi-jernih-warga-simpenan-desak-penertiban-tambang-liar",
+      image: "https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/IMG-20260725-WA0067-e1784991814798.jpg",
+    },
+    {
+      title: "Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP Cibadak",
+      category: "HEADLINE",
+      slug: "belum-kantongi-izin-pembangunan-alfamart-ditegor-satpol-pp",
+      image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      title: "Tak Kuat Menanjak, Truk Kayu Terguling di Tanjakan Cibangban Sukabumi",
+      category: "PERISTIWA",
+      slug: "truk-kayu-terguling-di-cibangban-sukabumi",
+      image: "https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-['Montserrat',sans-serif]">
       <Header />
 
-      <main className="max-w-7xl w-full mx-auto px-4 py-6 flex-1">
+      <main className="max-w-7xl w-full mx-auto px-4 py-6 flex-1 relative">
         {/* 1. GRID UTAMA (Membagi Konten Kiri col-span-8 dan Sidebar Kanan col-span-4) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* KONTEN KIRI (lg:col-span-8) */}
           <div className="lg:col-span-8 flex flex-col">
-            {/* BAGIAN ATAS (Full Width di dalam area Konten Kiri col-span-8) */}
             {/* Breadcrumb Navigation */}
             <div className="text-sm font-bold mb-4 flex items-center gap-1.5 font-['Montserrat']">
               <Link href="/" className="text-red-600 hover:underline">
@@ -503,25 +363,24 @@ export default function BeritaDetailPage() {
               </Link>
               <span className="text-gray-400 font-normal">/</span>
               <Link
-                href={`/kategori/${(article.category || "berita").toLowerCase().trim().replace(/\s+/g, "-")}`}
+                href={`/kategori/${categorySlug}`}
                 className="text-blue-700 uppercase hover:underline font-bold"
               >
                 {article.category}
               </Link>
             </div>
 
-            {/* Headline */}
+            {/* Headline Title */}
             <h1 className="text-2xl md:text-3xl lg:text-[32px] font-extrabold text-black leading-tight tracking-tight mb-5 font-['Montserrat']">
               {article.title}
             </h1>
 
             {/* Meta & Share Buttons Flex Container */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-2 border-b-0 font-['Montserrat']">
-              {/* Sisi Kiri: Pembuat & Tanggal */}
+              {/* Sisi Kiri: Redaksi & Tanggal */}
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-1">
                   <span className="text-red-600 font-bold text-base">Redaksi</span>
-                  {/* Verified Blue Checkmark Badge */}
                   <svg
                     className="w-4 h-4 shrink-0 text-[#1DA1F2] fill-current"
                     viewBox="0 0 24 24"
@@ -532,402 +391,126 @@ export default function BeritaDetailPage() {
                 <span className="text-sm text-gray-600">{article.date}</span>
               </div>
 
-              {/* Sisi Kanan: Share Buttons */}
-              <div className="flex items-center gap-2 mt-4 sm:mt-0">
-                <a
-                  href="#"
-                  className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="Facebook"
-                >
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a
-                  href="#"
-                  className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="X (Twitter)"
-                >
-                  <i className="fab fa-x-twitter" />
-                </a>
-                <a
-                  href="#"
-                  className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="WhatsApp"
-                >
-                  <i className="fab fa-whatsapp" />
-                </a>
-                <a
-                  href="#"
-                  className="w-8 h-8 rounded-full bg-blue-400 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="Telegram"
-                >
-                  <i className="fab fa-telegram" />
-                </a>
-                <a
-                  href="#"
-                  className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="Line"
-                >
-                  <i className="fab fa-line" />
-                </a>
-                <button
-                  className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs hover:opacity-90 transition-opacity"
-                  title="Copy Link"
-                >
-                  <i className="fas fa-link" />
-                </button>
-              </div>
+              {/* Sisi Kanan: Client Interactive Share Buttons */}
+              <ShareButtons />
             </div>
 
-            {/* Gambar Utama (100% Full Width dari area col-span-8) */}
-            <div className="w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4">
-              <img
+            {/* Gambar Utama (Optimized Next.js Image dengan Priority) */}
+            <div className="relative w-full aspect-[16/9] bg-gray-100 overflow-hidden border border-gray-200 mb-4 rounded-none">
+              <Image
                 src={article.image}
                 alt={article.title}
+                fill
+                priority={true}
+                sizes="(max-width: 1024px) 100vw, 800px"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
-                }}
               />
             </div>
 
-            {/* BAGIAN BAWAH: INNER GRID DI BAWAH GAMBAR */}
+            {/* INNER GRID: BERITA TERKAIT & KONTEN BACAAN */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              {/* KIRI BAWAH (lg:col-span-4): BERITA TERKAIT */}
+              {/* KIRI BAWAH: BERITA TERKAIT */}
               <aside className="lg:col-span-4 bg-white">
                 <div className="mt-8">
-                  <h3 className="text-lg font-bold mb-4 border-b-2 border-blue-800 pb-1 inline-block">Berita Terkait</h3>
+                  <h3 className="text-lg font-bold mb-4 border-b-2 border-blue-800 pb-1 inline-block">
+                    Berita Terkait
+                  </h3>
                   <div className="flex flex-col">
                     <div className="py-3 border-b border-gray-200">
-                      <a href="#" className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600">DPRD Sukabumi Dorong Dua Regulasi Strategis, Disabilitas Disahkan...</a>
+                      <Link
+                        href="/berita/oknum-kades-tamanjaya-positif-sabu-dewan-batman-soroti-ciemas-darurat-narkoba"
+                        className="text-gray-600 font-bold text-sm leading-snug hover:text-red-600 transition-colors"
+                      >
+                        DPRD Sukabumi Dorong Pembentukan Perda Pencegahan Narkoba di Tingkat Desa...
+                      </Link>
                     </div>
                     <div className="py-3 border-b border-gray-200">
-                      <a href="#" className="text-gray-500 font-bold text-sm leading-snug hover:text-blue-600">DPRD Dorong Pelaku Usaha Bangun Wisata yang Aman, Nyaman...</a>
+                      <Link
+                        href="/berita/oknum-kades-tamanjaya-positif-sabu-pemkab-sukabumi-siapkan-sanksi-tegas"
+                        className="text-gray-600 font-bold text-sm leading-snug hover:text-red-600 transition-colors"
+                      >
+                        Pemkab Sukabumi Siapkan Pj Kades Gantikan Oknum Kades Tamanjaya...
+                      </Link>
                     </div>
                   </div>
                 </div>
               </aside>
 
-              {/* KANAN BAWAH (lg:col-span-8): TOMBOL TEXT A A A & ISI BERITA & FOOTER & TAGS */}
-              <article className="lg:col-span-8 flex flex-col">
-                {/* Tombol Pengatur Ukuran Teks (A A A) */}
-                <div className="flex items-center justify-end gap-1.5 mb-3 text-gray-600 font-bold font-['Montserrat']">
-                  <button
-                    type="button"
-                    onClick={() => setFontSize("small")}
-                    className={`text-[10px] cursor-pointer transition-all px-2.5 py-1 border rounded ${
-                      fontSize === "small"
-                        ? "bg-red-600 text-white border-red-600 shadow-sm font-black"
-                        : "bg-white text-gray-700 border-gray-200 hover:text-red-600 hover:border-red-400"
-                    }`}
-                    title="Ukuran Teks Kecil"
-                  >
-                    A
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFontSize("medium")}
-                    className={`text-xs cursor-pointer transition-all px-2.5 py-1 border rounded ${
-                      fontSize === "medium"
-                        ? "bg-red-600 text-white border-red-600 shadow-sm font-black"
-                        : "bg-white text-gray-700 border-gray-200 hover:text-red-600 hover:border-red-400"
-                    }`}
-                    title="Ukuran Teks Sedang (Default)"
-                  >
-                    A
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFontSize("large")}
-                    className={`text-sm cursor-pointer transition-all px-2.5 py-1 border rounded ${
-                      fontSize === "large"
-                        ? "bg-red-600 text-white border-red-600 shadow-sm font-black"
-                        : "bg-white text-gray-700 border-gray-200 hover:text-red-600 hover:border-red-400"
-                    }`}
-                    title="Ukuran Teks Besar"
-                  >
-                    A
-                  </button>
-                </div>
-
-                {/* Isi Berita */}
-                <div
-                  className={`prose max-w-none text-slate-800 font-['Montserrat'] text-justify transition-all duration-200 ${
-                    fontSize === "small"
-                      ? "text-xs sm:text-sm leading-normal space-y-4"
-                      : fontSize === "large"
-                      ? "text-base sm:text-xl leading-loose space-y-6"
-                      : "text-sm sm:text-base leading-relaxed sm:leading-loose space-y-5"
-                  }`}
-                >
-                  {article.contentHtml ? (
-                    <div
-                      dangerouslySetInnerHTML={{ __html: article.contentHtml }}
-                    />
-                  ) : (
-                    article.paragraphs?.map((p, idx) => (
-                      <p key={idx}>
-                        {idx === 0 && (
-                          <span className="font-bold text-red-600">
-                            JURNALSUKABUMI.COM -{" "}
-                          </span>
-                        )}
-                        {p}
-                      </p>
-                    ))
-                  )}
-                </div>
-
-                {/* Footer Berita */}
-                <div className="border-t border-gray-200 mt-6 pt-4 text-xs font-bold text-slate-900 font-['Montserrat']">
-                  Reporter: Ilham Nugraha | Redaktur: Ujang Herlan
-                </div>
-              </article>
+              {/* KANAN BAWAH: Client Component FontSizeReader */}
+              <FontSizeReader
+                contentHtml={article.contentHtml}
+                paragraphs={article.paragraphs}
+              />
             </div>
 
-            {/* TAGS BOX (Abu-abu muda dengan Pill Tag : Merah dan Tag Oval) */}
+            {/* TAGS BOX */}
             <div className="bg-[#e9ecef] p-5 mt-8 mb-8 rounded-none font-['Montserrat']">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="bg-red-700 text-white font-bold text-xs px-4 py-1.5 rounded-full shrink-0">
                   Tag :
                 </span>
-                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
-                  Dewan Batman
-                </span>
-                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
-                  DPRD
-                </span>
-                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
-                  Oknum Kades Tamanjaya Positif Sabu
-                </span>
-                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
-                  Soroti Ciemas Darurat Narkoba
-                </span>
-                <span className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer">
-                  Sukabumi
-                </span>
+                {article.tags.map((t) => {
+                  const tagClean = t.replace(/^#\s*/, "");
+                  const tagSlug = tagClean.toLowerCase().trim().replace(/\s+/g, "-");
+                  return (
+                    <Link
+                      key={t}
+                      href={`/kategori/${tagSlug}`}
+                      className="bg-gray-300/80 text-gray-700 text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition-colors cursor-pointer"
+                    >
+                      {tagClean}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
-            {/* FITUR BERITA TERBARU (3 Kolom Grid 2 Baris) */}
+            {/* BERITA TERBARU (3 Kolom Grid 2 Baris dengan Lazy Loading Image) */}
             <div className="mt-4 font-['Montserrat']">
               <h3 className="text-xl font-bold mb-6 border-b border-gray-200 pb-2">
                 <span className="border-b-4 border-red-600 pb-2">Berita</span> Terbaru
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {/* Card 1 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg"
-                      alt="Oknum Kades"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
+                {latestNewsList.map((item, idx) => (
+                  <div key={idx} className="flex flex-col group cursor-pointer">
+                    <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2 border border-gray-200">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, 250px"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <Link
+                      href={`/kategori/${item.category.toLowerCase().trim().replace(/\s+/g, "-")}`}
+                      className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5 hover:underline w-fit"
+                    >
+                      {item.category}
+                    </Link>
+                    <Link href={`/berita/${item.slug}`}>
+                      <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
+                        {item.title}
+                      </h4>
+                    </Link>
                   </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    PARLEMEN
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti Ciemas Darurat Narkoba
-                  </h4>
-                </div>
-
-                {/* Card 2 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80"
-                      alt="Dugaan Hubungan Terlarang"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    HUKUM
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    Dugaan Hubungan Terlarang Oknum Guru dan Istri Orang di Kalibunder, Polisi Mulai Periksa Saksi
-                  </h4>
-                </div>
-
-                {/* Card 3 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg"
-                      alt="US Oknum Kades"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    GERBANG DESA
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    US Oknum Kades Tamanjaya Ciemas Positif Narkoba, Polisi Ungkap Barang Bukti Alat Hisap Sabu
-                  </h4>
-                </div>
-
-                {/* Card 4 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80"
-                      alt="Gelar Sosialisasi"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    RAGAM
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    Gelar Sosialisasi Pemilih Berkelanjutan di Nyalindung, Heri Gunawan Dorong Masyarakat Jadi Pemilih Cerdas
-                  </h4>
-                </div>
-
-                {/* Card 5 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80"
-                      alt="Pesan Bung Karno"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    RAGAM
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    Sampaikan Pesan Bung Karno, Ono Surono: Bangsa yang Kuat Terlahir dari Ibu Hebat
-                  </h4>
-                </div>
-
-                {/* Card 6 */}
-                <div className="flex flex-col group cursor-pointer">
-                  <div className="w-full aspect-[16/10] overflow-hidden rounded-xl bg-gray-200 mb-2">
-                    <img
-                      src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&auto=format&fit=crop&q=80"
-                      alt="DPRD Sukabumi"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <span className="text-[11px] font-bold text-red-600 uppercase mt-1 mb-0.5">
-                    PARLEMEN
-                  </span>
-                  <h4 className="font-extrabold text-sm text-black leading-snug group-hover:text-red-600 transition-colors line-clamp-3">
-                    DPRD Sukabumi Dorong Dua Regulasi Strategis, Disabilitas Disahkan dan Ketenagakerjaan Dibahas
-                  </h4>
-                </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* SIDEBAR KANAN (lg:col-span-4) - STICKY SIDEBAR */}
+          {/* SIDEBAR KANAN (lg:col-span-4) - STICKY */}
           <div className="lg:col-span-4 flex flex-col gap-8 font-['Montserrat'] sticky top-8 self-start">
-            {/* WIDGET BERITA TERPOPULER (6 Item) */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
-                <span className="border-b-4 border-red-600 pb-2">BERITA</span> TERPOPULER
-              </h3>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-4 p-4 bg-gray-50">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">1</div>
-                  <img src="https://wsrv.nl/?url=jurnalsukabumi.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-18-at-19.28.45-1-e1784378099703.jpeg" alt="US Oknum Kades" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">US Oknum Kades Tamanjaya Ciemas Positif Narkoba...</h4>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">2</div>
-                  <img src="https://wsrv.nl/?url=https://jurnalsukabumi.com/wp-content/uploads/2026/08/Ujang-Abdurohim-Rochmi-Alias-Dewan-Batman.jpg" alt="Dewan Batman" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">Oknum Kades Tamanjaya Positif Sabu, Dewan Batman Soroti...</h4>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-gray-50">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">3</div>
-                  <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80" alt="Kades Ciemas" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">Kades di Ciemas Berada di Satresnarkoba...</h4>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">4</div>
-                  <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&auto=format&fit=crop&q=80" alt="Alfamart Cibadak" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">Belum Kantongi Izin, Pembangunan Alfamart Ditegor Satpol PP...</h4>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-gray-50">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">5</div>
-                  <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&fit=crop&q=80" alt="Kebakaran Ciptamulya" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">Berangkat Esok, 52 Korban Kebakaran Ciptamulya Diundang KDM...</h4>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-white">
-                  <div className="text-5xl font-extrabold text-red-600 shrink-0 w-8 text-center">6</div>
-                  <img src="https://images.unsplash.com/photo-1586191582056-a15ce3d9b891?w=800&auto=format&fit=crop&q=80" alt="Truk Terguling" className="w-16 h-16 rounded-md shrink-0 object-cover" />
-                  <h4 className="font-bold text-sm text-black leading-tight">Tak Kuat Menanjak, Truk Kayu Terguling di Cibangban...</h4>
-                </div>
-              </div>
-            </div>
-
-            {/* WIDGET NASIONAL (Menggantikan Topik Terkini) */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 border-b border-gray-300 pb-2">
-                <span className="border-b-4 border-red-600 pb-2">NASIO</span>NAL
-              </h3>
-              <div className="flex flex-col">
-                {/* Featured Item Krisdayanti */}
-                <div className="flex flex-col mb-4 pb-4 border-b border-gray-200 group cursor-pointer">
-                  <img
-                    src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80"
-                    alt="Krisdayanti Hebohkan Cibadak"
-                    className="w-full aspect-[16/10] rounded-xl object-cover mb-3 group-hover:scale-[1.02] transition-transform"
-                  />
-                  <h4 className="font-bold text-base text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
-                    Krisdayanti Hebohkan Cibadak, Ribuan Warga Antusias hingga Berebut Foto Bersama
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    6 Agustus 2026 | 12:04 WIB
-                  </span>
-                </div>
-
-                {/* List Item 2 */}
-                <div className="py-3 border-b border-gray-200 group cursor-pointer">
-                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
-                    Dipanggil ke Purwakarta, KDM Ingin Kampung Adat Ciptamulya Ditata
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    2 Agustus 2026 | 19:30 WIB
-                  </span>
-                </div>
-
-                {/* List Item 3 */}
-                <div className="py-3 border-b border-gray-200 group cursor-pointer">
-                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
-                    Usung Perubahan di PWI Jabar, Kang Andhy Tawarkan Program Kesejahteraan hingga Karier Internasional
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    31 Juli 2026 | 22:04 WIB
-                  </span>
-                </div>
-
-                {/* List Item 4 */}
-                <div className="py-3 border-b border-gray-200 group cursor-pointer">
-                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
-                    Hergun Usul Kemendagri Luncurkan Program Wirausaha Pemula untuk Kemandirian Ekonomi Ormas
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    30 Juli 2026 | 15:09 WIB
-                  </span>
-                </div>
-
-                {/* List Item 5 */}
-                <div className="py-3 border-b border-gray-200 group cursor-pointer">
-                  <h4 className="font-bold text-sm text-black leading-snug group-hover:text-red-600 transition-colors mb-1">
-                    Wamenko Tantang Sukabumi Bangun Budaya Pilah Sampah di Setiap Desa
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    29 Juli 2026 | 14:29 WIB
-                  </span>
-                </div>
-              </div>
-            </div>
+            <Sidebar />
           </div>
         </div>
+
+        {/* Back to Top Client Component (Intersection Observer Powered) */}
+        <BackToTop />
       </main>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

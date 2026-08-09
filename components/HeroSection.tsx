@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { LiveArticle } from "@/lib/wp";
 
 interface HeroSectionProps {
@@ -78,10 +79,13 @@ export default function HeroSection({ articles }: HeroSectionProps) {
     <section className="w-full flex flex-col rounded-none overflow-hidden border border-gray-200 bg-white">
       {/* 1. GAMBAR RAKSASA UTAMA (DINAMIS SINKRON DENGAN ACTIVEINDEX) */}
       <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] min-h-[300px] sm:min-h-[380px] md:min-h-[440px] bg-slate-900 overflow-hidden group flex flex-col justify-end rounded-none">
-        <img
+        <Image
           key={mainHeadline.id}
           src={mainHeadline.image}
           alt={mainHeadline.title}
+          fill
+          priority={true}
+          sizes="(max-width: 1200px) 100vw, 1200px"
           className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 rounded-none"
         />
 
@@ -129,9 +133,12 @@ export default function HeroSection({ articles }: HeroSectionProps) {
               }`}
             >
               <div className="relative w-full aspect-[16/10] bg-gray-300 overflow-hidden rounded-none">
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   className={`w-full h-full object-cover transition-transform duration-300 rounded-none ${
                     isActive ? "scale-105" : ""
                   }`}

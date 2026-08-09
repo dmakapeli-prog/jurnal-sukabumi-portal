@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const categoryLabels = [
@@ -195,9 +196,12 @@ export default function Header() {
         {/* KIRI: Logo Resmi Jurnal Sukabumi & Tombol Akses Mobile */}
         <div className="flex items-center justify-between w-full md:w-auto">
           <Link href="/" className="flex items-center gap-2">
-            <img
+            <Image
               src="https://jurnalsukabumi.com/wp-content/uploads/2025/11/cropped-Logo-jurnalsukabumi-2025-01.png"
               alt="Jurnal Sukabumi Logo Resmi"
+              width={180}
+              height={44}
+              priority={true}
               className="h-10 md:h-11 w-auto object-contain"
             />
           </Link>
@@ -578,9 +582,12 @@ export default function Header() {
                     >
                       {/* Thumbnail Gambar */}
                       <div className="w-20 h-16 flex-shrink-0 bg-gray-200 rounded overflow-hidden relative">
-                        <img
+                        <Image
                           src={itemImage}
                           alt={itemTitle}
+                          fill
+                          loading="lazy"
+                          sizes="80px"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         />
                       </div>

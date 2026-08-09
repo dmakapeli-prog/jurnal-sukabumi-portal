@@ -28,6 +28,16 @@ const nextConfig: NextConfig = {
         hostname: "*.jurnalsukabumi.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "wsrv.nl",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        pathname: "/**",
+      },
     ],
   },
 };

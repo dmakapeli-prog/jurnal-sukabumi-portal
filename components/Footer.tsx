@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerSocials = [
   {
@@ -76,9 +77,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col items-center text-center gap-8">
         {/* 1. Gambar Logo Resmi Footer */}
         <div className="flex justify-center">
-          <img
+          <Image
             src="https://jurnalsukabumi.com/wp-content/uploads/2025/11/Logo-Footer.png"
             alt="Logo Footer Resmi Jurnal Sukabumi"
+            width={200}
+            height={64}
+            loading="lazy"
             className="h-14 md:h-16 w-auto object-contain"
           />
         </div>

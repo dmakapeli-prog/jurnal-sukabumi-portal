@@ -1,5 +1,6 @@
 import { use } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
@@ -124,11 +125,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     {/* Thumbnail Gambar di Sebelah Kiri */}
                     <Link
                       href={`/berita/${articleSlug}`}
-                      className="w-full sm:w-56 h-40 sm:h-36 rounded-lg overflow-hidden shrink-0 bg-gray-100 border border-gray-200 block"
+                      className="w-full sm:w-56 h-40 sm:h-36 rounded-lg overflow-hidden shrink-0 bg-gray-100 border border-gray-200 block relative"
                     >
-                      <img
+                      <Image
                         src={articleImg}
                         alt={article.title}
+                        fill
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, 224px"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>

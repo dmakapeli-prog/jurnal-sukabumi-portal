@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { LiveArticle } from "@/lib/wp";
 
 interface NewsFeedProps {
@@ -252,9 +253,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
           >
             {/* Gambar thumbnail di kiri (w-1/3) */}
             <div className="relative w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
+                fill
+                loading="lazy"
+                sizes="(max-width: 768px) 33vw, 250px"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
               />
               <button
@@ -379,9 +383,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
               className="w-[calc(33.333%-0.75rem)] flex-shrink-0 snap-start flex flex-col gap-2 group"
             >
               <div className="relative w-full aspect-[16/10] bg-slate-800 rounded-none overflow-hidden border border-slate-700">
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 33vw, 250px"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
                 <button
@@ -444,9 +451,12 @@ export default function NewsFeed({ articles }: NewsFeedProps) {
             >
               {/* Gambar thumbnail di kiri (w-1/3) */}
               <div className="relative w-1/3 flex-shrink-0 aspect-[16/10] bg-gray-100 rounded-none overflow-hidden border border-gray-200">
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 33vw, 250px"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                 />
                 <button
